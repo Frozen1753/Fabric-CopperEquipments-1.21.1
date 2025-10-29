@@ -1,6 +1,7 @@
 package net.frozen1753.copperequipments.material;
 
 import net.frozen1753.copperequipments.CopperEquipments;
+import net.frozen1753.copperequipments.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
@@ -11,7 +12,7 @@ import net.minecraft.registry.tag.TagKey;
 import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
-    COPPER(BlockTags.INCORRECT_FOR_STONE_TOOL, 197, 11.0F, 1.5F, 20, () -> Ingredient.ofItems(Items.COPPER_INGOT));
+    COPPER(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL, 197, 11.0F, 1.5F, 18, () -> Ingredient.ofItems(Items.COPPER_INGOT));
 
     private final TagKey<Block> inverseTag;
     private final int durability;

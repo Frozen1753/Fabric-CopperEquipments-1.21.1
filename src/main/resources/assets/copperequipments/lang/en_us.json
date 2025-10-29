@@ -7,5 +7,6 @@
   "item.copperequipments.copper_helmet": "Copper Helmet",
   "item.copperequipments.copper_chestplate": "Copper Chestplate",
   "item.copperequipments.copper_leggings": "Copper Leggings",
-  "item.copperequipments.copper_boots": "Copper Boots"
+  "item.copperequipments.copper_boots": "Copper Boots",
+  "itemgroup.copperequipments.copper_equipments": "Copper Equipments"
 }
