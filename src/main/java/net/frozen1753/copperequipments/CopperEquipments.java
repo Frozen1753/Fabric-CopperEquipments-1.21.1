@@ -2,10 +2,12 @@ package net.frozen1753.copperequipments;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.frozen1753.copperequipments.item.ModBlocks;
 import net.frozen1753.copperequipments.item.ModItemGroups;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.material.ModArmorMaterials;
 import net.frozen1753.copperequipments.material.ModToolMaterials;
+import net.frozen1753.copperequipments.particle.ModParticles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,9 @@ public class CopperEquipments implements ModInitializer {
 	public void onInitialize() {
         ModArmorMaterials.registerModArmorMaterials();
         ModToolMaterials.registerModToolMaterials();
+        ModParticles.registerParticles();
         ModItems.registerModItems();
+        ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroup();
 	}
 }

@@ -1,0 +1,77 @@
+package net.frozen1753.copperequipments.particle.custom;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.util.math.MathHelper;
+
+public class CopperFlameParticle extends AbstractSlowingParticle {
+    public CopperFlameParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+        super(clientWorld, d, e, f, g, h, i);
+    }
+
+    @Override
+    public ParticleTextureSheet getType() {
+        return ParticleTextureSheet.PARTICLE_SHEET_OPAQUE;
+    }
+
+    @Override
+    public void move(double dx, double dy, double dz) {
+        this.setBoundingBox(this.getBoundingBox().offset(dx, dy, dz));
+        this.repositionFromBoundingBox();
+    }
+
+    @Override
+    public float getSize(float tickDelta) {
+        float f = (this.age + tickDelta) / this.maxAge;
+        return this.scale * (1.0F - f * f * 0.5F);
+    }
+
+    @Override
+    public int getBrightness(float tint) {
+        float f = (this.age + tint) / this.maxAge;
+        f = MathHelper.clamp(f, 0.0F, 1.0F);
+        int i = super.getBrightness(tint);
+        int j = i & 0xFF;
+        int k = i >> 16 & 0xFF;
+        j += (int)(f * 15.0F * 16.0F);
+        if (j > 240) {
+            j = 240;
+        }
+
+        return j | k << 16;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class Factory implements ParticleFactory<SimpleParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public Factory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            CopperFlameParticle flameParticle = new CopperFlameParticle(clientWorld, d, e, f, g, h, i);
+            flameParticle.setSprite(this.spriteProvider);
+            return flameParticle;
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class SmallFactory implements ParticleFactory<SimpleParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public SmallFactory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            CopperFlameParticle flameParticle = new CopperFlameParticle(clientWorld, d, e, f, g, h, i);
+            flameParticle.setSprite(this.spriteProvider);
+            flameParticle.scale(0.5F);
+            return flameParticle;
+        }
+    }
+}

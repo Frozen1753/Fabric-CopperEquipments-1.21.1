@@ -4,18 +4,19 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.material.ModArmorMaterials;
 import net.frozen1753.copperequipments.material.ModToolMaterials;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ToolComponent;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 
 import java.util.List;
 
 public class ModItems {
     public static final Item COPPER_NUGGET = registerItem("copper_nugget", new Item(new Item.Settings()));
+
+    public static final Item COPPER_TORCH_ITEM = registerItem("copper_torch",
+            new VerticallyAttachableBlockItem(ModBlocks.COPPER_TORCH, ModBlocks.COPPER_WALL_TORCH, new Item.Settings(), Direction.DOWN));
 
     public static final Item COPPER_SWORD = registerItem("copper_sword",
             new SwordItem(ModToolMaterials.COPPER,
@@ -82,8 +83,18 @@ public class ModItems {
     public static void registerModItems() {
         CopperEquipments.LOGGER.info("Registering Mod Items for " + CopperEquipments.MOD_ID);
 
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
+            entries.add(COPPER_NUGGET);
+        });
+
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
             entries.add(COPPER_SWORD);
+            entries.add(COPPER_AXE);
+
+            entries.add(COPPER_HELMET);
+            entries.add(COPPER_CHESTPLATE);
+            entries.add(COPPER_LEGGINGS);
+            entries.add(COPPER_BOOTS);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
@@ -91,13 +102,6 @@ public class ModItems {
             entries.add(COPPER_PICKAXE);
             entries.add(COPPER_AXE);
             entries.add(COPPER_HOE);
-        });
-
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
-            entries.add(COPPER_HELMET);
-            entries.add(COPPER_CHESTPLATE);
-            entries.add(COPPER_LEGGINGS);
-            entries.add(COPPER_BOOTS);
         });
     }
 }

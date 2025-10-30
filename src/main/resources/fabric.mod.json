@@ -18,13 +18,13 @@
 		"main": [
 			"net.frozen1753.copperequipments.CopperEquipments"
 		],
+        "client" : [
+            "net.frozen1753.copperequipments.CopperEquipmentsClient"
+        ],
 		"fabric-datagen": [
 			"net.frozen1753.copperequipments.CopperEquipmentsDataGenerator"
 		]
 	},
-    "client" : [
-      "net.frozen1753.copperequipments.CopperEquipmentsClient"
-    ],
 	"mixins": [
 		"copperequipments.mixins.json"
 	],

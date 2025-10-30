@@ -16,6 +16,12 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(() -> new ItemStack(Items.COPPER_INGOT))
                     .displayName(Text.translatable("itemgroup.copperequipments.copper_equipments"))
                     .entries((displayContext, entries) -> {
+                        entries.add(ModItems.COPPER_NUGGET);
+                        entries.add(ModBlocks.COPPER_CHAIN);
+                        entries.add(ModItems.COPPER_TORCH_ITEM);
+                        entries.add(ModBlocks.COPPER_LANTERN);
+                        entries.add(ModBlocks.COPPER_BARS);
+
                         entries.add(ModItems.COPPER_AXE);
                         entries.add(ModItems.COPPER_SWORD);
                         entries.add(ModItems.COPPER_PICKAXE);
