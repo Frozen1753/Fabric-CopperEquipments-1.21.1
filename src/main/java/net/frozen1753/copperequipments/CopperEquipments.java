@@ -2,7 +2,7 @@ package net.frozen1753.copperequipments;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.frozen1753.copperequipments.item.ModBlocks;
+import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.ModItemGroups;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.material.ModArmorMaterials;
@@ -24,5 +24,5 @@ public class CopperEquipments implements ModInitializer {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroup();
-	}
+    }
 }

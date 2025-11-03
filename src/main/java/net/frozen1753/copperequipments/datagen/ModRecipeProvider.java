@@ -2,9 +2,7 @@ package net.frozen1753.copperequipments.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.frozen1753.copperequipments.CopperEquipments;
-import net.frozen1753.copperequipments.CopperEquipmentsClient;
-import net.frozen1753.copperequipments.item.ModBlocks;
+import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -15,7 +13,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
