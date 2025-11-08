@@ -17,6 +17,6 @@ public class ModParticles {
     }
 
     public static void registerParticles() {
-        CopperEquipments.LOGGER.info("Registering Mod Particles for " + CopperEquipments.MOD_ID);
+        CopperEquipments.LOGGER.info("Registering Particles for " + CopperEquipments.MOD_ID);
     }
 }

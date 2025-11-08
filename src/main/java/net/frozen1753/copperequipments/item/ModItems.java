@@ -80,27 +80,28 @@ public class ModItems {
     }
 
     public static void registerModItems() {
-        CopperEquipments.LOGGER.info("Registering Mod Items for " + CopperEquipments.MOD_ID);
+        CopperEquipments.LOGGER.info("Registering Items for " + CopperEquipments.MOD_ID);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            entries.add(COPPER_NUGGET);
+            entries.addBefore(Items.IRON_NUGGET, COPPER_NUGGET);
+            entries.addBefore(Items.IRON_INGOT, Items.COPPER_INGOT);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
-            entries.add(COPPER_SWORD);
-            entries.add(COPPER_AXE);
+            entries.addAfter(Items.STONE_SWORD, COPPER_SWORD);
+            entries.addAfter(Items.STONE_AXE, COPPER_AXE);
 
-            entries.add(COPPER_HELMET);
-            entries.add(COPPER_CHESTPLATE);
-            entries.add(COPPER_LEGGINGS);
-            entries.add(COPPER_BOOTS);
+            entries.addAfter(Items.LEATHER_BOOTS, COPPER_HELMET);
+            entries.addAfter(COPPER_HELMET, COPPER_CHESTPLATE);
+            entries.addAfter(COPPER_CHESTPLATE, COPPER_LEGGINGS);
+            entries.addAfter(COPPER_LEGGINGS, COPPER_BOOTS);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
-            entries.add(COPPER_SHOVEL);
-            entries.add(COPPER_PICKAXE);
-            entries.add(COPPER_AXE);
-            entries.add(COPPER_HOE);
+            entries.addAfter(Items.STONE_HOE, COPPER_SHOVEL);
+            entries.addAfter(COPPER_SHOVEL, COPPER_PICKAXE);
+            entries.addAfter(COPPER_PICKAXE, COPPER_AXE);
+            entries.addAfter(COPPER_AXE, COPPER_HOE);
         });
     }
 }

@@ -1,10 +1,15 @@
 package net.frozen1753.copperequipments.datagen.custom;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.frozen1753.copperequipments.CopperEquipments;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
+import net.minecraft.item.Item;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
+
+import java.util.*;
 
 public class ModModelUtils {
     public static void registerMetalBars(BlockStateModelGenerator generator, Block block) {
@@ -34,5 +39,39 @@ public class ModModelUtils {
 
         generator.blockStateCollector.accept(supplier);
         generator.registerItemModel(block);
+    }
+
+    public static void registerOxidizingEquipmentModel(ItemModelGenerator generator, Item item, Model model) {
+        Identifier modelId = ModelIds.getItemModelId(item);
+        TextureMap textureMap = TextureMap.layer0(item);
+
+        model.upload(modelId, textureMap, generator.writer, (id, textures) -> {
+            JsonObject json = model.createJson(id, textures);
+
+            JsonArray overrides = new JsonArray();
+
+            overrides.add(createOverride(0.25F, ModelIds.getItemSubModelId(item, "_exposed")));
+            overrides.add(createOverride(0.50F, ModelIds.getItemSubModelId(item, "_weathered")));
+            overrides.add(createOverride(0.75F, ModelIds.getItemSubModelId(item, "_oxidized")));
+
+            json.add("overrides", overrides);
+            return json;
+        });
+
+        generator.register(item, "_exposed", model);
+        generator.register(item, "_weathered", model);
+        generator.register(item, "_oxidized", model);
+    }
+
+    private static JsonObject createOverride(float oxidationValue, Identifier modelId) {
+        JsonObject override = new JsonObject();
+
+        JsonObject predicate = new JsonObject();
+        predicate.addProperty("oxidation", oxidationValue);
+
+        override.add("predicate", predicate);
+        override.addProperty("model", modelId.toString());
+
+        return override;
     }
 }

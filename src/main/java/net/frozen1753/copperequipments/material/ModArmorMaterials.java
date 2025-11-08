@@ -39,6 +39,6 @@ public class ModArmorMaterials {
     }
 
     public static void registerModArmorMaterials() {
-        CopperEquipments.LOGGER.info("Registering Copper Materials");
+        CopperEquipments.LOGGER.info("Registering Armor Materials for " + CopperEquipments.MOD_ID);
     }
 }

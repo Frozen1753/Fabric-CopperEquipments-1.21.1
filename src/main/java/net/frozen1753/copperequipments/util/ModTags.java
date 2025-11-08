@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 public class ModTags {
     public static class Blocks {
-        public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag("needs_cooper_tool");
+        public static final TagKey<Block> NEEDS_COPPER_TOOL = createTag("needs_copper_tool");
         public static final TagKey<Block> INCORRECT_FOR_COPPER_TOOL = createTag("incorrect_for_copper_tool");
 
         private static TagKey<Block> createTag(String name) {
@@ -25,6 +25,9 @@ public class ModTags {
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(CopperEquipments.MOD_ID, name));
         }
+    }
 
+    public static void registerModTags() {
+        CopperEquipments.LOGGER.info("Registering Tags for " + CopperEquipments.MOD_ID);
     }
 }

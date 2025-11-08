@@ -3,14 +3,66 @@ package net.frozen1753.copperequipments;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.item.ModItems;
+import net.frozen1753.copperequipments.material.custom.OxidizableArmorRenderer;
 import net.frozen1753.copperequipments.particle.ModParticles;
 import net.frozen1753.copperequipments.particle.custom.CopperFlameParticle;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.util.Identifier;
 
 public class CopperEquipmentsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_SWORD, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_PICKAXE, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_AXE, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_SHOVEL, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_HOE, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_HELMET, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_CHESTPLATE, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_LEGGINGS, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_BOOTS, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.isDamageable()) return 0.0F;
+            return (float) stack.getDamage() / stack.getMaxDamage();
+        });
+
+        ArmorRenderer.register(new OxidizableArmorRenderer(), ModItems.COPPER_HELMET, ModItems.COPPER_CHESTPLATE, ModItems.COPPER_LEGGINGS, ModItems.COPPER_BOOTS);
+
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.COPPER_TORCH, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.COPPER_WALL_TORCH, RenderLayer.getCutout());
 

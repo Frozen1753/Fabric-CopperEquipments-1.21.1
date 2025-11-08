@@ -333,7 +333,7 @@ public class ModBlocks {
     }
 
     public static void registerModBlocks() {
-        CopperEquipments.LOGGER.info("Registering Mod Blocks for " + CopperEquipments.MOD_ID);
+        CopperEquipments.LOGGER.info("Registering Blocks for " + CopperEquipments.MOD_ID);
 
         OxidizableBlocksRegistry.registerOxidizableBlockPair(COPPER_CHAIN, EXPOSED_COPPER_CHAIN);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_COPPER_CHAIN, WEATHERED_COPPER_CHAIN);

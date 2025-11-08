@@ -12,7 +12,7 @@ import net.minecraft.registry.tag.TagKey;
 import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
-    COPPER(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL, 197, 11.0F, 1.5F, 18, () -> Ingredient.ofItems(Items.COPPER_INGOT));
+    COPPER(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL, 197, 5.0F, 1.5F, 16, () -> Ingredient.ofItems(Items.COPPER_INGOT));
 
     private final TagKey<Block> inverseTag;
     private final int durability;
@@ -38,6 +38,6 @@ public enum ModToolMaterials implements ToolMaterial {
     @Override public TagKey<Block> getInverseTag() { return inverseTag; }
 
     public static void registerModToolMaterials() {
-        CopperEquipments.LOGGER.info("Registering Copper Tool Material");
+        CopperEquipments.LOGGER.info("Registering Tool Material for " + CopperEquipments.MOD_ID);
     }
 }
