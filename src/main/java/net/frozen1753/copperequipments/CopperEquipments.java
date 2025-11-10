@@ -8,6 +8,7 @@ import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.material.ModArmorMaterials;
 import net.frozen1753.copperequipments.material.ModToolMaterials;
 import net.frozen1753.copperequipments.particle.ModParticles;
+import net.frozen1753.copperequipments.util.ModDataComponents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,5 +25,6 @@ public class CopperEquipments implements ModInitializer {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroup();
+        ModDataComponents.registerModDataComponents();
     }
 }

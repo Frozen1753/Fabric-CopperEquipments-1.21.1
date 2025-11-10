@@ -4,13 +4,17 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.ModItems;
+import net.frozen1753.copperequipments.item.custom.CopperArmorItem;
 import net.frozen1753.copperequipments.material.custom.OxidizableArmorRenderer;
 import net.frozen1753.copperequipments.particle.ModParticles;
 import net.frozen1753.copperequipments.particle.custom.CopperFlameParticle;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 public class CopperEquipmentsClient implements ClientModInitializer {

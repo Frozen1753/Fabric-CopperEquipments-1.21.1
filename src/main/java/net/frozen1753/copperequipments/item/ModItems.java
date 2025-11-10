@@ -3,6 +3,8 @@ package net.frozen1753.copperequipments.item;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.item.custom.CopperAnimalArmorItem;
+import net.frozen1753.copperequipments.item.custom.CopperArmorItem;
 import net.frozen1753.copperequipments.material.ModArmorMaterials;
 import net.frozen1753.copperequipments.material.ModToolMaterials;
 import net.minecraft.item.*;
@@ -56,23 +58,28 @@ public class ModItems {
     private static final int DURABILITY_MULTIPLIER = 11; // copper
 
     public static final Item COPPER_HELMET = registerItem("copper_helmet",
-            new ArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+            new CopperArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
                     new Item.Settings().maxDamage(BASE_DURABILITY[3] * DURABILITY_MULTIPLIER))
     );
 
     public static final Item COPPER_CHESTPLATE = registerItem("copper_chestplate",
-            new ArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+            new CopperArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
                     new Item.Settings().maxDamage(BASE_DURABILITY[2] * DURABILITY_MULTIPLIER))
     );
 
     public static final Item COPPER_LEGGINGS = registerItem("copper_leggings",
-            new ArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+            new CopperArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
                     new Item.Settings().maxDamage(BASE_DURABILITY[1] * DURABILITY_MULTIPLIER))
     );
 
     public static final Item COPPER_BOOTS = registerItem("copper_boots",
-            new ArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+            new CopperArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
                     new Item.Settings().maxDamage(BASE_DURABILITY[0] * DURABILITY_MULTIPLIER))
+    );
+
+    public static final Item COPPER_HORSE_ARMOR = registerItem("copper_horse_armor",
+            new CopperAnimalArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, AnimalArmorItem.Type.EQUESTRIAN, false,
+                    new Item.Settings().maxDamage(100))
     );
 
     private static Item registerItem(String name, Item item) {

@@ -69,5 +69,7 @@ public class ModModelProvider extends FabricModelProvider {
         ModModelUtils.registerOxidizingEquipmentModel(itemModelGenerator, ModItems.COPPER_CHESTPLATE, Models.GENERATED);
         ModModelUtils.registerOxidizingEquipmentModel(itemModelGenerator, ModItems.COPPER_LEGGINGS, Models.GENERATED);
         ModModelUtils.registerOxidizingEquipmentModel(itemModelGenerator, ModItems.COPPER_BOOTS, Models.GENERATED);
+
+        ModModelUtils.registerOxidizingEquipmentModel(itemModelGenerator, ModItems.COPPER_HORSE_ARMOR, Models.GENERATED);
     }
 }

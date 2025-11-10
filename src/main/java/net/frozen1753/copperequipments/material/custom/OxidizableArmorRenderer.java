@@ -2,6 +2,7 @@ package net.frozen1753.copperequipments.material.custom;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.frozen1753.copperequipments.CopperEquipments;
+import net.frozen1753.copperequipments.util.ModDataComponents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
@@ -29,11 +30,7 @@ public class OxidizableArmorRenderer implements ArmorRenderer {
                        int light,
                        BipedEntityModel<LivingEntity> contextModel) {
 
-        int damage = stack.getDamage();
-        int maxDamage = stack.getMaxDamage();
-        float ratio = maxDamage > 0 ? (float) damage / (float) maxDamage : 0f;
-
-        String stage = switch ((int) (ratio * 4)) {
+        String stage = switch (stack.getOrDefault(ModDataComponents.OXIDATION_STAGE, 0)) {
             case 0 -> "";
             case 1 -> "_exposed";
             case 2 -> "_weathered";
