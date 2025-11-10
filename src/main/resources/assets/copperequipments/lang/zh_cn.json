@@ -1,0 +1,53 @@
+{
+  "item.copperequipments.copper_nugget": "铜粒",
+
+  "block.copperequipments.copper_torch": "铜火把",
+
+  "block.copperequipments.copper_chain": "铜链",
+  "block.copperequipments.exposed_copper_chain": "斑驳的铜链",
+  "block.copperequipments.weathered_copper_chain": "锈蚀的铜链",
+  "block.copperequipments.oxidized_copper_chain": "氧化的铜链",
+  "block.copperequipments.waxed_copper_chain": "涂蜡铜链",
+  "block.copperequipments.waxed_exposed_copper_chain": "涂蜡的斑驳铜链",
+  "block.copperequipments.waxed_weathered_copper_chain": "涂蜡的锈蚀铜链",
+  "block.copperequipments.waxed_oxidized_copper_chain": "涂蜡的氧化铜链",
+
+  "block.copperequipments.copper_lantern": "铜灯笼",
+  "block.copperequipments.exposed_copper_lantern": "斑驳的铜灯笼",
+  "block.copperequipments.weathered_copper_lantern": "锈蚀的铜灯笼",
+  "block.copperequipments.oxidized_copper_lantern": "氧化的铜灯笼",
+  "block.copperequipments.waxed_copper_lantern": "涂蜡铜灯笼",
+  "block.copperequipments.waxed_exposed_copper_lantern": "涂蜡的斑驳铜灯笼",
+  "block.copperequipments.waxed_weathered_copper_lantern": "涂蜡的锈蚀铜灯笼",
+  "block.copperequipments.waxed_oxidized_copper_lantern": "涂蜡的氧化铜灯笼",
+
+  "block.copperequipments.copper_bars": "铜栏杆",
+  "block.copperequipments.exposed_copper_bars": "斑驳的铜栏杆",
+  "block.copperequipments.weathered_copper_bars": "锈蚀的铜栏杆",
+  "block.copperequipments.oxidized_copper_bars": "氧化的铜栏杆",
+  "block.copperequipments.waxed_copper_bars": "涂蜡铜栏杆",
+  "block.copperequipments.waxed_exposed_copper_bars": "涂蜡的斑驳铜栏杆",
+  "block.copperequipments.waxed_weathered_copper_bars": "涂蜡的锈蚀铜栏杆",
+  "block.copperequipments.waxed_oxidized_copper_bars": "涂蜡的氧化铜栏杆",
+
+  "item.copperequipments.copper_sword": "铜剑",
+  "item.copperequipments.copper_pickaxe": "铜镐",
+  "item.copperequipments.copper_axe": "铜斧",
+  "item.copperequipments.copper_shovel": "铜锹",
+  "item.copperequipments.copper_hoe": "铜锄",
+
+  "item.copperequipments.copper_helmet": "铜头盔",
+  "item.copperequipments.copper_chestplate": "铜胸甲",
+  "item.copperequipments.copper_leggings": "铜护腿",
+  "item.copperequipments.copper_boots": "铜靴子",
+
+  "item.copperequipments.copper_horse_armor": "铜马铠",
+
+  "tooltip.copperequipments.waxed": "蜡封",
+  "tooltip.copperequipments.unexposed": "未氧化",
+  "tooltip.copperequipments.exposed": "暴露",
+  "tooltip.copperequipments.weathered": "风化",
+  "tooltip.copperequipments.oxidized": "氧化",
+
+  "itemgroup.copperequipments.copper_equipments": "铜质装备"
+}

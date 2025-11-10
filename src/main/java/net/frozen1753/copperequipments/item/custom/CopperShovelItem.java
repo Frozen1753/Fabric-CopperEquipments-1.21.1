@@ -1,17 +1,16 @@
 package net.frozen1753.copperequipments.item.custom;
 
-import net.minecraft.item.AnimalArmorItem;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 
 import java.util.List;
 
-public class CopperAnimalArmorItem extends AnimalArmorItem implements CopperItem {
-    public CopperAnimalArmorItem(RegistryEntry<ArmorMaterial> material, Type type, boolean hasOverlay, Settings settings) {
-        super(material, type, hasOverlay, settings);
+public class CopperShovelItem extends ShovelItem implements CopperItem {
+    public CopperShovelItem(ToolMaterial toolMaterial, Settings settings) {
+        super(toolMaterial, settings);
     }
 
     @Override

@@ -19,14 +19,15 @@ Copper Equipments is a lightweight mod that gives copper a real purpose in the g
 - 🧪 **Oxidation** : The blocks oxidise over time and the gears oxidise depending on their durability.
 - 📦 **Crafting Recipes**: Fully integrated with the vanilla crafting system.
 
-## 🛠️ Current Progress (v1.1)
+## 🛠️ Current Progress (v1.0.4)
 Here’s what I’ve been working on for the next version:
 
 - [x] Add Copper Horse Armor item texture
 - [x] Add Copper Horse Armor item model
-- [ ] `in progress` Add waxed variants for item
-- [ ] Implement oxidation logic for Copper Horse Armor
-- [ ] Wax Recipes for waxed blocks (forgot during 1.0.2 💀)
+- [x] Add Chinese translation
+- [x] Add French translation
+- [x] Add waxed variants for item
+- [ ] `in progress` Wax Recipes for waxed blocks (forgot during 1.0.2 💀)
 - [ ] Testing and code cleanup
 
 ## 🔮 What’s Next?

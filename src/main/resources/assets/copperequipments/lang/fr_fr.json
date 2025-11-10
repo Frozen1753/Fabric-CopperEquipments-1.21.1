@@ -1,0 +1,53 @@
+{
+  "item.copperequipments.copper_nugget": "Pépite de cuivre",
+
+  "block.copperequipments.copper_torch": "Torche en cuivre",
+
+  "block.copperequipments.copper_chain": "Chaîne en cuivre",
+  "block.copperequipments.exposed_copper_chain": "Chaîne en cuivre exposée",
+  "block.copperequipments.weathered_copper_chain": "Chaîne en cuivre altérée",
+  "block.copperequipments.oxidized_copper_chain": "Chaîne en cuivre oxydée",
+  "block.copperequipments.waxed_copper_chain": "Chaîne en cuivre cirée",
+  "block.copperequipments.waxed_exposed_copper_chain": "Chaîne en cuivre exposée cirée",
+  "block.copperequipments.waxed_weathered_copper_chain": "Chaîne en cuivre altérée cirée",
+  "block.copperequipments.waxed_oxidized_copper_chain": "Chaîne en cuivre oxydée cirée",
+
+  "block.copperequipments.copper_lantern": "Lanterne en cuivre",
+  "block.copperequipments.exposed_copper_lantern": "Lanterne en cuivre exposée",
+  "block.copperequipments.weathered_copper_lantern": "Lanterne en cuivre altérée",
+  "block.copperequipments.oxidized_copper_lantern": "Lanterne en cuivre oxydée",
+  "block.copperequipments.waxed_copper_lantern": "Lanterne en cuivre cirée",
+  "block.copperequipments.waxed_exposed_copper_lantern": "Lanterne en cuivre exposée cirée",
+  "block.copperequipments.waxed_weathered_copper_lantern": "Lanterne en cuivre altérée cirée",
+  "block.copperequipments.waxed_oxidized_copper_lantern": "Lanterne en cuivre oxydée cirée",
+
+  "block.copperequipments.copper_bars": "Barreaux en cuivre",
+  "block.copperequipments.exposed_copper_bars": "Barreaux en cuivre exposés",
+  "block.copperequipments.weathered_copper_bars": "Barreaux en cuivre altérés",
+  "block.copperequipments.oxidized_copper_bars": "Barreaux en cuivre oxydés",
+  "block.copperequipments.waxed_copper_bars": "Barreaux en cuivre cirés",
+  "block.copperequipments.waxed_exposed_copper_bars": "Barreaux en cuivre exposés cirés",
+  "block.copperequipments.waxed_weathered_copper_bars": "Barreaux en cuivre altérés cirés",
+  "block.copperequipments.waxed_oxidized_copper_bars": "Barreaux en cuivre oxydés cirés",
+
+  "item.copperequipments.copper_sword": "Épée en cuivre",
+  "item.copperequipments.copper_pickaxe": "Pioche en cuivre",
+  "item.copperequipments.copper_axe": "Hache en cuivre",
+  "item.copperequipments.copper_shovel": "Pelle en cuivre",
+  "item.copperequipments.copper_hoe": "Houe en cuivre",
+
+  "item.copperequipments.copper_helmet": "Casque en cuivre",
+  "item.copperequipments.copper_chestplate": "Plastron en cuivre",
+  "item.copperequipments.copper_leggings": "Jambières en cuivre",
+  "item.copperequipments.copper_boots": "Bottes en cuivre",
+
+  "item.copperequipments.copper_horse_armor": "Armure en cuivre pour cheval",
+
+  "tooltip.copperequipments.waxed": "Ciré",
+  "tooltip.copperequipments.unexposed": "Intact",
+  "tooltip.copperequipments.exposed": "Exposé",
+  "tooltip.copperequipments.weathered": "Altéré",
+  "tooltip.copperequipments.oxidized": "Oxydé",
+
+  "itemgroup.copperequipments.copper_equipments": "Équipements en cuivre"
+}

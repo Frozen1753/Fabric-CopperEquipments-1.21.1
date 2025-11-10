@@ -3,7 +3,7 @@
 	"package": "net.frozen1753.copperequipments.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+      "ItemStackMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

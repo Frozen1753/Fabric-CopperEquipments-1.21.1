@@ -43,5 +43,11 @@
 
   "item.copperequipments.copper_horse_armor": "Copper Horse Armor",
 
+  "tooltip.copperequipments.waxed": "Waxed",
+  "tooltip.copperequipments.unexposed": "Unexposed",
+  "tooltip.copperequipments.exposed": "Exposed",
+  "tooltip.copperequipments.weathered": "Weathered",
+  "tooltip.copperequipments.oxidized": "Oxidized",
+
   "itemgroup.copperequipments.copper_equipments": "Copper Equipments"
 }

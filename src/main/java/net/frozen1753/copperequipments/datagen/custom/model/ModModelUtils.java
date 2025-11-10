@@ -1,15 +1,12 @@
-package net.frozen1753.copperequipments.datagen.custom;
+package net.frozen1753.copperequipments.datagen.custom.model;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.frozen1753.copperequipments.CopperEquipments;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
-
-import java.util.*;
 
 public class ModModelUtils {
     public static void registerMetalBars(BlockStateModelGenerator generator, Block block) {

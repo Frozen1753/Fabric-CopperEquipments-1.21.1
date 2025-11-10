@@ -2,6 +2,7 @@ package net.frozen1753.copperequipments.material;
 
 import net.frozen1753.copperequipments.CopperEquipments;
 
+import net.minecraft.item.AnimalArmorItem;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
