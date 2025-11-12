@@ -2,7 +2,6 @@ package net.frozen1753.copperequipments.item.custom;
 
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 
 import java.util.List;

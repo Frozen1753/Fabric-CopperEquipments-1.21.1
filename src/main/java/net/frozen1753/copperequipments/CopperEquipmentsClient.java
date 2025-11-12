@@ -4,9 +4,11 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
+import net.frozen1753.copperequipments.material.custom.CopperHorseEntityRenderer;
 import net.frozen1753.copperequipments.material.custom.OxidizableArmorRenderer;
 import net.frozen1753.copperequipments.particle.ModParticles;
 import net.frozen1753.copperequipments.particle.custom.CopperFlameParticle;
@@ -14,6 +16,7 @@ import net.frozen1753.copperequipments.util.ModDataComponents;
 import net.frozen1753.copperequipments.util.events.ItemDurabilityChangeCallback;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 
 public class CopperEquipmentsClient implements ClientModInitializer {
@@ -118,7 +121,19 @@ public class CopperEquipmentsClient implements ClientModInitializer {
             };
         });
 
+        ModelPredicateProviderRegistry.register(ModItems.COPPER_HORSE_ARMOR, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
+            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
+            return switch (CopperItem.getOxidationStage(stack)) {
+                case 0 -> 0.0F;
+                case 1 -> 0.25F;
+                case 2 -> 0.50F;
+                case 3 -> 0.75F;
+                default -> -1.0F;
+            };
+        });
+
         ArmorRenderer.register(new OxidizableArmorRenderer(), ModItems.COPPER_HELMET, ModItems.COPPER_CHESTPLATE, ModItems.COPPER_LEGGINGS, ModItems.COPPER_BOOTS);
+        EntityRendererRegistry.register(EntityType.HORSE, CopperHorseEntityRenderer::new);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.COPPER_TORCH, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.COPPER_WALL_TORCH, RenderLayer.getCutout());

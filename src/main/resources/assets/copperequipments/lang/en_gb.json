@@ -1,0 +1,53 @@
+{
+  "item.copperequipments.copper_nugget": "Copper Nugget",
+
+  "block.copperequipments.copper_torch": "Copper Torch",
+
+  "block.copperequipments.copper_chain": "Copper Chain",
+  "block.copperequipments.exposed_copper_chain": "Exposed Copper Chain",
+  "block.copperequipments.weathered_copper_chain": "Weathered Copper Chain",
+  "block.copperequipments.oxidised_copper_chain": "Oxidised Copper Chain",
+  "block.copperequipments.waxed_copper_chain": "Waxed Copper Chain",
+  "block.copperequipments.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
+  "block.copperequipments.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
+  "block.copperequipments.waxed_oxidised_copper_chain": "Waxed Oxidised Copper Chain",
+
+  "block.copperequipments.copper_lantern": "Copper Lantern",
+  "block.copperequipments.exposed_copper_lantern": "Exposed Copper Lantern",
+  "block.copperequipments.weathered_copper_lantern": "Weathered Copper Lantern",
+  "block.copperequipments.oxidised_copper_lantern": "Oxidised Copper Lantern",
+  "block.copperequipments.waxed_copper_lantern": "Waxed Copper Lantern",
+  "block.copperequipments.waxed_exposed_copper_lantern": "Waxed Exposed Copper Lantern",
+  "block.copperequipments.waxed_weathered_copper_lantern": "Waxed Weathered Copper Lantern",
+  "block.copperequipments.waxed_oxidised_copper_lantern": "Waxed Oxidised Copper Lantern",
+
+  "block.copperequipments.copper_bars": "Copper Bars",
+  "block.copperequipments.exposed_copper_bars": "Exposed Copper Bars",
+  "block.copperequipments.weathered_copper_bars": "Weathered Copper Bars",
+  "block.copperequipments.oxidised_copper_bars": "Oxidised Copper Bars",
+  "block.copperequipments.waxed_copper_bars": "Waxed Copper Bars",
+  "block.copperequipments.waxed_exposed_copper_bars": "Waxed Exposed Copper Bars",
+  "block.copperequipments.waxed_weathered_copper_bars": "Waxed Weathered Copper Bars",
+  "block.copperequipments.waxed_oxidised_copper_bars": "Waxed Oxidised Copper Bars",
+
+  "item.copperequipments.copper_sword": "Copper Sword",
+  "item.copperequipments.copper_pickaxe": "Copper Pickaxe",
+  "item.copperequipments.copper_axe": "Copper Axe",
+  "item.copperequipments.copper_shovel": "Copper Shovel",
+  "item.copperequipments.copper_hoe": "Copper Hoe",
+
+  "item.copperequipments.copper_helmet": "Copper Helmet",
+  "item.copperequipments.copper_chestplate": "Copper Chestplate",
+  "item.copperequipments.copper_leggings": "Copper Leggings",
+  "item.copperequipments.copper_boots": "Copper Boots",
+
+  "item.copperequipments.copper_horse_armour": "Copper Horse Armour",
+
+  "tooltip.copperequipments.waxed": "Waxed",
+  "tooltip.copperequipments.unexposed": "Unexposed",
+  "tooltip.copperequipments.exposed": "Exposed",
+  "tooltip.copperequipments.weathered": "Weathered",
+  "tooltip.copperequipments.oxidised": "Oxidised",
+
+  "itemgroup.copperequipments.copper_equipments": "Copper Equipments"
+}

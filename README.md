@@ -7,6 +7,7 @@ Copper Equipments is a lightweight mod that gives copper a real purpose in the g
 ## Features
 - 🛡️ **Copper Armor**: Helmet, Chestplate, Leggings, and Boots with balanced durability and protection.
 - 🪓 **Copper Tools**: Sword, Pickaxe, Axe, Shovel, and Hoe — all craftable using copper ingots.
+- 🐴 **Copper Horse Armor**: Because horses deserve style too.
 - ♻️ **Smelting & Recycling**: Copper gear can be smelted into copper nuggets.
 - 🧱 **Copper Blocks**:
   - Copper Torch
@@ -16,28 +17,30 @@ Copper Equipments is a lightweight mod that gives copper a real purpose in the g
 - 🎨 **Vanilla Textures**: Faithful to Minecraft 1.21.9’s style.
 - 🔁 **Repairable**: All items can be repaired using copper ingots.
 - ✨ **Enchantable**: Copper gear supports enchantments like any vanilla equipment.
-- 🧪 **Oxidation** : The blocks oxidise over time and the gears oxidise depending on their durability.
+- 🧪 **Natural Oxidation** : The blocks oxidise over time and the gears oxidise depending on their durability.
+- 🕯️ **Waxing** : Blocks and gear can be waxed to prevent further oxidation.
 - 📦 **Crafting Recipes**: Fully integrated with the vanilla crafting system.
 
-## 🛠️ Current Progress (v1.0.4)
+## Translations
+- 🇺🇸 EN (US)
+- 🇬🇧 EN (UK)
+- 🇫🇷 FR (France)
+- 🇨🇳 CN (Mandarin)
+
+## 🛠️ Current Progress (v1.0.5)
 Here’s what I’ve been working on for the next version:
 
-- [x] Add Copper Horse Armor item texture
-- [x] Add Copper Horse Armor item model
-- [x] Add Translations:
-  - [x] Add Chinese translation
-  - [x] Add French translation
-- [x] Add waxed variants for item
-- [x] Wax/Unwax Recipes for copper items
-- [x] Wax Recipes for waxed blocks (forgot during 1.0.2 💀)
-- [ ] `in progress` Testing and code cleanup
+- [ ] `in progress` Add new item : Oxidizing powder
+- [ ] Create texture for Oxidizing Powder
+- [ ] Implement crafting recipe for Oxidizing Powder
+- [ ] Add special recipe type for forced oxidation
+- [ ] Add special recipe type for removing wax
+- [ ] Rework oxidation system for items
+- [ ] Testing
+- [ ] Clean and comment code for official release
 
 ## 🔮 What’s Next?
 I’ve got big plans for future updates!
-
-**v1.0.4**
-- 🕯️ **Waxable gear**: Don’t want your copper gear turning green as it gets damaged? Just wax it to preserve its shine!
-- 🐎 **Copper Horse Armor**: Because horses deserve style too — now they can wear copper armor just like you.
 
 **v1.0.5 — Pre-Release**
 - ⚙️ **Oxidation rework for items**: Copper gear will now oxidize naturally over time, while durability still influences the process.
@@ -48,6 +51,7 @@ I’ve got big plans for future updates!
 - 🐞 **Bug Fixing**: I'm going to create my own survival world to test all possible scenarios, just like a normal player would. I'm also leaving a little time for you all to find any bugs that I might have missed
 - 💬 **Comment Code**: Adding comments throughout the code to help other modders understand and reuse my work more easily.
 - 🎨 **Gear retexture**: I’m not an artist, so the exposed and weathered textures are just linear transitions between copper and oxidized. I plan to rework them to better match the vanilla vibe — with authentic copper stains and aging
+- 📖 **Wiki**: Most players rely on mods like JEI to see recipes, but I want to go further — a dedicated wiki will expose **everything the mod does** without requiring users to read the code or learn Java.
 
 **For v1.2**
 - 🌹 **Rosegold Equipment Set**: A beautiful alloy of copper and gold with unique textures and balanced stats.

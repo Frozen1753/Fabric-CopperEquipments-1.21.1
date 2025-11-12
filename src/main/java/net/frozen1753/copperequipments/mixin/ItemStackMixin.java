@@ -1,7 +1,6 @@
 package net.frozen1753.copperequipments.mixin;
 
 import net.frozen1753.copperequipments.item.custom.CopperItem;
-import net.frozen1753.copperequipments.util.ModDataComponents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;

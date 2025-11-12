@@ -2,19 +2,14 @@ package net.frozen1753.copperequipments.datagen.custom;
 
 import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.advancement.criterion.EnterBlockCriterion;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
-import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
-import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.TagKey;
 
 import java.util.Arrays;
 import java.util.List;

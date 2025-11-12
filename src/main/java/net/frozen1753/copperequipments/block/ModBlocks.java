@@ -12,6 +12,7 @@ import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -360,45 +361,45 @@ public class ModBlocks {
         OxidizableBlocksRegistry.registerWaxableBlockPair(OXIDIZED_COPPER_BARS, WAXED_OXIDIZED_COPPER_BARS);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-            entries.add(COPPER_CHAIN);
-            entries.add(EXPOSED_COPPER_CHAIN);
-            entries.add(WEATHERED_COPPER_CHAIN);
-            entries.add(OXIDIZED_COPPER_CHAIN);
-            entries.add(WAXED_COPPER_CHAIN);
-            entries.add(WAXED_EXPOSED_COPPER_CHAIN);
-            entries.add(WAXED_WEATHERED_COPPER_CHAIN);
-            entries.add(WAXED_OXIDIZED_COPPER_CHAIN);
+            entries.addAfter(Items.COPPER_TRAPDOOR, COPPER_CHAIN);
+            entries.addAfter(Items.EXPOSED_COPPER_TRAPDOOR, EXPOSED_COPPER_CHAIN);
+            entries.addAfter(Items.WEATHERED_COPPER_TRAPDOOR, WEATHERED_COPPER_CHAIN);
+            entries.addAfter(Items.OXIDIZED_COPPER_TRAPDOOR, OXIDIZED_COPPER_CHAIN);
+            entries.addAfter(Items.WAXED_COPPER_TRAPDOOR, WAXED_COPPER_CHAIN);
+            entries.addAfter(Items.WAXED_EXPOSED_COPPER_TRAPDOOR, WAXED_EXPOSED_COPPER_CHAIN);
+            entries.addAfter(Items.WAXED_WEATHERED_COPPER_TRAPDOOR, WAXED_WEATHERED_COPPER_CHAIN);
+            entries.addAfter(Items.WAXED_OXIDIZED_COPPER_TRAPDOOR, WAXED_OXIDIZED_COPPER_CHAIN);
 
-            entries.add(COPPER_BARS);
-            entries.add(EXPOSED_COPPER_BARS);
-            entries.add(WEATHERED_COPPER_BARS);
-            entries.add(OXIDIZED_COPPER_BARS);
-            entries.add(WAXED_COPPER_BARS);
-            entries.add(WAXED_EXPOSED_COPPER_BARS);
-            entries.add(WAXED_WEATHERED_COPPER_BARS);
-            entries.add(WAXED_OXIDIZED_COPPER_BARS);
+            entries.addBefore(Items.COPPER_DOOR, COPPER_BARS);
+            entries.addBefore(Items.EXPOSED_COPPER_DOOR, EXPOSED_COPPER_BARS);
+            entries.addBefore(Items.WEATHERED_COPPER_DOOR, WEATHERED_COPPER_BARS);
+            entries.addBefore(Items.OXIDIZED_COPPER_DOOR, OXIDIZED_COPPER_BARS);
+            entries.addBefore(Items.WAXED_COPPER_DOOR, WAXED_COPPER_BARS);
+            entries.addBefore(Items.WAXED_EXPOSED_COPPER_DOOR, WAXED_EXPOSED_COPPER_BARS);
+            entries.addBefore(Items.WAXED_WEATHERED_COPPER_DOOR, WAXED_WEATHERED_COPPER_BARS);
+            entries.addBefore(Items.WAXED_OXIDIZED_COPPER_DOOR, WAXED_OXIDIZED_COPPER_BARS);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
-            entries.add(COPPER_CHAIN);
-            entries.add(EXPOSED_COPPER_CHAIN);
-            entries.add(WEATHERED_COPPER_CHAIN);
-            entries.add(OXIDIZED_COPPER_CHAIN);
-            entries.add(WAXED_COPPER_CHAIN);
-            entries.add(WAXED_EXPOSED_COPPER_CHAIN);
-            entries.add(WAXED_WEATHERED_COPPER_CHAIN);
-            entries.add(WAXED_OXIDIZED_COPPER_CHAIN);
+            entries.addAfter(Items.CHAIN, COPPER_CHAIN);
+            entries.addAfter(COPPER_CHAIN, EXPOSED_COPPER_CHAIN);
+            entries.addAfter(EXPOSED_COPPER_CHAIN, WEATHERED_COPPER_CHAIN);
+            entries.addAfter(WEATHERED_COPPER_CHAIN, OXIDIZED_COPPER_CHAIN);
+            entries.addAfter(OXIDIZED_COPPER_CHAIN, WAXED_COPPER_CHAIN);
+            entries.addAfter(WAXED_COPPER_CHAIN, WAXED_EXPOSED_COPPER_CHAIN);
+            entries.addAfter(WAXED_EXPOSED_COPPER_CHAIN, WAXED_WEATHERED_COPPER_CHAIN);
+            entries.addAfter(WAXED_WEATHERED_COPPER_CHAIN, WAXED_OXIDIZED_COPPER_CHAIN);
 
-            entries.add(COPPER_TORCH);
+            entries.addAfter(Items.SOUL_TORCH, COPPER_TORCH);
 
-            entries.add(COPPER_LANTERN);
-            entries.add(EXPOSED_COPPER_LANTERN);
-            entries.add(WEATHERED_COPPER_LANTERN);
-            entries.add(OXIDIZED_COPPER_LANTERN);
-            entries.add(WAXED_COPPER_LANTERN);
-            entries.add(WAXED_EXPOSED_COPPER_LANTERN);
-            entries.add(WAXED_WEATHERED_COPPER_LANTERN);
-            entries.add(WAXED_OXIDIZED_COPPER_LANTERN);
+            entries.addAfter(Items.SOUL_LANTERN, COPPER_LANTERN);
+            entries.addAfter(COPPER_LANTERN, EXPOSED_COPPER_LANTERN);
+            entries.addAfter(EXPOSED_COPPER_LANTERN, WEATHERED_COPPER_LANTERN);
+            entries.addAfter(WEATHERED_COPPER_LANTERN, OXIDIZED_COPPER_LANTERN);
+            entries.addAfter(OXIDIZED_COPPER_LANTERN, WAXED_COPPER_LANTERN);
+            entries.addAfter(WAXED_COPPER_LANTERN, WAXED_EXPOSED_COPPER_LANTERN);
+            entries.addAfter(WAXED_EXPOSED_COPPER_LANTERN, WAXED_WEATHERED_COPPER_LANTERN);
+            entries.addAfter(WAXED_WEATHERED_COPPER_LANTERN, WAXED_OXIDIZED_COPPER_LANTERN);
         });
     }
 }

@@ -3,7 +3,6 @@ package net.frozen1753.copperequipments.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.frozen1753.copperequipments.item.ModItems;
-import net.frozen1753.copperequipments.util.ModTags;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 

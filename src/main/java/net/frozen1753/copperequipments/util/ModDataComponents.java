@@ -3,7 +3,6 @@ package net.frozen1753.copperequipments.util;
 import com.mojang.serialization.Codec;
 import net.frozen1753.copperequipments.CopperEquipments;
 import net.minecraft.component.ComponentType;
-import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;

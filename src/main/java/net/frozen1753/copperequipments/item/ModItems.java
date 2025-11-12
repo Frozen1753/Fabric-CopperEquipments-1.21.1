@@ -101,6 +101,8 @@ public class ModItems {
             entries.addAfter(COPPER_HELMET, COPPER_CHESTPLATE);
             entries.addAfter(COPPER_CHESTPLATE, COPPER_LEGGINGS);
             entries.addAfter(COPPER_LEGGINGS, COPPER_BOOTS);
+
+            entries.addAfter(Items.LEATHER_HORSE_ARMOR, COPPER_HORSE_ARMOR);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
