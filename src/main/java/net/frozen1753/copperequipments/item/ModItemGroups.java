@@ -58,6 +58,8 @@ public class ModItemGroups {
                         entries.add(ModItems.COPPER_CHESTPLATE);
                         entries.add(ModItems.COPPER_LEGGINGS);
                         entries.add(ModItems.COPPER_BOOTS);
+
+                        entries.add(ModItems.COPPER_HORSE_ARMOR);
                     })
 
                     .build());

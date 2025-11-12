@@ -24,19 +24,25 @@ Here’s what I’ve been working on for the next version:
 
 - [x] Add Copper Horse Armor item texture
 - [x] Add Copper Horse Armor item model
-- [x] Add Chinese translation
-- [x] Add French translation
+- [x] Add Translations:
+  - [x] Add Chinese translation
+  - [x] Add French translation
 - [x] Add waxed variants for item
 - [x] Wax/Unwax Recipes for copper items
-- [ ] `in progress` Wax Recipes for waxed blocks (forgot during 1.0.2 💀)
-- [ ] Testing and code cleanup
+- [x] Wax Recipes for waxed blocks (forgot during 1.0.2 💀)
+- [ ] `in progress` Testing and code cleanup
 
 ## 🔮 What’s Next?
 I’ve got big plans for future updates!
 
-**v1.0.4 — Pre-Release**
+**v1.0.4**
 - 🕯️ **Waxable gear**: Don’t want your copper gear turning green as it gets damaged? Just wax it to preserve its shine!
 - 🐎 **Copper Horse Armor**: Because horses deserve style too — now they can wear copper armor just like you.
+
+**v1.0.5 — Pre-Release**
+- ⚙️ **Oxidation rework for items**: Copper gear will now oxidize naturally over time, while durability still influences the process.
+- 🪓 **Fast Unwax**: In vanilla Minecraft you can wax a full stack of blocks directly in your inventory with honeycomb. But unwaxing requires placing them down and axing each one individually. Now simply drop them into a crafting table and they’ll be unwaxed in bulk!
+- 💨️ **Oxidizing powder**: Tired of waiting for your blocks and items to age? Sprinkle this magical dust to accelerate oxidation instantly!
 
 **v1.1 — Release**
 - 🐞 **Bug Fixing**: I'm going to create my own survival world to test all possible scenarios, just like a normal player would. I'm also leaving a little time for you all to find any bugs that I might have missed

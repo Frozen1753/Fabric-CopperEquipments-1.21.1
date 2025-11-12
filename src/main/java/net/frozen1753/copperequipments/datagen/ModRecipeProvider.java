@@ -3,10 +3,12 @@ package net.frozen1753.copperequipments.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.datagen.custom.ModRecipeUtils;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -16,6 +18,7 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
@@ -35,6 +38,21 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 ModItems.COPPER_CHESTPLATE,
                 ModItems.COPPER_LEGGINGS,
                 ModItems.COPPER_BOOTS
+        );
+
+        Map<ItemConvertible, ItemConvertible> UNWAXED_TO_WAXED = Map.ofEntries(
+                Map.entry(ModBlocks.COPPER_BARS, ModBlocks.WAXED_COPPER_BARS),
+                Map.entry(ModBlocks.EXPOSED_COPPER_BARS, ModBlocks.WAXED_EXPOSED_COPPER_BARS),
+                Map.entry(ModBlocks.WEATHERED_COPPER_BARS, ModBlocks.WAXED_WEATHERED_COPPER_BARS),
+                Map.entry(ModBlocks.OXIDIZED_COPPER_BARS, ModBlocks.WAXED_OXIDIZED_COPPER_BARS),
+                Map.entry(ModBlocks.COPPER_CHAIN, ModBlocks.WAXED_COPPER_CHAIN),
+                Map.entry(ModBlocks.EXPOSED_COPPER_CHAIN, ModBlocks.WAXED_EXPOSED_COPPER_CHAIN),
+                Map.entry(ModBlocks.WEATHERED_COPPER_CHAIN, ModBlocks.WAXED_WEATHERED_COPPER_CHAIN),
+                Map.entry(ModBlocks.OXIDIZED_COPPER_CHAIN, ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN),
+                Map.entry(ModBlocks.COPPER_LANTERN, ModBlocks.WAXED_COPPER_LANTERN),
+                Map.entry(ModBlocks.EXPOSED_COPPER_LANTERN, ModBlocks.WAXED_EXPOSED_COPPER_LANTERN),
+                Map.entry(ModBlocks.WEATHERED_COPPER_LANTERN, ModBlocks.WAXED_WEATHERED_COPPER_LANTERN),
+                Map.entry(ModBlocks.OXIDIZED_COPPER_LANTERN, ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN)
         );
 
         offerReversibleCompactingRecipes(recipeExporter, RecipeCategory.MISC, ModItems.COPPER_NUGGET, RecipeCategory.MISC, Items.COPPER_INGOT);
@@ -78,6 +96,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('C', Items.COPPER_INGOT)
                 .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
                 .offerTo(recipeExporter);
+
+        ModRecipeUtils.offerWaxingRecipes(recipeExporter, UNWAXED_TO_WAXED);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.COPPER_AXE)
                 .pattern("CC")
