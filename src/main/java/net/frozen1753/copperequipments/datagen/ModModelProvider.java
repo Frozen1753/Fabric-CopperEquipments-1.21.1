@@ -3,7 +3,7 @@ package net.frozen1753.copperequipments.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.frozen1753.copperequipments.block.ModBlocks;
-import net.frozen1753.copperequipments.datagen.custom.model.ModModelUtils;
+import net.frozen1753.copperequipments.datagen.custom.ModModelUtils;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.minecraft.data.client.*;
 

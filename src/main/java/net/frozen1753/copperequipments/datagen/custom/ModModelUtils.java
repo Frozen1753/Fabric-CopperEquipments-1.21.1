@@ -1,4 +1,4 @@
-package net.frozen1753.copperequipments.datagen.custom.model;
+package net.frozen1753.copperequipments.datagen.custom;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

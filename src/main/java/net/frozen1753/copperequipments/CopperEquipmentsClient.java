@@ -153,5 +153,7 @@ public class CopperEquipmentsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.COPPER_FLAME, CopperFlameParticle.Factory::new);
 
         ItemDurabilityChangeCallback.EVENT.register((stack, amount, world, player) -> {});
+
+
     }
 }

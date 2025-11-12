@@ -27,6 +27,7 @@ Here’s what I’ve been working on for the next version:
 - [x] Add Chinese translation
 - [x] Add French translation
 - [x] Add waxed variants for item
+- [x] Wax/Unwax Recipes for copper items
 - [ ] `in progress` Wax Recipes for waxed blocks (forgot during 1.0.2 💀)
 - [ ] Testing and code cleanup
 

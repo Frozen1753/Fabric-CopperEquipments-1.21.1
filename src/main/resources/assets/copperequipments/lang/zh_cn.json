@@ -43,11 +43,11 @@
 
   "item.copperequipments.copper_horse_armor": "铜马铠",
 
-  "tooltip.copperequipments.waxed": "蜡封",
-  "tooltip.copperequipments.unexposed": "未氧化",
-  "tooltip.copperequipments.exposed": "暴露",
-  "tooltip.copperequipments.weathered": "风化",
-  "tooltip.copperequipments.oxidized": "氧化",
+  "tooltip.copperequipments.waxed": "蜡封 •",
+  "tooltip.copperequipments.unexposed": "铜光焕发",
+  "tooltip.copperequipments.exposed": "青痕暗渡",
+  "tooltip.copperequipments.weathered": "锈色斑斑",
+  "tooltip.copperequipments.oxidized": "碧霭笼身",
 
   "itemgroup.copperequipments.copper_equipments": "铜质装备"
 }
