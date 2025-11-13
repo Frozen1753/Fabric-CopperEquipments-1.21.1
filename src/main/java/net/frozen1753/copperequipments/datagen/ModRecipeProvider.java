@@ -7,6 +7,7 @@ import net.frozen1753.copperequipments.datagen.custom.ModRecipeUtils;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -35,7 +36,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 ModItems.COPPER_HELMET,
                 ModItems.COPPER_CHESTPLATE,
                 ModItems.COPPER_LEGGINGS,
-                ModItems.COPPER_BOOTS
+                ModItems.COPPER_BOOTS,
+                ModItems.COPPER_HORSE_ARMOR
         );
 
         Map<ItemConvertible, ItemConvertible> UNWAXED_TO_WAXED = Map.ofEntries(
@@ -54,6 +56,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         );
 
         offerReversibleCompactingRecipes(recipeExporter, RecipeCategory.MISC, ModItems.COPPER_NUGGET, RecipeCategory.MISC, Items.COPPER_INGOT);
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BREWING, ModItems.OXIDIZING_POWDER, 4)
+                .input(Items.REDSTONE)
+                .input(ModItems.COPPER_NUGGET, 2)
+                .input(Items.BONE_MEAL)
+                .criterion(hasItem(Items.REDSTONE), conditionsFromItem(Items.REDSTONE))
+                .criterion(hasItem(Items.BONE_MEAL), conditionsFromItem(Items.BONE_MEAL))
+                .criterion(hasItem(ModItems.COPPER_NUGGET), conditionsFromItem(ModItems.COPPER_NUGGET))
+                .offerTo(recipeExporter);
 
         offerSmelting(recipeExporter, COPPER_NUGGET_SMELTABLES, RecipeCategory.MISC, ModItems.COPPER_NUGGET, 0.1F, 200, "copper_nugget");
         offerBlasting(recipeExporter, COPPER_NUGGET_SMELTABLES, RecipeCategory.MISC, ModItems.COPPER_NUGGET, 0.1F, 100, "copper_nugget");

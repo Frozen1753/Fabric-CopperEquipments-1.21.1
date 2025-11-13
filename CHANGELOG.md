@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## Version 1.0.4 - November 12, 2025
+
+### Included in this build:
+
+#### 🕯️ Item Waxability
+All copper‑based gear can now be waxed to prevent further oxidation.
+
+#### 🐎 Copper Horse Armor
+Introduced Copper Horse Armor, complete with natural oxidation and waxing support.
+
+#### 🌍 Translations
+Added translations for :
+- 🇺🇸 EN (US)
+- 🇬🇧 EN (UK)
+- 🇫🇷 FR (France)
+- 🇨🇳 CN (Mandarin)
+
+🐛 Bug Fixes
+
+- Added recipes for waxable blocks
+- Creative menus now have copper blocks in order
+
+---
+
 ## 🧪 Version 1.0.3 – November 8, 2025
 
 ### Included in this build:

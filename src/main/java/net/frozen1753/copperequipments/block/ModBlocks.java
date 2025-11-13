@@ -29,7 +29,8 @@ public class ModBlocks {
                             .sounds(BlockSoundGroup.WOOD)
                             .pistonBehavior(PistonBehavior.DESTROY)
                             .nonOpaque()
-            )
+            ),
+            false
     );
     public static final Block COPPER_WALL_TORCH = registerBlock("copper_wall_torch",
             new WallTorchBlock(

@@ -18,6 +18,7 @@ public class ModItemGroups {
                     .displayName(Text.translatable("itemgroup.copperequipments.copper_equipments"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.COPPER_NUGGET);
+                        entries.add(ModItems.OXIDIZING_POWDER);
 
                         entries.add(ModItems.COPPER_TORCH_ITEM);
 

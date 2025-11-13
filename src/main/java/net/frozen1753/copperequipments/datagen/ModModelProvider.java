@@ -47,6 +47,7 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.COPPER_NUGGET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.OXIDIZING_POWDER, Models.GENERATED);
 
         itemModelGenerator.register(ModBlocks.COPPER_CHAIN.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.EXPOSED_COPPER_CHAIN.asItem(), Models.GENERATED);

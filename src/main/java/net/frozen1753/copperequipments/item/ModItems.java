@@ -15,6 +15,8 @@ import net.minecraft.util.math.Direction;
 public class ModItems {
     public static final Item COPPER_NUGGET = registerItem("copper_nugget", new Item(new Item.Settings()));
 
+    public static final Item OXIDIZING_POWDER = registerItem("oxidizing_powder", new OxidizingPowderItem(new Item.Settings()));
+
     public static final Item COPPER_TORCH_ITEM = registerItem("copper_torch",
             new VerticallyAttachableBlockItem(ModBlocks.COPPER_TORCH, ModBlocks.COPPER_WALL_TORCH, new Item.Settings(), Direction.DOWN));
 
