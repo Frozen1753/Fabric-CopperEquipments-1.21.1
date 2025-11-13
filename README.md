@@ -40,16 +40,17 @@ Here’s what I’ve been working on for the next version:
 - [x] Fix [Crash when joining multiplayer world](https://github.com/Frozen1753/Fabric-CopperEquipments-1.21.1/issues/5) issue
 - [x] Remove debug messages when crafting
 - [x] Add forced oxidation using Oxidizing powder
-- [ ] `in progress` Add particle effect for forced oxidation
-- [ ] Add special recipe type for forced oxidation
-- [ ] Add special recipe type for unwaxing
+- [x] Add special recipe type for forced oxidation
+- [x] Add special recipe type for unwaxing
+- [x] Add special recipe type for deoxidation
 - [x] Add smelting recipe for Copper Horse Armor
+- [ ] `in progress` Add particle effect for forced oxidation
 - [ ] Testing and code cleanup
-- [ ] Translations:
+- [x] Translations:
   - [x] 🇺🇸 English (US)
   - [x] 🇬🇧 English (GB)
   - [x] 🇫🇷 French (FR)
-  - [ ] `help wanted` 🇨🇳 Mandarin (CN) 
+  - [x] 🇨🇳 Mandarin (CN) 
 
 ## 🔮 What’s Next?
 I’ve got big plans for future updates!

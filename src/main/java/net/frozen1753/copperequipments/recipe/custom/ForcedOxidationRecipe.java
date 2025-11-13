@@ -1,29 +1,27 @@
-package net.frozen1753.copperequipments.item.custom;
+package net.frozen1753.copperequipments.recipe.custom;
 
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.item.ModItems;
+import net.frozen1753.copperequipments.item.custom.CopperItem;
+import net.frozen1753.copperequipments.recipe.ModRecipes;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.property.Property;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.SpecialCraftingRecipe;
+import net.minecraft.recipe.book.CraftingRecipeCategory;
+import net.minecraft.recipe.input.CraftingRecipeInput;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.World;
 
 import java.util.Map;
 
-public class OxidizingPowderItem extends Item {
-
-    public OxidizingPowderItem(Settings settings) {
-        super(settings);
+public class ForcedOxidationRecipe extends SpecialCraftingRecipe {
+    public ForcedOxidationRecipe(CraftingRecipeCategory category) {
+        super(category);
     }
 
     private static final Map<ItemConvertible, ItemConvertible> OXIDATION_MAP = Map.ofEntries(
@@ -79,84 +77,78 @@ public class OxidizingPowderItem extends Item {
     );
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        BlockPos pos = context.getBlockPos();
-        BlockState state = world.getBlockState(pos);
-        ItemStack stack = context.getStack();
+    public boolean matches(CraftingRecipeInput input, World world) {
+        if (input.getStackCount() != 2) {
+            return false;
+        }
+        boolean foundPowder = false;
+        boolean foundOxidizable = false;
 
-        Block next = (Block) OXIDATION_MAP.get(state.getBlock());
-        if (next != null) {
-            // prevent reset state of block (ex: copper bars)
-            BlockState newState = copyProperties(state, next);
-            world.setBlockState(pos, newState);
+        for (ItemStack stack : input.getStacks()) {
+            if (stack.isEmpty()) continue;
 
-            stack.decrement(1); // consume powder
+            Item item = stack.getItem();
 
-            if (!world.isClient) {
-                ServerWorld serverWorld = (ServerWorld) world;
-                Random random = world.getRandom();
-
-                // Coordinates of the block's center
-                double cx = pos.getX() + 0.5;
-                double cy = pos.getY() + 0.5;
-                double cz = pos.getZ() + 0.5;
-
-                // Offsets for the 6 faces (up, down, north, south, east, west)
-                double[][] faces = {
-                        {0, +0.5, 0}, // up
-                        {0, -0.5, 0}, // down
-                        {0, 0, +0.5}, // south
-                        {0, 0, -0.5}, // north
-                        {+0.5, 0, 0}, // east
-                        {-0.5, 0, 0}  // west
-                };
-
-                for (double[] face : faces) {
-                    double fx = cx + face[0];
-                    double fy = cy + face[1];
-                    double fz = cz + face[2];
-
-                    for (int i = 0; i < 5; i++) {
-                        double x = fx + (random.nextDouble() - 0.5);
-                        double y = fy + (random.nextDouble() - 0.5);
-                        double z = fz + (random.nextDouble() - 0.5);
-
-                        serverWorld.spawnParticles(
-                                ParticleTypes.WAX_OFF,
-                                x, y, z,
-                                1,
-                                0,
-                                0,
-                                0,
-                                0.3
-                        );
-                    }
-                }
-
-                world.playSound(
-                        null,
-                        pos,
-                        SoundEvents.UI_STONECUTTER_TAKE_RESULT,
-                        SoundCategory.BLOCKS,
-                        1.0F,
-                        1.5F
-                );
+            if (item == ModItems.OXIDIZING_POWDER) {
+                foundPowder = true;
+                continue;
             }
 
-            return ActionResult.SUCCESS;
+            if (item instanceof BlockItem blockItem) {
+                Block block = blockItem.getBlock();
+                if (OXIDATION_MAP.containsKey(block)) {
+                    foundOxidizable = true;
+                }
+            }
+
+            if (item instanceof CopperItem) {
+                int stage = CopperItem.getOxidationStage(stack);
+                foundOxidizable = stage >= 0 && stage < 3; // can still oxidize forward
+            }
         }
 
-        return ActionResult.PASS;
+        return foundPowder && foundOxidizable;
     }
 
-    private static BlockState copyProperties(BlockState source, Block targetBlock) {
-        BlockState newState = targetBlock.getDefaultState();
-        for (Property<?> property : source.getProperties()) {
-            if (newState.contains(property)) {
-                newState = newState.with((Property) property, source.get(property));
+    @Override
+    public ItemStack craft(CraftingRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
+        ItemStack oxidizableStack = ItemStack.EMPTY;
+
+        for (ItemStack stack : input.getStacks()) {
+            if (stack.isEmpty()) continue;
+
+            Item item = stack.getItem();
+
+            if (item instanceof BlockItem blockItem) {
+                Block block = blockItem.getBlock();
+                Block oxidized = (Block) OXIDATION_MAP.get(block);
+                if (oxidized != null) {
+                    oxidizableStack = new ItemStack(oxidized.asItem());
+                    break;
+                }
+            }
+
+            if (item instanceof CopperItem) {
+                ItemStack result = stack.copy();
+                int stage = CopperItem.getOxidationStage(result);
+                if (stage < 3) {
+                    CopperItem.setOxidationStage(result, stage + 1);
+                }
+                oxidizableStack = result;
+                break;
             }
         }
-        return newState;
+
+        return oxidizableStack;
+    }
+
+    @Override
+    public boolean fits(int width, int height) {
+        return width * height >= 2;
+    }
+
+    @Override
+    public RecipeSerializer<?> getSerializer() {
+        return ModRecipes.CRAFTING_SPECIAL_FORCED_OXIDATION;
     }
 }

@@ -1,8 +1,12 @@
 package net.frozen1753.copperequipments.recipe.custom;
 
-import net.frozen1753.copperequipments.CopperEquipments;
+import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialCraftingRecipe;
@@ -11,10 +15,76 @@ import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.World;
 
+import java.util.Map;
+
 public class UnwaxingRecipe extends SpecialCraftingRecipe {
     public UnwaxingRecipe(CraftingRecipeCategory category) {
         super(category);
     }
+
+    private static final Map<Block, Block> UNWAXING_MAP = Map.ofEntries(
+            // Vanilla
+            Map.entry(Blocks.WAXED_COPPER_BLOCK, Blocks.COPPER_BLOCK),
+            Map.entry(Blocks.WAXED_EXPOSED_COPPER, Blocks.EXPOSED_COPPER),
+            Map.entry(Blocks.WAXED_WEATHERED_COPPER, Blocks.WEATHERED_COPPER),
+            Map.entry(Blocks.WAXED_OXIDIZED_COPPER, Blocks.OXIDIZED_COPPER),
+
+            Map.entry(Blocks.WAXED_CHISELED_COPPER, Blocks.CHISELED_COPPER),
+            Map.entry(Blocks.WAXED_EXPOSED_CHISELED_COPPER, Blocks.EXPOSED_CHISELED_COPPER),
+            Map.entry(Blocks.WAXED_WEATHERED_CHISELED_COPPER, Blocks.WEATHERED_CHISELED_COPPER),
+            Map.entry(Blocks.WAXED_OXIDIZED_CHISELED_COPPER, Blocks.OXIDIZED_CHISELED_COPPER),
+
+            Map.entry(Blocks.WAXED_COPPER_GRATE, Blocks.COPPER_GRATE),
+            Map.entry(Blocks.WAXED_EXPOSED_COPPER_GRATE, Blocks.EXPOSED_COPPER_GRATE),
+            Map.entry(Blocks.WAXED_WEATHERED_COPPER_GRATE, Blocks.WEATHERED_COPPER_GRATE),
+            Map.entry(Blocks.WAXED_OXIDIZED_COPPER_GRATE, Blocks.OXIDIZED_COPPER_GRATE),
+
+            Map.entry(Blocks.WAXED_CUT_COPPER, Blocks.CUT_COPPER),
+            Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER, Blocks.EXPOSED_CUT_COPPER),
+            Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER, Blocks.WEATHERED_CUT_COPPER),
+            Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER, Blocks.OXIDIZED_CUT_COPPER),
+
+            Map.entry(Blocks.WAXED_CUT_COPPER_STAIRS, Blocks.CUT_COPPER_STAIRS),
+            Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER_STAIRS, Blocks.EXPOSED_CUT_COPPER_STAIRS),
+            Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER_STAIRS, Blocks.WEATHERED_CUT_COPPER_STAIRS),
+            Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER_STAIRS, Blocks.OXIDIZED_CUT_COPPER_STAIRS),
+
+            Map.entry(Blocks.WAXED_CUT_COPPER_SLAB, Blocks.CUT_COPPER_SLAB),
+            Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB, Blocks.EXPOSED_CUT_COPPER_SLAB),
+            Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB, Blocks.WEATHERED_CUT_COPPER_SLAB),
+            Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB, Blocks.OXIDIZED_CUT_COPPER_SLAB),
+
+            Map.entry(Blocks.WAXED_COPPER_BULB, Blocks.COPPER_BULB),
+            Map.entry(Blocks.WAXED_EXPOSED_COPPER_BULB, Blocks.EXPOSED_COPPER_BULB),
+            Map.entry(Blocks.WAXED_WEATHERED_COPPER_BULB, Blocks.WEATHERED_COPPER_BULB),
+            Map.entry(Blocks.WAXED_OXIDIZED_COPPER_BULB, Blocks.OXIDIZED_COPPER_BULB),
+
+            Map.entry(Blocks.WAXED_COPPER_DOOR, Blocks.COPPER_DOOR),
+            Map.entry(Blocks.WAXED_EXPOSED_COPPER_DOOR, Blocks.EXPOSED_COPPER_DOOR),
+            Map.entry(Blocks.WAXED_WEATHERED_COPPER_DOOR, Blocks.WEATHERED_COPPER_DOOR),
+            Map.entry(Blocks.WAXED_OXIDIZED_COPPER_DOOR, Blocks.OXIDIZED_COPPER_DOOR),
+
+            Map.entry(Blocks.WAXED_COPPER_TRAPDOOR, Blocks.COPPER_TRAPDOOR),
+            Map.entry(Blocks.WAXED_EXPOSED_COPPER_TRAPDOOR, Blocks.EXPOSED_COPPER_TRAPDOOR),
+            Map.entry(Blocks.WAXED_WEATHERED_COPPER_TRAPDOOR, Blocks.WEATHERED_COPPER_TRAPDOOR),
+            Map.entry(Blocks.WAXED_OXIDIZED_COPPER_TRAPDOOR, Blocks.OXIDIZED_COPPER_TRAPDOOR),
+
+            // Mod
+            Map.entry(ModBlocks.WAXED_COPPER_BARS, ModBlocks.COPPER_BARS),
+            Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_BARS, ModBlocks.EXPOSED_COPPER_BARS),
+            Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_BARS, ModBlocks.WEATHERED_COPPER_BARS),
+            Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_BARS, ModBlocks.OXIDIZED_COPPER_BARS),
+
+            Map.entry(ModBlocks.WAXED_COPPER_CHAIN, ModBlocks.COPPER_CHAIN),
+            Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN, ModBlocks.EXPOSED_COPPER_CHAIN),
+            Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN, ModBlocks.WEATHERED_COPPER_CHAIN),
+            Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN, ModBlocks.OXIDIZED_COPPER_CHAIN),
+
+            Map.entry(ModBlocks.WAXED_COPPER_LANTERN, ModBlocks.COPPER_LANTERN),
+            Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN, ModBlocks.EXPOSED_COPPER_LANTERN),
+            Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN, ModBlocks.WEATHERED_COPPER_LANTERN),
+            Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN, ModBlocks.OXIDIZED_COPPER_LANTERN)
+    );
 
     @Override
     public boolean matches(CraftingRecipeInput input, World world) {
@@ -22,22 +92,25 @@ public class UnwaxingRecipe extends SpecialCraftingRecipe {
             return false;
         }
 
-        boolean foundWaxedCopper = false;
-
         for (ItemStack stack : input.getStacks()) {
             if (stack.isEmpty()) continue;
 
-            if (stack.getItem() instanceof CopperItem) {
-                if (!CopperItem.isWaxed(stack)) {
-                    return false;
-                }
-                foundWaxedCopper = true;
-            } else {
-                return false;
+            Item item = stack.getItem();
+
+            if (item instanceof CopperItem) {
+                return CopperItem.isWaxed(stack);
             }
+
+            // overrides vanilla waxed_copper_block -> 9 copper_ingot
+            if (item instanceof BlockItem blockItem) {
+                Block block = blockItem.getBlock();
+                return UNWAXING_MAP.containsKey(block);
+            }
+
+            return false;
         }
 
-        return foundWaxedCopper;
+        return false;
     }
 
     @Override
@@ -45,14 +118,24 @@ public class UnwaxingRecipe extends SpecialCraftingRecipe {
 
         for (int i = 0; i < input.getSize(); i++) {
             ItemStack stack = input.getStackInSlot(i);
+            if (stack.isEmpty()) continue;
 
-            if (stack.getItem() instanceof CopperItem) {
+            Item item = stack.getItem();
 
+            if (item instanceof CopperItem) {
                 if (CopperItem.isWaxed(stack)) {
                     ItemStack result = stack.copy();
                     CopperItem.setWaxed(result, false);
                     CopperItem.updateWaxStageFromDamage(result);
                     return result;
+                }
+            }
+
+            if (item instanceof BlockItem blockItem) {
+                Block block = blockItem.getBlock();
+                Block unwaxed = UNWAXING_MAP.get(block);
+                if (unwaxed != null) {
+                    return new ItemStack(unwaxed.asItem());
                 }
             }
         }
