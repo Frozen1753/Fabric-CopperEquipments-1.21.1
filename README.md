@@ -45,7 +45,8 @@ Here’s what I’ve been working on for the next version:
 - [x] Add special recipe type for deoxidation
 - [x] Add smelting recipe for Copper Horse Armor
 - [x] Add particle effect for forced oxidation
-- [ ] `in progress` Testing and code cleanup
+- [x] Testing and code cleanup
+- [ ] `in progress` Testing in multiplayer
 - [x] Translations:
   - [x] 🇺🇸 English (US)
   - [x] 🇬🇧 English (GB)
@@ -56,7 +57,7 @@ Here’s what I’ve been working on for the next version:
 I’ve got big plans for future updates!
 
 **v1.0.5**
-- 🪓 **Fast Unwax**: In vanilla Minecraft you can wax a full stack of blocks directly in your inventory with honeycomb. But unwaxing requires placing them down and axing each one individually. Now simply drop them into a crafting table and they’ll be unwaxed in bulk!
+- 🪓 **Fast Unwax & Scraping**: In vanilla Minecraft you can wax a full stack of blocks directly in your inventory with honeycomb. But unwaxing or scraping requires placing them down and axing each one individually. Now simply drop them into a crafting table and they’ll be scraped in bulk!
 - 💨️ **Oxidizing powder**: Tired of waiting for your blocks and items to age? Sprinkle this magical dust to accelerate oxidation instantly!
 
 **v1.0.6 — Pre-Release**
@@ -66,7 +67,8 @@ I’ve got big plans for future updates!
 
 **v1.1 — Release**
 - 🐞 **Bug Fixing**: I'm going to create my own survival world to test all possible scenarios, just like a normal player would. I'm also leaving a little time for you all to find any bugs that I might have missed
-- 💬 **Comment Code**: Adding comments throughout the code to help other modders understand and reuse my work more easily.
+- 🔄 **Versioning**: I will test and port the mod to several versions: my goal is full compatibility with all versions from 1.21.1 to 1.21.8
+- 💬 **Comment Code**: Adding comments throughout the code to help other modders understand and reuse my work more easily
 - 🎨 **Gear retexture**: I’m not an artist, so the exposed and weathered textures are just linear transitions between copper and oxidized. I plan to rework them to better match the vanilla vibe — with authentic copper stains and aging
 - 📖 **Wiki**: Most players rely on mods like JEI to see recipes, but I want to go further — a dedicated wiki will expose **everything the mod does** without requiring users to read the code or learn Java.
 
