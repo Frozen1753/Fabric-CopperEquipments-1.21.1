@@ -102,8 +102,10 @@ public class ForcedOxidationRecipe extends SpecialCraftingRecipe {
             }
 
             if (item instanceof CopperItem) {
-                int stage = CopperItem.getOxidationStage(stack);
-                foundOxidizable = stage >= 0 && stage < 3; // can still oxidize forward
+                if (!CopperItem.isWaxed(stack)) {
+                    int stage = CopperItem.getOxidationStage(stack);
+                    foundOxidizable = stage >= 0 && stage < 3; // can still oxidize forward
+                }
             }
         }
 
@@ -134,8 +136,6 @@ public class ForcedOxidationRecipe extends SpecialCraftingRecipe {
                 if (stage < 3) {
                     CopperItem.setOxidationStage(result, stage + 1);
                 }
-                oxidizableStack = result;
-                break;
             }
         }
 

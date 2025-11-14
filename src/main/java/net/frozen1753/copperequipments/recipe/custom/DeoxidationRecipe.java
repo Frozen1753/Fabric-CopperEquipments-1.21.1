@@ -86,8 +86,10 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe {
                 }
             }
             if (stack.getItem() instanceof CopperItem) {
-                int stage = CopperItem.getOxidationStage(stack);
-                if (stage > 0) return true; // can still revert backwards
+                if (!CopperItem.isWaxed(stack)) {
+                    int stage = CopperItem.getOxidationStage(stack);
+                    if (stage > 0) return true; // can still revert backwards
+                }
             }
 
         }

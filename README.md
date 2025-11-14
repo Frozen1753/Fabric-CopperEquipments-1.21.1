@@ -5,20 +5,18 @@ Hi there! I'm Frozen1753, and this is my very first Minecraft mod — and also m
 Copper Equipments is a lightweight mod that gives copper a real purpose in the game. It adds a full set of copper-based tools and armor, plus a few decorative blocks — all designed to feel like they belong in vanilla Minecraft.
 
 ## Features
-- 🛡️ **Copper Armor**: Helmet, Chestplate, Leggings, and Boots with balanced durability and protection.
-- 🪓 **Copper Tools**: Sword, Pickaxe, Axe, Shovel, and Hoe — all craftable using copper ingots.
+- 🛡️ **Copper Armor**: `Helmet`, `Chestplate`, `Leggings`, and `Boots` with balanced durability and protection.
+- 🪓 **Copper Tools**: `Sword`, `Pickaxe`, `Axe`, `Shovel`, and `Hoe` — all craftable using copper ingots.
 - 🐴 **Copper Horse Armor**: Because horses deserve style too.
-- ♻️ **Smelting & Recycling**: Copper gear can be smelted into copper nuggets.
-- 🧱 **Copper Blocks**:
-  - Copper Torch
-  - Copper Lantern
-  - Copper Chain
-  - Copper Bars
+- ♻️ **Smelting & Recycling**: Copper gear can be smelted into `Copper Nuggets`.
+- 🧱 **Copper Blocks**: `Copper Torch`, `Copper Lantern`, `Copper Chain` and `Copper Bars`
 - 🎨 **Vanilla Textures**: Faithful to Minecraft 1.21.9’s style.
 - 🔁 **Repairable**: All items can be repaired using copper ingots.
 - ✨ **Enchantable**: Copper gear supports enchantments like any vanilla equipment.
 - 🧪 **Natural Oxidation** : The blocks oxidise over time and the gears oxidise depending on their durability.
 - 🕯️ **Waxing** : Blocks and gear can be waxed to prevent further oxidation.
+- 🪓 **Fast Unwax & Scraping**: In vanilla Minecraft you can wax a full stack of blocks directly in your inventory with honeycomb. But unwaxing or scraping requires placing them down and axing each one individually. Now simply drop them into a crafting table and they’ll be scraped in bulk!
+- 💨️ **Oxidizing powder**: Tired of waiting for your blocks and items to age? Sprinkle this magical dust to accelerate oxidation instantly!
 - 📦 **Crafting Recipes**: Fully integrated with the vanilla crafting system.
 
 ## Translations
@@ -29,41 +27,30 @@ Copper Equipments is a lightweight mod that gives copper a real purpose in the g
 
 If you want to add or correct a language, please create a new issue on [Github](https://github.com/Frozen1753/Fabric-CopperEquipments-1.21.1/issues).
 
-## 🛠️ Current Progress (v1.0.5)
+## 🛠️ Current Progress (v1.0.6)
 Here’s what I’ve been working on for the next version:
 
-- [x] Remake Mod Icon
-- [x] Add Mod Banner
-- [x] Add new item : Oxidizing powder
-- [x] Create texture for Oxidizing Powder
-- [x] Implement crafting recipe for Oxidizing Powder
-- [x] Fix [Crash when joining multiplayer world](https://github.com/Frozen1753/Fabric-CopperEquipments-1.21.1/issues/5) issue
-- [x] Remove debug messages when crafting
-- [x] Add forced oxidation using Oxidizing powder
-- [x] Add special recipe type for forced oxidation
-- [x] Add special recipe type for unwaxing
-- [x] Add special recipe type for deoxidation
-- [x] Add smelting recipe for Copper Horse Armor
-- [x] Add particle effect for forced oxidation
-- [x] Testing and code cleanup
-- [ ] `in progress` Testing in multiplayer
-- [x] Translations:
-  - [x] 🇺🇸 English (US)
-  - [x] 🇬🇧 English (GB)
-  - [x] 🇫🇷 French (FR)
-  - [x] 🇨🇳 Mandarin (CN) 
+- [ ] Add config file
+- [ ] Add compatibility with Mod Menu
+- [ ] Add configs for oxidation
+- [ ] Add other oxidation system for items
+- [ ] Modify minecraft loot tables for copper horse armor
+- [ ] Modify minecraft spawn for monster to accepts copper armor
+- [ ] Tests and cleanup
+- [ ] Translations
+  - [ ] 🇺🇸 English (US)
+  - [ ] 🇬🇧 English (GB)
+  - [ ] 🇫🇷 French (FR)
+  - [ ] 🇨🇳 Mandarin (CN)
 
 ## 🔮 What’s Next?
 I’ve got big plans for future updates!
-
-**v1.0.5**
-- 🪓 **Fast Unwax & Scraping**: In vanilla Minecraft you can wax a full stack of blocks directly in your inventory with honeycomb. But unwaxing or scraping requires placing them down and axing each one individually. Now simply drop them into a crafting table and they’ll be scraped in bulk!
-- 💨️ **Oxidizing powder**: Tired of waiting for your blocks and items to age? Sprinkle this magical dust to accelerate oxidation instantly!
 
 **v1.0.6 — Pre-Release**
 - 🧟 **Armor Spawn for mobs**: Zombies, Husks, Skeletons, Strays, and Bogged can now spawn with armor just like vanilla.
 - 📝 **Config file**: Add a config file and compatibility with [Mod Menu](https://modrinth.com/mod/modmenu)
 - ⚙️ **Oxidation rework for items**: With config options, players can customize how oxidation works for items (`Durability only`, `Time only`, `Durability + Time` or `No oxidation`)
+- 🛡️ **Copper Armor Trims**: Copper armor should properly support trims, fixing the issue present in v1.0.5.
 
 **v1.1 — Release**
 - 🐞 **Bug Fixing**: I'm going to create my own survival world to test all possible scenarios, just like a normal player would. I'm also leaving a little time for you all to find any bugs that I might have missed

@@ -93,6 +93,7 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.addBefore(Items.IRON_NUGGET, COPPER_NUGGET);
             entries.addBefore(Items.IRON_INGOT, Items.COPPER_INGOT);
+            entries.addAfter(Items.GUNPOWDER, OXIDIZING_POWDER);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
