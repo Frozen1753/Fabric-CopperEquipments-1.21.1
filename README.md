@@ -44,8 +44,8 @@ Here’s what I’ve been working on for the next version:
 - [x] Add special recipe type for unwaxing
 - [x] Add special recipe type for deoxidation
 - [x] Add smelting recipe for Copper Horse Armor
-- [ ] `in progress` Add particle effect for forced oxidation
-- [ ] Testing and code cleanup
+- [x] Add particle effect for forced oxidation
+- [ ] `in progress` Testing and code cleanup
 - [x] Translations:
   - [x] 🇺🇸 English (US)
   - [x] 🇬🇧 English (GB)

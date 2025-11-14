@@ -12,6 +12,10 @@ public class ModParticles {
             FabricParticleTypes.simple()
     );
 
+    public static final SimpleParticleType FORCED_OXIDATION = registerParticle("forced_oxidation",
+            FabricParticleTypes.simple()
+    );
+
     public static SimpleParticleType registerParticle(String name, SimpleParticleType particleType) {
         return Registry.register(Registries.PARTICLE_TYPE, Identifier.of(CopperEquipments.MOD_ID, name), particleType);
     }

@@ -1,6 +1,7 @@
 package net.frozen1753.copperequipments.item.custom;
 
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.particle.ModParticles;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -8,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -113,17 +113,39 @@ public class OxidizingPowderItem extends Item {
                 };
 
                 for (double[] face : faces) {
-                    double fx = cx + face[0];
-                    double fy = cy + face[1];
-                    double fz = cz + face[2];
+                    double fx = cx + face[0]; // face X coordinate
+                    double fy = cy + face[1]; // face Y coordinate
+                    double fz = cz + face[2]; // face Z coordinate
 
                     for (int i = 0; i < 5; i++) {
-                        double x = fx + (random.nextDouble() - 0.5);
-                        double y = fy + (random.nextDouble() - 0.5);
-                        double z = fz + (random.nextDouble() - 0.5);
+                        double x = fx;
+                        double y = fy;
+                        double z = fz;
+
+                        double pixelOffset = 1.0 / 16.0;
+
+                        if (face[0] != 0) { // east/west face → vary Y and Z
+                            y += (random.nextDouble() - 0.5);
+                            z += (random.nextDouble() - 0.5);
+
+                            // push outward along X by 1 pixel
+                            x += pixelOffset * Math.signum(face[0]);
+                        } else if (face[1] != 0) { // up/down face → vary X and Z
+                            x += (random.nextDouble() - 0.5);
+                            z += (random.nextDouble() - 0.5);
+
+                            // push outward along Y by 1 pixel
+                            y += pixelOffset * Math.signum(face[1]);
+                        } else if (face[2] != 0) { // north/south face → vary X and Y
+                            x += (random.nextDouble() - 0.5);
+                            y += (random.nextDouble() - 0.5);
+
+                            // push outward along Z by 1 pixel
+                            z += pixelOffset * Math.signum(face[2]);
+                        }
 
                         serverWorld.spawnParticles(
-                                ParticleTypes.WAX_OFF,
+                                ModParticles.FORCED_OXIDATION,
                                 x, y, z,
                                 1,
                                 0,
@@ -137,10 +159,10 @@ public class OxidizingPowderItem extends Item {
                 world.playSound(
                         null,
                         pos,
-                        SoundEvents.UI_STONECUTTER_TAKE_RESULT,
+                        SoundEvents.BLOCK_FIRE_EXTINGUISH,
                         SoundCategory.BLOCKS,
-                        1.0F,
-                        1.5F
+                        0.6F,
+                        0.2F
                 );
             }
 
@@ -154,9 +176,14 @@ public class OxidizingPowderItem extends Item {
         BlockState newState = targetBlock.getDefaultState();
         for (Property<?> property : source.getProperties()) {
             if (newState.contains(property)) {
-                newState = newState.with((Property) property, source.get(property));
+                newState = copyProperty(source, newState, property);
             }
         }
         return newState;
+    }
+
+    private static <T extends Comparable<T>> BlockState copyProperty(BlockState source, BlockState state, Property<T> property) {
+        T value = source.get(property);
+        return state.with(property, value);
     }
 }

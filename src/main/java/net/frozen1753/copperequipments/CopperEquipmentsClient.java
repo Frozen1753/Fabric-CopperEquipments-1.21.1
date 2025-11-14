@@ -12,6 +12,7 @@ import net.frozen1753.copperequipments.material.custom.CopperHorseEntityRenderer
 import net.frozen1753.copperequipments.material.custom.OxidizableArmorRenderer;
 import net.frozen1753.copperequipments.particle.ModParticles;
 import net.frozen1753.copperequipments.particle.custom.CopperFlameParticle;
+import net.frozen1753.copperequipments.particle.custom.ForcedOxidationParticle;
 import net.frozen1753.copperequipments.util.ModDataComponents;
 import net.frozen1753.copperequipments.util.events.ItemDurabilityChangeCallback;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -166,9 +167,8 @@ public class CopperEquipmentsClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WAXED_OXIDIZED_COPPER_BARS, RenderLayer.getCutout());
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.COPPER_FLAME, CopperFlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.FORCED_OXIDATION, ForcedOxidationParticle.Factory::new);
 
         ItemDurabilityChangeCallback.EVENT.register((stack, amount, world, player) -> {});
-
-
     }
 }

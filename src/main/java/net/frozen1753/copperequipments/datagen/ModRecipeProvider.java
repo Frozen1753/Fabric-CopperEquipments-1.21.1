@@ -57,12 +57,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         offerReversibleCompactingRecipes(recipeExporter, RecipeCategory.MISC, ModItems.COPPER_NUGGET, RecipeCategory.MISC, Items.COPPER_INGOT);
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.BREWING, ModItems.OXIDIZING_POWDER, 4)
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BREWING, ModItems.OXIDIZING_POWDER, 8)
                 .input(Items.REDSTONE)
                 .input(ModItems.COPPER_NUGGET, 2)
-                .input(Items.BONE_MEAL)
+                .input(Items.BLAZE_POWDER)
                 .criterion(hasItem(Items.REDSTONE), conditionsFromItem(Items.REDSTONE))
-                .criterion(hasItem(Items.BONE_MEAL), conditionsFromItem(Items.BONE_MEAL))
+                .criterion(hasItem(Items.BLAZE_POWDER), conditionsFromItem(Items.BLAZE_POWDER))
                 .criterion(hasItem(ModItems.COPPER_NUGGET), conditionsFromItem(ModItems.COPPER_NUGGET))
                 .offerTo(recipeExporter);
 
