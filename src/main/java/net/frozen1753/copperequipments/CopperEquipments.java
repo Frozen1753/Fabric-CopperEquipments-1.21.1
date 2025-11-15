@@ -1,8 +1,11 @@
 package net.frozen1753.copperequipments;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.config.ModConfigs;
 import net.frozen1753.copperequipments.item.ModItemGroups;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.material.ModArmorMaterials;
@@ -18,6 +21,8 @@ public class CopperEquipments implements ModInitializer {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+    public static ModConfigs CONFIG;
+
 	@Override
 	public void onInitialize() {
         ModArmorMaterials.registerModArmorMaterials();
@@ -28,5 +33,8 @@ public class CopperEquipments implements ModInitializer {
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroup();
         ModDataComponents.registerModDataComponents();
+
+        AutoConfig.register(ModConfigs.class, GsonConfigSerializer::new);
+        CONFIG = AutoConfig.getConfigHolder(ModConfigs.class).getConfig();
     }
 }

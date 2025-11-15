@@ -50,5 +50,28 @@
   "tooltip.copperequipments.weathered": "Weathered",
   "tooltip.copperequipments.oxidized": "Oxidized",
 
-  "itemgroup.copperequipments.copper_equipments": "Copper Equipments"
+  "itemgroup.copperequipments.copper_equipments": "Copper Equipments",
+
+  "text.autoconfig.CopperEquipmentsConfigs.title": "Copper Equipments Configs",
+  "text.autoconfig.CopperEquipmentsConfigs.option.deoxidation": "Deoxidation",
+  "text.autoconfig.CopperEquipmentsConfigs.option.unwaxing": "Unwaxing",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation": "Oxidation",
+  "text.autoconfig.CopperEquipmentsConfigs.option.textures": "Textures",
+
+  "text.autoconfig.CopperEquipmentsConfigs.option.deoxidation.axeRequiredForDeoxidize": "Axe Required for Deoxidation",
+  "text.autoconfig.CopperEquipmentsConfigs.option.deoxidation.axeRequiredForDeoxidize.@Tooltip": "In the crafting menu, combine an oxidized block with any axe to scrape it.",
+  "text.autoconfig.CopperEquipmentsConfigs.option.deoxidation.axeDurabilityForDeoxidize": "Use Axe Durability for Deoxidation",
+  "text.autoconfig.CopperEquipmentsConfigs.option.deoxidation.axeDurabilityForDeoxidize.@Tooltip": "Scraping in the inventory will reduce the axe’s durability.",
+
+  "text.autoconfig.CopperEquipmentsConfigs.option.unwaxing.axeRequiredForUnwaxing": "Axe Required for Unwaxing",
+  "text.autoconfig.CopperEquipmentsConfigs.option.unwaxing.axeRequiredForUnwaxing.@Tooltip": "In the crafting menu, combine a waxed block with any axe to remove the wax.",
+  "text.autoconfig.CopperEquipmentsConfigs.option.unwaxing.axeDurabilityForUnwaxing": "Use Axe Durability for Unwaxing",
+  "text.autoconfig.CopperEquipmentsConfigs.option.unwaxing.axeDurabilityForUnwaxing.@Tooltip": "Unwaxing in the inventory will reduce the axe’s durability.",
+
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.itemOxidationMethod": "Item Oxidation Method",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.itemOxidationMethod.@Tooltip": "Choose how items oxidize: None, Durability, Time, or Both.\n[None] Copper items never oxidize.\n[Durability] Oxidation is linked to durability:\n • 100–75% → Unexposed\n • 75–50% → Exposed\n • 50–25% → Weathered\n • 25–0% → Oxidized\n[Time] Oxidation works the same as for blocks.\n[Both] Items oxidize based on both time and durability.",
+
+  "text.autoconfig.CopperEquipmentsConfigs.option.textures.waxedUniqueTextures": "Waxed Unique Textures",
+  "text.autoconfig.CopperEquipmentsConfigs.option.textures.waxedUniqueTextures.@Tooltip": "[Coming Soon] Changes block textures to show subtle honey details, and adds a small yellow dot to item icons."
+
 }

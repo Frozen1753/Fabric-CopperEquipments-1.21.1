@@ -25,6 +25,7 @@ public class ItemStackMixin {
     )
     private void onDamage(int amount, ServerWorld world, @Nullable ServerPlayerEntity player, Consumer<Item> breakCallback, CallbackInfo ci) {
         ItemStack self = (ItemStack)(Object)this;
+
         if (self.getItem() instanceof CopperItem copper) {
             if (!CopperItem.isWaxed(self)) {
                 CopperItem.updateWaxStageFromDamage(self);

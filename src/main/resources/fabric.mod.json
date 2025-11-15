@@ -3,7 +3,7 @@
 	"id": "copperequipments",
 	"version": "${version}",
 	"name": "Copper Equipments",
-	"description": "pr",
+	"description": "Copper Equipments is a lightweight mod that gives copper a real purpose in the game.",
 	"authors": [
 		"Frozen1753"
 	],
@@ -23,7 +23,10 @@
         ],
 		"fabric-datagen": [
 			"net.frozen1753.copperequipments.CopperEquipmentsDataGenerator"
-		]
+		],
+        "modmenu": [
+            "net.frozen1753.copperequipments.config.CopperEquipmentsModMenu"
+        ]
 	},
 	"mixins": [
 		"copperequipments.mixins.json"

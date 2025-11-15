@@ -3,7 +3,9 @@
 	"package": "net.frozen1753.copperequipments.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-      "ItemStackMixin"
+      "ItemStackMixin",
+      "CraftingResultSlotMixin",
+      "PlayerEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

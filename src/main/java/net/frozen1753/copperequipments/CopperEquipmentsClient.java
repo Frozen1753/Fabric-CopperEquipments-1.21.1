@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.config.ModConfigs;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.material.custom.CopperHorseEntityRenderer;
@@ -21,6 +22,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 
 public class CopperEquipmentsClient implements ClientModInitializer {
+    public static ModConfigs CONFIG;
+
     @Override
     public void onInitializeClient() {
         ModelPredicateProviderRegistry.register(ModItems.COPPER_SWORD, Identifier.of("oxidation"), (stack, world, entity, seed) -> {

@@ -16,7 +16,7 @@ Copper Equipments is a lightweight mod that gives copper a real purpose in the g
 - 🧪 **Natural Oxidation** : The blocks oxidise over time and the gears oxidise depending on their durability.
 - 🕯️ **Waxing** : Blocks and gear can be waxed to prevent further oxidation.
 - 🪓 **Fast Unwax & Scraping**: In vanilla Minecraft you can wax a full stack of blocks directly in your inventory with honeycomb. But unwaxing or scraping requires placing them down and axing each one individually. Now simply drop them into a crafting table and they’ll be scraped in bulk!
-- 💨️ **Oxidizing powder**: Tired of waiting for your blocks and items to age? Sprinkle this magical dust to accelerate oxidation instantly!
+- 💨️ **Oxidizing powder**: Tired of waiting for your blocks and items to age? Sprinkle some `Oxidizing powder` to accelerate oxidation instantly!
 - 📦 **Crafting Recipes**: Fully integrated with the vanilla crafting system.
 
 ## Translations
@@ -30,10 +30,14 @@ If you want to add or correct a language, please create a new issue on [Github](
 ## 🛠️ Current Progress (v1.0.6)
 Here’s what I’ve been working on for the next version:
 
-- [ ] Add config file
-- [ ] Add compatibility with Mod Menu
-- [ ] Add configs for oxidation
-- [ ] Add other oxidation system for items
+- [x] Add config file
+- [x] Add compatibility with Mod Menu
+- [x] Add configs for deoxidation
+- [ ] `in progress` Add alternative deoxidation system
+- [x] Add configs for unwaxing
+- [ ] Add alternative unwaxing system
+- [x] Add configs for oxidation
+- [ ] Add alternative oxidation systems for items
 - [ ] Modify minecraft loot tables for copper horse armor
 - [ ] Modify minecraft spawn for monster to accepts copper armor
 - [ ] Tests and cleanup
