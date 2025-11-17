@@ -1,10 +1,13 @@
 package net.frozen1753.copperequipments.recipe.custom;
 
+import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,9 +16,13 @@ import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.Map;
+
+import static net.frozen1753.copperequipments.recipe.custom.DeoxidationRecipe.getEnchantmentLevel;
 
 public class UnwaxingRecipe extends SpecialCraftingRecipe {
     public UnwaxingRecipe(CraftingRecipeCategory category) {
@@ -88,47 +95,57 @@ public class UnwaxingRecipe extends SpecialCraftingRecipe {
 
     @Override
     public boolean matches(CraftingRecipeInput input, World world) {
-        if (input.getStackCount() != 1) {
+        boolean axeRequired = CopperEquipments.CONFIG.unwaxing.axeRequiredForUnwaxing;
+
+        // Si l'outil est requis, il faut exactement 2 items (un waxed + une hache)
+        // Sinon, un seul item waxed suffit
+        if (input.getStackCount() != (axeRequired ? 2 : 1)) {
             return false;
         }
+
+        ItemStack waxed = null;
+        ItemStack axe = null;
 
         for (ItemStack stack : input.getStacks()) {
             if (stack.isEmpty()) continue;
-
             Item item = stack.getItem();
 
-            if (item instanceof CopperItem) {
-                return CopperItem.isWaxed(stack);
+            if (item instanceof AxeItem) {
+                if (axe == null) axe = stack;
+                continue;
             }
 
-            // overrides vanilla waxed_copper_block -> 9 copper_ingot
+            if (item instanceof CopperItem && CopperItem.isWaxed(stack)) {
+                waxed = stack;
+                continue;
+            }
+
             if (item instanceof BlockItem blockItem) {
                 Block block = blockItem.getBlock();
-                return UNWAXING_MAP.containsKey(block);
+                if (UNWAXING_MAP.containsKey(block)) {
+                    waxed = stack;
+                }
             }
-
-            return false;
         }
 
-        return false;
+        if (waxed == null) return false;
+        if (axeRequired && axe == null) return false;
+
+        return true;
     }
 
     @Override
     public ItemStack craft(CraftingRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
+        ItemStack waxed = null;
 
-        for (int i = 0; i < input.getSize(); i++) {
-            ItemStack stack = input.getStackInSlot(i);
+        for (ItemStack stack : input.getStacks()) {
             if (stack.isEmpty()) continue;
-
             Item item = stack.getItem();
 
-            if (item instanceof CopperItem) {
-                if (CopperItem.isWaxed(stack)) {
-                    ItemStack result = stack.copy();
-                    CopperItem.setWaxed(result, false);
-                    CopperItem.updateWaxStageFromDamage(result);
-                    return result;
-                }
+            if (item instanceof CopperItem && CopperItem.isWaxed(stack)) {
+                ItemStack result = stack.copy();
+                CopperItem.setWaxed(result, false);
+                return result;
             }
 
             if (item instanceof BlockItem blockItem) {
@@ -141,6 +158,46 @@ public class UnwaxingRecipe extends SpecialCraftingRecipe {
         }
 
         return ItemStack.EMPTY;
+    }
+
+    @Override
+    public DefaultedList<ItemStack> getRemainder(CraftingRecipeInput input) {
+        DefaultedList<ItemStack> remainders = DefaultedList.ofSize(input.getSize(), ItemStack.EMPTY);
+
+        boolean axeRequired = CopperEquipments.CONFIG.unwaxing.axeRequiredForUnwaxing;
+        boolean axeDurability = CopperEquipments.CONFIG.unwaxing.axeDurabilityForUnwaxing;
+
+        if (!axeRequired) {
+            return remainders; // pas d'outil requis → pas de remainder
+        }
+
+        Random random = Random.create();
+
+        for (int i = 0; i < input.getSize(); i++) {
+            ItemStack stack = input.getStackInSlot(i);
+            if (stack.isEmpty() || !(stack.getItem() instanceof AxeItem)) continue;
+
+            ItemStack axeCopy = stack.copy();
+
+            if (axeDurability) {
+                int unbreakingLevel = getEnchantmentLevel(axeCopy, Enchantments.UNBREAKING);
+                if (random.nextInt(unbreakingLevel + 1) == 0) {
+                    int newDamage = axeCopy.getDamage() + 1;
+                    if (newDamage < axeCopy.getMaxDamage()) {
+                        axeCopy.setDamage(newDamage);
+                        remainders.set(i, axeCopy);
+                    } else {
+                        remainders.set(i, ItemStack.EMPTY); // l'outil se casse
+                    }
+                } else {
+                    remainders.set(i, axeCopy); // pas de dégât
+                }
+            } else {
+                remainders.set(i, axeCopy); // durabilité désactivée
+            }
+        }
+
+        return remainders;
     }
 
 

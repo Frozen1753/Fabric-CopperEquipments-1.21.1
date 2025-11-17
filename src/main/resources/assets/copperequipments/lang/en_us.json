@@ -56,7 +56,8 @@
   "text.autoconfig.CopperEquipmentsConfigs.option.deoxidation": "Deoxidation",
   "text.autoconfig.CopperEquipmentsConfigs.option.unwaxing": "Unwaxing",
   "text.autoconfig.CopperEquipmentsConfigs.option.oxidation": "Oxidation",
-  "text.autoconfig.CopperEquipmentsConfigs.option.textures": "Textures",
+  "text.autoconfig.CopperEquipmentsConfigs.option.textures": "[Coming Soon] Textures",
+  "text.autoconfig.CopperEquipmentsConfigs.option.items": "[Coming Soon] Items",
 
   "text.autoconfig.CopperEquipmentsConfigs.option.deoxidation.axeRequiredForDeoxidize": "Axe Required for Deoxidation",
   "text.autoconfig.CopperEquipmentsConfigs.option.deoxidation.axeRequiredForDeoxidize.@Tooltip": "In the crafting menu, combine an oxidized block with any axe to scrape it.",
@@ -69,9 +70,22 @@
   "text.autoconfig.CopperEquipmentsConfigs.option.unwaxing.axeDurabilityForUnwaxing.@Tooltip": "Unwaxing in the inventory will reduce the axe’s durability.",
 
   "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.itemOxidationMethod": "Item Oxidation Method",
-  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.itemOxidationMethod.@Tooltip": "Choose how items oxidize: None, Durability, Time, or Both.\n[None] Copper items never oxidize.\n[Durability] Oxidation is linked to durability:\n • 100–75% → Unexposed\n • 75–50% → Exposed\n • 50–25% → Weathered\n • 25–0% → Oxidized\n[Time] Oxidation works the same as for blocks.\n[Both] Items oxidize based on both time and durability.",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.itemOxidationMethod.@Tooltip": "Choose how copper items oxidize:\n[None] Items never oxidize naturally.\n[Durability] Oxidation stage is determined by durability:\n • 100–75% → Unexposed\n • 75–50% → Exposed\n • 50–25% → Weathered\n • 25–0% → Oxidized\n[Time] Items oxidize gradually over their lifespan, similar to copper blocks.\n[Both] Items oxidize based on both durability and lifespan, with weighted influence.",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.maxLifespanTick": "Max Lifespan (Ticks)",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.maxLifespanTick.@Tooltip": "Defines how long an item can exist before reaching full oxidation when using time-based methods.\nFor example, 36000 ticks = 30 minutes of real time.",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.alphaWeight": "Durability Weight (α)",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.alphaWeight.@Tooltip": "Controls how strongly durability influences oxidation when using the 'Both' method.\nHigher values make damage more important in determining oxidation progression.",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.betaWeight": "Time Weight (β)",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.betaWeight.@Tooltip": "Controls how strongly lifespan influences oxidation when using the 'Both' method.\nHigher values make item age more important in determining oxidation progression.",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.oxidationIntervalAttempt": "Oxidation Check Interval (Ticks)",
+  "text.autoconfig.CopperEquipmentsConfigs.option.oxidation.oxidationIntervalAttempt.@Tooltip": "Defines how often the game attempts to progress oxidation.\nLower values = more frequent checks.\nFor example, 200 ticks = every 10 seconds of real time.\n⚠ Warning: Setting this too low may cause performance issues due to excessive oxidation checks.",
 
   "text.autoconfig.CopperEquipmentsConfigs.option.textures.waxedUniqueTextures": "Waxed Unique Textures",
-  "text.autoconfig.CopperEquipmentsConfigs.option.textures.waxedUniqueTextures.@Tooltip": "[Coming Soon] Changes block textures to show subtle honey details, and adds a small yellow dot to item icons."
+  "text.autoconfig.CopperEquipmentsConfigs.option.textures.waxedUniqueTextures.@Tooltip": "Changes block textures to show subtle honey details.",
+  "text.autoconfig.CopperEquipmentsConfigs.option.textures.waxedIndicatorItem": "Waxed Indicator Item",
+  "text.autoconfig.CopperEquipmentsConfigs.option.textures.waxedIndicatorItem.@Tooltip": "Adds a small yellow dot to waxed items.",
+
+  "text.autoconfig.CopperEquipmentsConfigs.option.items.copperHorseArmorCraftable": "Copper Horse Armor Recipe",
+  "text.autoconfig.CopperEquipmentsConfigs.option.items.copperHorseArmorCraftable.@Tooltip": "Adds a recipe to craft the copper horse armor."
 
 }

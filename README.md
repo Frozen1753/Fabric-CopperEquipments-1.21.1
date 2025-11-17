@@ -33,11 +33,19 @@ Here’s what I’ve been working on for the next version:
 - [x] Add config file
 - [x] Add compatibility with Mod Menu
 - [x] Add configs for deoxidation
-- [ ] `in progress` Add alternative deoxidation system
+- [x] Add alternative deoxidation system
 - [x] Add configs for unwaxing
-- [ ] Add alternative unwaxing system
+- [x] Add alternative unwaxing system
 - [x] Add configs for oxidation
-- [ ] Add alternative oxidation systems for items
+- [ ] `in progress` Add alternative oxidation systems for items
+- [x] Add sound for deoxidation special recipe
+- [ ] Add sound for waxing special recipe
+- [x] Add sound for unwaxing special recipe
+- [ ] Add corresponding advancements `Wax on` & `Wax off`(including copper axe)
+- [ ] Tests and cleanup
+- [ ] Mod menu config requirements
+- [ ] Configs working without Mod Menu
+- [ ] Tests
 - [ ] Modify minecraft loot tables for copper horse armor
 - [ ] Modify minecraft spawn for monster to accepts copper armor
 - [ ] Tests and cleanup

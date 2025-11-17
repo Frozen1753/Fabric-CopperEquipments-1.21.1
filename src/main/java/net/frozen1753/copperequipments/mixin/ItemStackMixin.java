@@ -28,7 +28,7 @@ public class ItemStackMixin {
 
         if (self.getItem() instanceof CopperItem copper) {
             if (!CopperItem.isWaxed(self)) {
-                CopperItem.updateWaxStageFromDamage(self);
+                CopperItem.updateOxidationStage(self, world, world.getRandom());
             }
         }
     }

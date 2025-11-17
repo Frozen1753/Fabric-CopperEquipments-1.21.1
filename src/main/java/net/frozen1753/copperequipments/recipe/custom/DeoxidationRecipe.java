@@ -23,11 +23,44 @@ import net.minecraft.world.World;
 
 import java.util.Map;
 
+/**
+ * Special crafting recipe for copper deoxidation.
+ *
+ * <p>This recipe allows players to "scrape" oxidized copper blocks and items back
+ * to a less oxidized state using an axe. It supports both vanilla copper variants
+ * and custom modded copper blocks/items defined in {@link ModBlocks}.
+ *
+ * <p>Key behaviors:
+ * <ul>
+ *   <li>Uses {@link #DEOXIDATION_MAP} to map oxidized blocks to their less oxidized form.</li>
+ *   <li>Supports {@link CopperItem} oxidation stages for non-block copper items.</li>
+ *   <li>Requires an axe if {@code axeRequiredForDeoxidize} is enabled in config.</li>
+ *   <li>Consumes axe durability if {@code axeDurabilityForDeoxidize} is enabled in config,
+ *       respecting Unbreaking enchantment logic.</li>
+ *   <li>Ensures copper axes are treated strictly as tools, not as oxidized candidates,
+ *       to avoid recipe conflicts (e.g. vanilla repair).</li>
+ * </ul>
+ *
+ * <p>Implementation notes:
+ * <ul>
+ *   <li>{@link #findCandidates(CraftingRecipeInput)} scans the grid once to identify
+ *       the oxidized candidate and axe candidate.</li>
+ *   <li>{@link #matches(CraftingRecipeInput, World)} enforces stack count and candidate presence.</li>
+ *   <li>{@link #craft(CraftingRecipeInput, RegistryWrapper.WrapperLookup)} produces the deoxidized result.</li>
+ *   <li>{@link #getRemainder(CraftingRecipeInput)} handles axe durability and breakage.</li>
+ *   <li>{@link #getEnchantmentLevel(ItemStack, RegistryKey)} reads enchantment levels from the new
+ *       data component system.</li>
+ * </ul>
+ */
 public class DeoxidationRecipe extends SpecialCraftingRecipe {
     public DeoxidationRecipe(CraftingRecipeCategory category) {
         super(category);
     }
 
+    /**
+     * Maps oxidized copper blocks to their less oxidized form.
+     * Includes both vanilla and modded copper variants.
+     */
     private static final Map<ItemConvertible, ItemConvertible> DEOXIDATION_MAP = Map.ofEntries(
             // Vanilla
             Map.entry(Blocks.OXIDIZED_COPPER, Blocks.WEATHERED_COPPER),
@@ -80,100 +113,68 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe {
             Map.entry(ModBlocks.EXPOSED_COPPER_LANTERN, ModBlocks.COPPER_LANTERN)
     );
 
-    @Override
-    public boolean matches(CraftingRecipeInput input, World world) {
-        boolean axeRequired = CopperEquipments.CONFIG.deoxidation.axeRequiredForDeoxidize;
+    private record Candidates(ItemStack oxidized, ItemStack axe) {}
 
-        // Expect 1 item if no axe required, 2 items if axe required
-        if (input.getStackCount() != (axeRequired ? 2 : 1)) return false;
-
-        ItemStack oxidizedCandidate = null;
-        ItemStack axeCandidate = null;
+    private Candidates findCandidates(CraftingRecipeInput input) {
+        ItemStack oxidized = null;
+        ItemStack axe = null;
 
         for (ItemStack stack : input.getStacks()) {
             if (stack.isEmpty()) continue;
             Item item = stack.getItem();
 
-            if (item instanceof BlockItem blockItem && DEOXIDATION_MAP.containsKey(blockItem.getBlock())) {
-                if (oxidizedCandidate == null) oxidizedCandidate = stack;
+            // Axe tool check first: copper axes should always be considered tools
+            if (item instanceof AxeItem) {
+                if (axe == null) axe = stack;
                 continue;
             }
+
+            // Oxidized block
+            if (item instanceof BlockItem blockItem && DEOXIDATION_MAP.containsKey(blockItem.getBlock())) {
+                if (oxidized == null) oxidized = stack;
+                continue;
+            }
+
+            // Oxidized copper item (but not tools!)
             if (item instanceof CopperItem && !CopperItem.isWaxed(stack)) {
                 int stage = CopperItem.getOxidationStage(stack);
-                if (stage > 0 && oxidizedCandidate == null) {
-                    oxidizedCandidate = stack;
+                if (stage > 0 && oxidized == null) {
+                    oxidized = stack;
                 }
-                continue;
-            }
-
-            // Check axe tool
-            if (item instanceof AxeItem) {
-                // Only count as axe if it's not already chosen as oxidized
-                if (axeCandidate == null) axeCandidate = stack;
             }
         }
+        return new Candidates(oxidized, axe);
+    }
 
-        if (oxidizedCandidate == null) return false;
+    @Override
+    public boolean matches(CraftingRecipeInput input, World world) {
+        boolean axeRequired = CopperEquipments.CONFIG.deoxidation.axeRequiredForDeoxidize;
 
-        // If axe is required, must have a separate axe stack
-        if (axeRequired && axeCandidate == null) return false;
+        if (input.getStackCount() != (axeRequired ? 2 : 1)) return false;
+
+        Candidates c = findCandidates(input);
+        if (c.oxidized == null) return false;
+        if (axeRequired && c.axe == null) return false;
 
         return true;
     }
 
     @Override
     public ItemStack craft(CraftingRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
-        boolean axeRequired = CopperEquipments.CONFIG.deoxidation.axeRequiredForDeoxidize;
-        boolean axeDurability = CopperEquipments.CONFIG.deoxidation.axeDurabilityForDeoxidize;
-
-        ItemStack oxidizedCandidate = null;
-        ItemStack axeCandidate = null;
-
-        // Separate oxidized item and axe tool
-        for (ItemStack stack : input.getStacks()) {
-            if (stack.isEmpty()) continue;
-            Item item = stack.getItem();
-
-            // Oxidized block
-            if (item instanceof BlockItem blockItem && DEOXIDATION_MAP.containsKey(blockItem.getBlock())) {
-                if (oxidizedCandidate == null) oxidizedCandidate = stack;
-                continue;
-            }
-
-            // Oxidized copper item
-            if (item instanceof CopperItem && !CopperItem.isWaxed(stack)) {
-                int stage = CopperItem.getOxidationStage(stack);
-                if (stage > 0 && oxidizedCandidate == null) {
-                    oxidizedCandidate = stack;
-                }
-                continue;
-            }
-
-            // Axe tool (only if not already chosen as oxidized)
-            if (item instanceof AxeItem) {
-                if (axeCandidate == null) {
-                    if (stack.getMaxDamage() >= stack.getDamage()) axeCandidate = stack;
-                }
-            }
-        }
-
-        if (oxidizedCandidate == null) return ItemStack.EMPTY;
+        Candidates c = findCandidates(input);
+        if (c.oxidized == null) return ItemStack.EMPTY;
 
         ItemStack result;
+        Item item = c.oxidized.getItem();
 
-        // Handle block deoxidation
-        if (oxidizedCandidate.getItem() instanceof BlockItem blockItem) {
-            Block target = (Block)DEOXIDATION_MAP.get(blockItem.getBlock());
+        if (item instanceof BlockItem blockItem) {
+            Block target = (Block) DEOXIDATION_MAP.get(blockItem.getBlock());
             if (target == null) return ItemStack.EMPTY;
             result = new ItemStack(target.asItem());
-        }
-        // Handle copper item deoxidation
-        else if (oxidizedCandidate.getItem() instanceof CopperItem) {
-            result = oxidizedCandidate.copy();
+        } else if (item instanceof CopperItem) {
+            result = c.oxidized.copy();
             int stage = CopperItem.getOxidationStage(result);
-            if (stage > 0) {
-                CopperItem.setOxidationStage(result, stage - 1);
-            }
+            if (stage > 0) CopperItem.setOxidationStage(result, stage - 1);
         } else {
             return ItemStack.EMPTY;
         }
@@ -185,40 +186,34 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe {
     public DefaultedList<ItemStack> getRemainder(CraftingRecipeInput input) {
         DefaultedList<ItemStack> remainders = DefaultedList.ofSize(input.getSize(), ItemStack.EMPTY);
 
-        boolean axeRequired = CopperEquipments.CONFIG.deoxidation.axeRequiredForDeoxidize;
-        boolean axeDurability = CopperEquipments.CONFIG.deoxidation.axeDurabilityForDeoxidize;
+        if (!CopperEquipments.CONFIG.deoxidation.axeRequiredForDeoxidize) {
+            return remainders; // nothing to do
+        }
 
+        boolean axeDurability = CopperEquipments.CONFIG.deoxidation.axeDurabilityForDeoxidize;
         Random random = Random.create();
 
         for (int i = 0; i < input.getSize(); i++) {
             ItemStack stack = input.getStackInSlot(i);
-            if (stack.isEmpty()) continue;
+            if (stack.isEmpty() || !(stack.getItem() instanceof AxeItem)) continue;
 
-            if (stack.getItem() instanceof AxeItem && axeRequired) {
-                ItemStack axeCopy = stack.copy();
+            ItemStack axeCopy = stack.copy();
 
-                if (axeDurability) {
-
-                    int unbreakingLevel = getEnchantmentLevel(axeCopy, Enchantments.UNBREAKING);
-
-                    // Vanilla logic: chance to consume durability is 1 / (level+1)
-                    if (random.nextInt(unbreakingLevel + 1) == 0) {
-                        int newDamage = axeCopy.getDamage() + 1;
-                        if (newDamage < axeCopy.getMaxDamage()) {
-                            axeCopy.setDamage(newDamage);
-                            remainders.set(i, axeCopy);
-                        } else {
-                            // Axe broke
-                            remainders.set(i, ItemStack.EMPTY);
-                        }
-                    } else {
-                        // No durability consumed this time
+            if (axeDurability) {
+                int unbreakingLevel = getEnchantmentLevel(axeCopy, Enchantments.UNBREAKING);
+                if (random.nextInt(unbreakingLevel + 1) == 0) {
+                    int newDamage = axeCopy.getDamage() + 1;
+                    if (newDamage < axeCopy.getMaxDamage()) {
+                        axeCopy.setDamage(newDamage);
                         remainders.set(i, axeCopy);
+                    } else {
+                        remainders.set(i, ItemStack.EMPTY); // broke
                     }
                 } else {
-                    // Axe not damaged at all
-                    remainders.set(i, axeCopy);
+                    remainders.set(i, axeCopy); // no damage
                 }
+            } else {
+                remainders.set(i, axeCopy); // durability disabled
             }
         }
         return remainders;

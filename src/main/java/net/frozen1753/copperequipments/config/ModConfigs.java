@@ -18,34 +18,57 @@ public class ModConfigs implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public TexturesSettings textures = new TexturesSettings();
 
-    public static class DeoxidationSettings {
-        @ConfigEntry.Gui.Tooltip(count = 1)
-        public boolean axeRequiredForDeoxidize = false;
+    @ConfigEntry.Gui.CollapsibleObject
+    public ItemsSettings items = new ItemsSettings();
 
-        @ConfigEntry.Gui.Tooltip(count = 1)
+    public static class DeoxidationSettings {
+        @ConfigEntry.Gui.Tooltip
+        public boolean axeRequiredForDeoxidize = true;
+
+        @ConfigEntry.Gui.Tooltip
         public boolean axeDurabilityForDeoxidize = true;
     }
 
     public static class UnwaxingSettings {
-        @ConfigEntry.Gui.Tooltip(count = 1)
-        public boolean axeRequiredForUnwaxing = false;
+        @ConfigEntry.Gui.Tooltip
+        public boolean axeRequiredForUnwaxing = true;
 
-        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.Tooltip
         public boolean axeDurabilityForUnwaxing = true;
     }
 
     public static class OxidationSettings {
-        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         public ItemOxidationMethod itemOxidationMethod = ItemOxidationMethod.DURABILITY_AND_TIME;
 
         public enum ItemOxidationMethod {
             NONE, DURABILITY_ONLY, TIME_ONLY, DURABILITY_AND_TIME
         }
+
+        @ConfigEntry.Gui.Tooltip
+        public double maxLifespanTick = 36000; // 30 minutes RL
+
+        @ConfigEntry.Gui.Tooltip
+        public double alphaWeight = 0.5;
+
+        @ConfigEntry.Gui.Tooltip
+        public double betaWeight = 0.5;
+
+        @ConfigEntry.Gui.Tooltip
+        public double oxidationIntervalAttempt = 200; // 10 seconds RL = 10 * 20 = 200 ticks
     }
 
     public static class TexturesSettings {
-        @ConfigEntry.Gui.Tooltip(count = 1)
-        public boolean waxedUniqueTextures = false;
+        @ConfigEntry.Gui.Tooltip
+        public boolean waxedUniqueTextures = true;
+
+        @ConfigEntry.Gui.Tooltip
+        public boolean waxedIndicatorItem = true;
+    }
+
+    public static class ItemsSettings {
+        @ConfigEntry.Gui.Tooltip
+        public boolean copperHorseArmorCraftable = true;
     }
 }

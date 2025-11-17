@@ -5,7 +5,9 @@
 	"mixins": [
       "ItemStackMixin",
       "CraftingResultSlotMixin",
-      "PlayerEntityMixin"
+      "CraftingScreenHandlerMixin",
+      "PlayerEntityMixin",
+      "ItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

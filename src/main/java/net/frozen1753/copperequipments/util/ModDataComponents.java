@@ -18,6 +18,11 @@ public class ModDataComponents {
                     .codec(Codec.INT)
                     .build());
 
+    public static final ComponentType<Long> CREATION_TIME = registerDataComponent("creation_time",
+            ComponentType.<Long>builder()
+                    .codec(Codec.LONG)
+                    .build());
+
     private static <T> ComponentType<T> registerDataComponent(String name, ComponentType<T> component) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(CopperEquipments.MOD_ID, name), component);
     }

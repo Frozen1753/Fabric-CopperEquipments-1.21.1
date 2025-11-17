@@ -1,39 +1,149 @@
 package net.frozen1753.copperequipments.item.custom;
 
+import net.frozen1753.copperequipments.CopperEquipments;
+import net.frozen1753.copperequipments.config.ModConfigs;
 import net.frozen1753.copperequipments.util.ModDataComponents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 
 import java.util.List;
 
 public interface CopperItem {
-    public static boolean isWaxed(ItemStack stack) {
+    static boolean isWaxed(ItemStack stack) {
         return stack.getOrDefault(ModDataComponents.WAXED, false);
     }
 
-    public static void setWaxed(ItemStack stack, boolean waxed) {
+    static void setWaxed(ItemStack stack, boolean waxed) {
         stack.set(ModDataComponents.WAXED, waxed);
     }
 
-    public static int getOxidationStage(ItemStack stack) {
+    static int getOxidationStage(ItemStack stack) {
         return stack.getOrDefault(ModDataComponents.OXIDATION_STAGE, 0);
     }
 
-    public static void setOxidationStage(ItemStack stack, int stage) {
+    static void setOxidationStage(ItemStack stack, int stage) {
         stack.set(ModDataComponents.OXIDATION_STAGE, stage);
     }
 
-    public static void updateWaxStageFromDamage(ItemStack stack) {
+    static void updateStageFromDamage(ItemStack stack) {
         int damage = stack.getDamage();
         int max = stack.getMaxDamage();
         float ratio = (float) damage / max;
 
         int stage = Math.min(3, (int) (ratio * 4));
         setOxidationStage(stack, stage);
+
+        System.out.println("[CopperEquipments] DURABILITY_ONLY | damage=" + damage + "/" + max + " | ratio=" + ratio + " | stage=" + stage);
+    }
+
+    static long getCreationTime(ItemStack stack, World world) {
+        return stack.getOrDefault(ModDataComponents.CREATION_TIME, world.getTime());
+    }
+
+    static void setCreationTime(ItemStack stack, World world) {
+        stack.set(ModDataComponents.CREATION_TIME, world.getTime());
+        System.out.println("[CopperEquipments] Creation time set at tick " + world.getTime());
+    }
+
+    static long getAgeTicks(ItemStack stack, World world) {
+        long creation = getCreationTime(stack, world);
+        return world.getTime() - creation;
+    }
+
+    static void setAgeTicks(ItemStack stack, World world, long ageTicks) {
+        long creationTime = world.getTime() - ageTicks;
+        stack.set(ModDataComponents.CREATION_TIME, creationTime);
+
+        System.out.println("[CopperEquipments] setAgeTicks called | ageTicks=" + ageTicks
+                + " | worldTime=" + world.getTime()
+                + " | creationTime=" + creationTime);
+    }
+
+    static void setAgeTicksForStage(ItemStack stack, World world) {
+        int stage = getOxidationStage(stack);
+        long maxLifespan = (long) CopperEquipments.CONFIG.oxidation.maxLifespanTick;
+
+        long ageForStage;
+        switch (stage) {
+            case 0 -> ageForStage = 0;
+            case 1 -> ageForStage = (long)(0.25 * maxLifespan);
+            case 2 -> ageForStage = (long)(0.50 * maxLifespan);
+            case 3 -> ageForStage = (long)(0.75 * maxLifespan);
+            default -> ageForStage = 0;
+        }
+
+        setAgeTicks(stack, world, ageForStage);
+    }
+
+    static int stageFromTime(long ageTicks, long maxLifespanTicks) {
+        double pct = Math.min(1.0, (double) ageTicks / maxLifespanTicks);
+        int stage;
+        if (pct < 0.25) stage = 0;
+        else if (pct < 0.50) stage = 1;
+        else if (pct < 0.75) stage = 2;
+        else stage = 3;
+
+        System.out.println("[CopperEquipments] TIME_ONLY | ageTicks=" + ageTicks + "/" + maxLifespanTicks + " | pct=" + pct + " | stage=" + stage);
+        return stage;
+    }
+
+    static void updateOxidationStage(ItemStack stack, World world, Random random) {
+        if (isWaxed(stack)) {
+            System.out.println("[CopperEquipments] Item was waxed");
+            return;
+        }
+
+        var method = CopperEquipments.CONFIG.oxidation.itemOxidationMethod;
+        int currentStage = getOxidationStage(stack);
+
+        if (method == ModConfigs.OxidationSettings.ItemOxidationMethod.NONE) {
+            setOxidationStage(stack, 0);
+            System.out.println("[CopperEquipments] NONE | stage forced to 0");
+            return;
+        }
+
+        long ageTicks = getAgeTicks(stack, world);
+
+        switch (method) {
+            case DURABILITY_ONLY -> {
+                updateStageFromDamage(stack);
+            }
+            case TIME_ONLY -> {
+                int stage = stageFromTime(ageTicks, (long) CopperEquipments.CONFIG.oxidation.maxLifespanTick);
+                setOxidationStage(stack, stage);
+            }
+            case DURABILITY_AND_TIME -> {
+                double durabilityPct = stack.isDamageable()
+                        ? 1.0 - (stack.getDamage() / (double) stack.getMaxDamage())
+                        : 1.0;
+
+                double Lmax = CopperEquipments.CONFIG.oxidation.maxLifespanTick;
+                double timePct = Math.min(1.0, ageTicks / Lmax);
+
+                double alpha = CopperEquipments.CONFIG.oxidation.alphaWeight;
+                double beta = CopperEquipments.CONFIG.oxidation.betaWeight;
+
+                double p = alpha * (1.0 - durabilityPct) + beta * timePct;
+                p = Math.max(0.0, Math.min(1.0, p));
+
+                double roll = random.nextDouble();
+                System.out.println("[CopperEquipments] BOTH | ageTicks=" + ageTicks + "/" + Lmax
+                        + " | timePct=" + timePct
+                        + " | durabilityPct=" + durabilityPct
+                        + " | alpha=" + alpha + " | beta=" + beta
+                        + " | probability=" + p + " | roll=" + roll
+                        + " | currentStage=" + currentStage);
+
+                if (currentStage < 3 && roll < p) {
+                    setOxidationStage(stack, currentStage + 1);
+                    System.out.println("[CopperEquipments] BOTH | Stage progressed to " + (currentStage + 1));
+                }
+            }
+        }
     }
 
     static void appendCopperTooltip(ItemStack stack, List<Text> tooltip) {
