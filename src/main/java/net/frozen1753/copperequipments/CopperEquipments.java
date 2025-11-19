@@ -12,6 +12,7 @@ import net.frozen1753.copperequipments.material.ModArmorMaterials;
 import net.frozen1753.copperequipments.material.ModToolMaterials;
 import net.frozen1753.copperequipments.particle.ModParticles;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
+import net.frozen1753.copperequipments.sound.ModSounds;
 import net.frozen1753.copperequipments.util.ModDataComponents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,7 @@ public class CopperEquipments implements ModInitializer {
         ModBlocks.registerModBlocks();
         ModItemGroups.registerItemGroup();
         ModDataComponents.registerModDataComponents();
+        ModSounds.registerModSounds();
 
         AutoConfig.register(ModConfigs.class, GsonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(ModConfigs.class).getConfig();

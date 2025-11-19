@@ -24,6 +24,7 @@ public class ItemStackMixin {
             )
     )
     private void onDamage(int amount, ServerWorld world, @Nullable ServerPlayerEntity player, Consumer<Item> breakCallback, CallbackInfo ci) {
+        if (world.isClient) return;
         ItemStack self = (ItemStack)(Object)this;
 
         if (self.getItem() instanceof CopperItem copper) {

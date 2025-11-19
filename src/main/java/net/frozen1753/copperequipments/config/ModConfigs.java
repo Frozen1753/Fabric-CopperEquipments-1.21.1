@@ -50,10 +50,10 @@ public class ModConfigs implements ConfigData {
         public double maxLifespanTick = 36000; // 30 minutes RL
 
         @ConfigEntry.Gui.Tooltip
-        public double alphaWeight = 0.5;
+        public double alphaWeight = 0.03; // max +3% per interval to oxidize
 
         @ConfigEntry.Gui.Tooltip
-        public double betaWeight = 0.5;
+        public double betaWeight = 0.02; // max +2% per interval to oxidize
 
         @ConfigEntry.Gui.Tooltip
         public double oxidationIntervalAttempt = 200; // 10 seconds RL = 10 * 20 = 200 ticks

@@ -19,7 +19,12 @@ public class CopperHorseEntityRenderer extends AbstractHorseEntityRenderer<Horse
     @Override
     public Identifier getTexture(HorseEntity entity) {
         HorseColor color = entity.getVariant();
+        String textureName = color.asString();
 
-        return Identifier.of("minecraft", "textures/entity/horse/horse_" + color.asString() + ".png");
+        if (color == HorseColor.DARK_BROWN) {
+            textureName = "darkbrown"; // why mojang, why ?
+        }
+
+        return Identifier.of("minecraft", "textures/entity/horse/horse_" + textureName + ".png");
     }
 }

@@ -37,11 +37,13 @@ Here’s what I’ve been working on for the next version:
 - [x] Add configs for unwaxing
 - [x] Add alternative unwaxing system
 - [x] Add configs for oxidation
-- [ ] `in progress` Add alternative oxidation systems for items
+- [x] Add alternative oxidation systems for items
 - [x] Add sound for deoxidation special recipe
-- [ ] Add sound for waxing special recipe
+- [x] Add sound for waxing special recipe
+- [x] Add sound for forced oxidation special recipe
 - [x] Add sound for unwaxing special recipe
-- [ ] Add corresponding advancements `Wax on` & `Wax off`(including copper axe)
+- [x] Fix Horse Texture
+- [ ] `in progress` Add corresponding advancements `Wax on` & `Wax off`(including copper axe)
 - [ ] Tests and cleanup
 - [ ] Mod menu config requirements
 - [ ] Configs working without Mod Menu

@@ -4,24 +4,26 @@ import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
+import net.frozen1753.copperequipments.util.accessor.ScrapeFlagHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ItemEnchantmentsComponent;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.Map;
+
+import static net.frozen1753.copperequipments.util.ModFunctions.getEnchantmentLevel;
 
 /**
  * Special crafting recipe for copper deoxidation.
@@ -48,11 +50,11 @@ import java.util.Map;
  *   <li>{@link #matches(CraftingRecipeInput, World)} enforces stack count and candidate presence.</li>
  *   <li>{@link #craft(CraftingRecipeInput, RegistryWrapper.WrapperLookup)} produces the deoxidized result.</li>
  *   <li>{@link #getRemainder(CraftingRecipeInput)} handles axe durability and breakage.</li>
- *   <li>{@link #getEnchantmentLevel(ItemStack, RegistryKey)} reads enchantment levels from the new
+ *   <li>{@link net.frozen1753.copperequipments.util.ModFunctions#getEnchantmentLevel(ItemStack, RegistryKey)} reads enchantment levels from the new
  *       data component system.</li>
  * </ul>
  */
-public class DeoxidationRecipe extends SpecialCraftingRecipe {
+public class DeoxidationRecipe extends SpecialCraftingRecipe implements ModRecipe {
     public DeoxidationRecipe(CraftingRecipeCategory category) {
         super(category);
     }
@@ -112,6 +114,16 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe {
             Map.entry(ModBlocks.WEATHERED_COPPER_LANTERN, ModBlocks.EXPOSED_COPPER_LANTERN),
             Map.entry(ModBlocks.EXPOSED_COPPER_LANTERN, ModBlocks.COPPER_LANTERN)
     );
+
+    @Override
+    public void playSound(World world, PlayerEntity player) {
+        ScrapeFlagHolder accessor = (ScrapeFlagHolder) player;
+        if (!accessor.hasPlayedScrapeThisTick()) {
+            accessor.setPlayedScrapeThisTick(true);
+            world.playSound(null, player.getBlockPos(),
+                    SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        }
+    }
 
     private record Candidates(ItemStack oxidized, ItemStack axe) {}
 
@@ -217,21 +229,6 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe {
             }
         }
         return remainders;
-    }
-
-    public static int getEnchantmentLevel(ItemStack stack, RegistryKey<Enchantment> key) {
-        // Get the enchantments component from the stack
-        ItemEnchantmentsComponent comp =
-                stack.getOrDefault(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT);
-
-        // Iterate through the RegistryEntries present
-        for (RegistryEntry<Enchantment> entry : comp.getEnchantments()) {
-            if (entry.matchesKey(key)) {
-                // Ask the component for the level of this entry
-                return comp.getLevel(entry);
-            }
-        }
-        return 0;
     }
 
     @Override

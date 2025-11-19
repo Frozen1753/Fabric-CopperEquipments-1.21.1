@@ -2,6 +2,7 @@ package net.frozen1753.copperequipments.item.custom;
 
 import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.particle.ModParticles;
+import net.frozen1753.copperequipments.sound.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -159,7 +159,7 @@ public class OxidizingPowderItem extends Item {
                 world.playSound(
                         null,
                         pos,
-                        SoundEvents.BLOCK_FIRE_EXTINGUISH,
+                        ModSounds.OXIDIZING_POWDER_USE,
                         SoundCategory.BLOCKS,
                         0.6F,
                         0.2F

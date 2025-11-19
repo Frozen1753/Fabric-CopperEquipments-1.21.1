@@ -4,8 +4,11 @@ import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
+import net.frozen1753.copperequipments.sound.ModSounds;
+import net.frozen1753.copperequipments.util.accessor.ForcedOxidationFlagHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -15,11 +18,12 @@ import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.World;
 
 import java.util.Map;
 
-public class ForcedOxidationRecipe extends SpecialCraftingRecipe {
+public class ForcedOxidationRecipe extends SpecialCraftingRecipe implements ModRecipe {
     public ForcedOxidationRecipe(CraftingRecipeCategory category) {
         super(category);
     }
@@ -136,6 +140,7 @@ public class ForcedOxidationRecipe extends SpecialCraftingRecipe {
                 if (stage < 3) {
                     CopperItem.setOxidationStage(result, stage + 1);
                 }
+                oxidizableStack = result;
             }
         }
 
@@ -150,5 +155,15 @@ public class ForcedOxidationRecipe extends SpecialCraftingRecipe {
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ModRecipes.CRAFTING_SPECIAL_FORCED_OXIDATION;
+    }
+
+    @Override
+    public void playSound(World world, PlayerEntity player) {
+        ForcedOxidationFlagHolder accessor = (ForcedOxidationFlagHolder) player;
+        if (!accessor.hasPlayedForcedOxidationThisTick()) {
+            accessor.setPlayedForcedOxidationThisTick(true);
+            world.playSound(null, player.getBlockPos(),
+                    ModSounds.OXIDIZING_POWDER_USE, SoundCategory.BLOCKS, 0.6F, 0.2F);
+        }
     }
 }

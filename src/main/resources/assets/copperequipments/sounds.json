@@ -1,0 +1,8 @@
+{
+  "oxidizing_powder_use" : {
+    "subtitle": "sounds.copperequipments.oxidizing_powder_use",
+    "sounds": [
+      "copperequipments:oxidizing_powder_use"
+    ]
+  }
+}

@@ -4,9 +4,11 @@ import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.block.ModBlocks;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
+import net.frozen1753.copperequipments.util.accessor.UnwaxFlagHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -16,15 +18,17 @@ import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.Map;
 
-import static net.frozen1753.copperequipments.recipe.custom.DeoxidationRecipe.getEnchantmentLevel;
+import static net.frozen1753.copperequipments.util.ModFunctions.getEnchantmentLevel;
 
-public class UnwaxingRecipe extends SpecialCraftingRecipe {
+public class UnwaxingRecipe extends SpecialCraftingRecipe implements ModRecipe {
     public UnwaxingRecipe(CraftingRecipeCategory category) {
         super(category);
     }
@@ -136,8 +140,6 @@ public class UnwaxingRecipe extends SpecialCraftingRecipe {
 
     @Override
     public ItemStack craft(CraftingRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
-        ItemStack waxed = null;
-
         for (ItemStack stack : input.getStacks()) {
             if (stack.isEmpty()) continue;
             Item item = stack.getItem();
@@ -209,5 +211,15 @@ public class UnwaxingRecipe extends SpecialCraftingRecipe {
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ModRecipes.CRAFTING_SPECIAL_UNWAXING;
+    }
+
+    @Override
+    public void playSound(World world, PlayerEntity player) {
+        UnwaxFlagHolder accessor = (UnwaxFlagHolder) player;
+        if (!accessor.hasPlayedUnwaxThisTick()) {
+            accessor.setPlayedUnwaxThisTick(true);
+            world.playSound(null, player.getBlockPos(),
+                    SoundEvents.ITEM_AXE_WAX_OFF, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        }
     }
 }

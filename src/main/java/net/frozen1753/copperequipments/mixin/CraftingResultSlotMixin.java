@@ -2,8 +2,7 @@ package net.frozen1753.copperequipments.mixin;
 
 import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
-import net.frozen1753.copperequipments.recipe.custom.DeoxidationRecipe;
-import net.frozen1753.copperequipments.recipe.custom.UnwaxingRecipe;
+import net.frozen1753.copperequipments.recipe.custom.*;
 import net.frozen1753.copperequipments.util.accessor.ScrapeFlagHolder;
 import net.frozen1753.copperequipments.util.accessor.UnwaxFlagHolder;
 import net.minecraft.entity.player.PlayerEntity;
@@ -87,8 +86,8 @@ public abstract class CraftingResultSlotMixin {
 
         recipe = recipeOpt.get();
 
-        // If recipe is not either DeoxidationRecipe or UnwaxingRecipe
-        if (!(recipe instanceof DeoxidationRecipe) && !(recipe instanceof UnwaxingRecipe)) {
+        // If recipe is not one of the mod recipe
+        if (!(recipe instanceof ModRecipe)) {
             return;
         }
 
@@ -109,33 +108,19 @@ public abstract class CraftingResultSlotMixin {
         World world = player.getWorld();
         if (world.isClient) return;
 
-        if (axeBefore.isEmpty()) return; // axeBefore is EMPTY if snapshotBefore decided this wasn't our recipe or no axe logic applies
-
-        ScrapeFlagHolder scrapeAccessor = (ScrapeFlagHolder) player;
-        UnwaxFlagHolder unwaxAccessor = (UnwaxFlagHolder) player;
+        if (!(recipe instanceof ModRecipe)) {
+            return;
+        }
 
         if (crafted.getItem() instanceof CopperItem) {
             CopperItem.setAgeTicksForStage(crafted, world);
         }
 
-        // Deoxidizing
-        if (recipe instanceof DeoxidationRecipe) {
-            // play scraping sound without spam
-            if (!scrapeAccessor.hasPlayedScrapeThisTick()) {
-                scrapeAccessor.setPlayedScrapeThisTick(true);
-                world.playSound(null, player.getBlockPos(),
-                        SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            }
-        }
-        // Unwaxing
-        else if (recipe instanceof UnwaxingRecipe) {
-            // play unwaxing sound without spam
-            if (!unwaxAccessor.hasPlayedUnwaxThisTick()) {
-                unwaxAccessor.setPlayedUnwaxThisTick(true);
-                world.playSound(null, player.getBlockPos(),
-                        SoundEvents.ITEM_AXE_WAX_OFF, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            }
-        }
+        System.out.println("Arrived at sound playing");
+        // plays recipe sound
+        ((ModRecipe) recipe).playSound(world, player);
+
+        if (axeBefore.isEmpty()) return; // axeBefore is EMPTY, no need for axe logic
 
         boolean checkDurability =
                 (recipe instanceof DeoxidationRecipe && CopperEquipments.CONFIG.deoxidation.axeDurabilityForDeoxidize)

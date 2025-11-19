@@ -2,15 +2,19 @@ package net.frozen1753.copperequipments.recipe.custom;
 
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
+import net.frozen1753.copperequipments.util.accessor.WaxFlagHolder;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
-public class WaxingRecipe extends SpecialCraftingRecipe {
+public class WaxingRecipe extends SpecialCraftingRecipe implements ModRecipe{
     public WaxingRecipe(CraftingRecipeCategory category) {
         super(category);
     }
@@ -39,8 +43,7 @@ public class WaxingRecipe extends SpecialCraftingRecipe {
             }
         }
 
-        boolean ok = foundUnwaxedCopper && foundHoney;
-        return ok;
+        return foundUnwaxedCopper && foundHoney;
     }
 
     @Override
@@ -70,6 +73,16 @@ public class WaxingRecipe extends SpecialCraftingRecipe {
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ModRecipes.CRAFTING_SPECIAL_WAXING;
+    }
+
+    @Override
+    public void playSound(World world, PlayerEntity player) {
+        WaxFlagHolder accessor = (WaxFlagHolder) player;
+        if (!accessor.hasPlayedWaxThisTick()) {
+            accessor.setPlayedWaxThisTick(true);
+            world.playSound(null, player.getBlockPos(),
+                    SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        }
     }
 }
 

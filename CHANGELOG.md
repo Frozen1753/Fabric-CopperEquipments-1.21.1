@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 1.0.5 - November 14, 2025
+
+### Included in this build:
+
+#### 🪓 Fast Unwax & Scraping
+
+Blocks and items can now be scraped or unwaxed in bulk throught the crafting menu
+
+#### 💨️ Oxidizing powder
+Blocks and items can be forced to oxidize by using `Oxidizing Powder` (right clicking or used in crafting menu)
+
+#### 🐛 Bug Fixes
+
+- Fixed crash in multiplayer
+
 ---
 
 ## Version 1.0.4 - November 12, 2025

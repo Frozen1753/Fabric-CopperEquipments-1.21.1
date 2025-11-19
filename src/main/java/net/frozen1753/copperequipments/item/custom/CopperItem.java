@@ -97,12 +97,14 @@ public interface CopperItem {
             return;
         }
 
-        var method = CopperEquipments.CONFIG.oxidation.itemOxidationMethod;
         int currentStage = getOxidationStage(stack);
+        if (currentStage > 2) {
+            System.out.println("[CopperEquipments] Item cannot age further");
+        }
 
+        var method = CopperEquipments.CONFIG.oxidation.itemOxidationMethod;
         if (method == ModConfigs.OxidationSettings.ItemOxidationMethod.NONE) {
-            setOxidationStage(stack, 0);
-            System.out.println("[CopperEquipments] NONE | stage forced to 0");
+            System.out.println("[CopperEquipments] NONE | stage kept at " + currentStage);
             return;
         }
 
@@ -127,18 +129,20 @@ public interface CopperItem {
                 double alpha = CopperEquipments.CONFIG.oxidation.alphaWeight;
                 double beta = CopperEquipments.CONFIG.oxidation.betaWeight;
 
-                double p = alpha * (1.0 - durabilityPct) + beta * timePct;
+                double threshold = (1 + currentStage) / 4.0;
+                double durabilityFactor = 1.0 / (1 + Math.exp(-50 * ((1 - durabilityPct) - threshold)));
+
+                double p = alpha * durabilityFactor + beta * timePct;
                 p = Math.max(0.0, Math.min(1.0, p));
 
                 double roll = random.nextDouble();
                 System.out.println("[CopperEquipments] BOTH | ageTicks=" + ageTicks + "/" + Lmax
                         + " | timePct=" + timePct
-                        + " | durabilityPct=" + durabilityPct
-                        + " | alpha=" + alpha + " | beta=" + beta
-                        + " | probability=" + p + " | roll=" + roll
+                        + " | durabilityPct=" + durabilityPct);
+                System.out.println("[CopperEquipments] BOTH | probability=" + p + " | roll=" + roll
                         + " | currentStage=" + currentStage);
 
-                if (currentStage < 3 && roll < p) {
+                if (roll < p) {
                     setOxidationStage(stack, currentStage + 1);
                     System.out.println("[CopperEquipments] BOTH | Stage progressed to " + (currentStage + 1));
                 }
