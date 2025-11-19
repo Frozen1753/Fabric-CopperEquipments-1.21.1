@@ -31,25 +31,39 @@ If you want to add or correct a language, please create a new issue on [Github](
 Here’s what I’ve been working on for the next version:
 
 - [x] Add config file
-- [x] Add compatibility with Mod Menu
-- [x] Add configs for deoxidation
-- [x] Add alternative deoxidation system
-- [x] Add configs for unwaxing
-- [x] Add alternative unwaxing system
-- [x] Add configs for oxidation
-- [x] Add alternative oxidation systems for items
-- [x] Add sound for deoxidation special recipe
-- [x] Add sound for waxing special recipe
-- [x] Add sound for forced oxidation special recipe
-- [x] Add sound for unwaxing special recipe
+  - [x] Add Cloth
+  - [x] Add compatibility with Mod Menu
+  - [x] Add configs
+    - [x] Add configs for deoxidation
+    - [x] Add configs for unwaxing
+    - [x] Add configs for oxidation
+- [x] Add alternative oxidation methods for items
+  - [x] Add `NONE` oxidation method
+  - [x] Add `DURABILITY_ONLY` oxidation method
+  - [x] Add `TIME_ONLY` oxidation method
+  - [x] Add `DURABILITY_AND_TIME` oxidation method
+- [x] Add sounds for special recipe
+  - [x] Add sound for deoxidation
+  - [x] Add sound for waxing
+  - [x] Add sound for forced oxidation
+    - [x] Make custom sound
+    - [x] Add custom sound
+  - [x] Add sound for unwaxing
 - [x] Fix Horse Texture
-- [ ] `in progress` Add corresponding advancements `Wax on` & `Wax off`(including copper axe)
-- [ ] Tests and cleanup
-- [ ] Mod menu config requirements
+- [x] Add Tags
+  - [x] Add `oxidizable_blocks` tag
+  - [x] Add `waxable_blocks` tag
+  - [x] Add `scrapable_blocks` tag
+  - [x] Add `waxed_blocks` tag
+  - [x] Add `copper_blocks` tag
+- [x] Add advancements
+  - [x] Override advancements `Wax on` & `Wax off`
+    - [x] include `#mincraft:axes` instead of list of vanilla axes for tools
+    - [x] include mod tags instead of list of vanilla blocks for block targets
+  - [x] `Rust Rush` advancement for using Oxidizing Powder
+  - [x] `Shine Again` advancement for scraping any oxidized block
+- [ ] `in progress` Mod menu config requirements
 - [ ] Configs working without Mod Menu
-- [ ] Tests
-- [ ] Modify minecraft loot tables for copper horse armor
-- [ ] Modify minecraft spawn for monster to accepts copper armor
 - [ ] Tests and cleanup
 - [ ] Translations
   - [ ] 🇺🇸 English (US)
@@ -60,10 +74,12 @@ Here’s what I’ve been working on for the next version:
 ## 🔮 What’s Next?
 I’ve got big plans for future updates!
 
-**v1.0.6 — Pre-Release**
-- 🧟 **Armor Spawn for mobs**: Zombies, Husks, Skeletons, Strays, and Bogged can now spawn with armor just like vanilla.
+**v1.0.6**
 - 📝 **Config file**: Add a config file and compatibility with [Mod Menu](https://modrinth.com/mod/modmenu)
 - ⚙️ **Oxidation rework for items**: With config options, players can customize how oxidation works for items (`Durability only`, `Time only`, `Durability + Time` or `No oxidation`)
+
+**v1.0.7 — Pre-Release**
+- 🧟 **Armor Spawn for mobs**: Zombies, Husks, Skeletons, Strays, and Bogged can now spawn with armor just like vanilla.
 - 🛡️ **Copper Armor Trims**: Copper armor should properly support trims, fixing the issue present in v1.0.5.
 
 **v1.1 — Release**

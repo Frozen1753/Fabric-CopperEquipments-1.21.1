@@ -50,6 +50,15 @@
   "tooltip.copperequipments.weathered": "Weathered",
   "tooltip.copperequipments.oxidized": "Oxidized",
 
+  "advancements.husbandry.wax_off.title": "Wax Off",
+  "advancements.husbandry.wax_off.description": "Use an axe to scrape wax from copper blocks.",
+  "advancements.husbandry.wax_on.title": "Wax On",
+  "advancements.husbandry.wax_on.description": "Apply honeycomb to copper blocks to protect them from oxidizing.",
+  "advancements.husbandry.force_oxidation.title": "Rust Rush",
+  "advancements.husbandry.force_oxidation.description": "Use oxidizing powder to advance copper by one stage of weathering.",
+  "advancements.husbandry.scrape_oxidation.title": "Shine Again",
+  "advancements.husbandry.scrape_oxidation.description": "Scrape copper to reduce its oxidation by one stage.",
+
   "itemgroup.copperequipments.copper_equipments": "Copper Equipments",
 
   "text.autoconfig.CopperEquipmentsConfigs.title": "Copper Equipments Configs",

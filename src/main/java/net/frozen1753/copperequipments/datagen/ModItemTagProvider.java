@@ -3,6 +3,7 @@ package net.frozen1753.copperequipments.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.frozen1753.copperequipments.item.ModItems;
+import net.frozen1753.copperequipments.util.ModTags;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 
@@ -34,6 +35,17 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.LEG_ARMOR)
                 .add(ModItems.COPPER_LEGGINGS);
         getOrCreateTagBuilder(ItemTags.FOOT_ARMOR)
+                .add(ModItems.COPPER_BOOTS);
+
+        getOrCreateTagBuilder(ModTags.Items.COPPER_ITEMS)
+                .add(ModItems.COPPER_SWORD)
+                .add(ModItems.COPPER_AXE)
+                .add(ModItems.COPPER_PICKAXE)
+                .add(ModItems.COPPER_SHOVEL)
+                .add(ModItems.COPPER_HOE)
+                .add(ModItems.COPPER_HELMET)
+                .add(ModItems.COPPER_CHESTPLATE)
+                .add(ModItems.COPPER_LEGGINGS)
                 .add(ModItems.COPPER_BOOTS);
     }
 }
