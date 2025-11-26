@@ -1,6 +1,6 @@
 package net.frozen1753.copperequipments.mixin;
 
-import net.frozen1753.copperequipments.CopperEquipments;
+import net.frozen1753.copperequipments.config.CopperEquipmentsConfigs;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.util.ModDataComponents;
 import net.minecraft.entity.Entity;
@@ -21,7 +21,7 @@ public abstract class ItemMixin {
         if (!(stack.getItem() instanceof CopperItem)) return;
         if (CopperItem.isWaxed(stack)) return;
 
-        if ((world.getTime() % CopperEquipments.CONFIG.oxidation.oxidationIntervalAttempt) != 0) return;
+        if ((world.getTime() % CopperEquipmentsConfigs.oxidationIntervalAttempt) != 0) return;
         CopperItem.updateOxidationStage(stack, world, world.getRandom());
 
         if (!stack.contains(ModDataComponents.CREATION_TIME)) {
@@ -35,7 +35,6 @@ public abstract class ItemMixin {
         if (stack.getItem() instanceof CopperItem) {
             if (!stack.contains(ModDataComponents.CREATION_TIME)) {
                 CopperItem.setCreationTime(stack, world);
-                System.out.println("[Debug] [onCopperItemCrafted] new copperitem crafted, setting creation date...");
             }
         }
     }

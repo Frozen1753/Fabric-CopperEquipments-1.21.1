@@ -5,7 +5,9 @@ import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
 import net.frozen1753.copperequipments.sound.ModSounds;
-import net.frozen1753.copperequipments.util.accessor.ForcedOxidationFlagHolder;
+import net.frozen1753.copperequipments.util.ModFunctions;
+import net.frozen1753.copperequipments.util.accessor.ActionFlagHolder;
+import net.frozen1753.copperequipments.util.accessor.ActionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,6 +21,7 @@ import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 import java.util.Map;
@@ -159,11 +162,18 @@ public class ForcedOxidationRecipe extends SpecialCraftingRecipe implements ModR
 
     @Override
     public void playSound(World world, PlayerEntity player) {
-        ForcedOxidationFlagHolder accessor = (ForcedOxidationFlagHolder) player;
-        if (!accessor.hasPlayedForcedOxidationThisTick()) {
-            accessor.setPlayedForcedOxidationThisTick(true);
+        ActionFlagHolder accessor = (ActionFlagHolder) player;
+        if (!accessor.hasPlayedFlag(ActionType.FORCED_OXIDATION)) {
+            accessor.setPlayedFlag(ActionType.FORCED_OXIDATION, true);
             world.playSound(null, player.getBlockPos(),
                     ModSounds.OXIDIZING_POWDER_USE, SoundCategory.BLOCKS, 0.6F, 0.2F);
         }
+    }
+
+    @Override
+    public void grantAdvancement(PlayerEntity player) {
+        ModFunctions.grantAdvancementCrafting(
+                Identifier.of("minecraft","husbandry/force_oxidation"),
+                player);
     }
 }

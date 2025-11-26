@@ -5,4 +5,6 @@ import net.minecraft.world.World;
 
 public interface ModRecipe {
     void playSound(World world, PlayerEntity player);
+
+    void grantAdvancement(PlayerEntity player);
 }

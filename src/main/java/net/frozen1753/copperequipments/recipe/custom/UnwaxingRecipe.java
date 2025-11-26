@@ -1,10 +1,12 @@
 package net.frozen1753.copperequipments.recipe.custom;
 
-import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.config.CopperEquipmentsConfigs;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
-import net.frozen1753.copperequipments.util.accessor.UnwaxFlagHolder;
+import net.frozen1753.copperequipments.util.ModFunctions;
+import net.frozen1753.copperequipments.util.accessor.ActionFlagHolder;
+import net.frozen1753.copperequipments.util.accessor.ActionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantments;
@@ -20,10 +22,13 @@ import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static net.frozen1753.copperequipments.util.ModFunctions.getEnchantmentLevel;
@@ -34,174 +39,252 @@ public class UnwaxingRecipe extends SpecialCraftingRecipe implements ModRecipe {
     }
 
     private static final Map<Block, Block> UNWAXING_MAP = Map.ofEntries(
-            // Vanilla
-            Map.entry(Blocks.WAXED_COPPER_BLOCK, Blocks.COPPER_BLOCK),
-            Map.entry(Blocks.WAXED_EXPOSED_COPPER, Blocks.EXPOSED_COPPER),
-            Map.entry(Blocks.WAXED_WEATHERED_COPPER, Blocks.WEATHERED_COPPER),
-            Map.entry(Blocks.WAXED_OXIDIZED_COPPER, Blocks.OXIDIZED_COPPER),
+        // Vanilla
+        Map.entry(Blocks.WAXED_COPPER_BLOCK, Blocks.COPPER_BLOCK),
+        Map.entry(Blocks.WAXED_EXPOSED_COPPER, Blocks.EXPOSED_COPPER),
+        Map.entry(Blocks.WAXED_WEATHERED_COPPER, Blocks.WEATHERED_COPPER),
+        Map.entry(Blocks.WAXED_OXIDIZED_COPPER, Blocks.OXIDIZED_COPPER),
 
-            Map.entry(Blocks.WAXED_CHISELED_COPPER, Blocks.CHISELED_COPPER),
-            Map.entry(Blocks.WAXED_EXPOSED_CHISELED_COPPER, Blocks.EXPOSED_CHISELED_COPPER),
-            Map.entry(Blocks.WAXED_WEATHERED_CHISELED_COPPER, Blocks.WEATHERED_CHISELED_COPPER),
-            Map.entry(Blocks.WAXED_OXIDIZED_CHISELED_COPPER, Blocks.OXIDIZED_CHISELED_COPPER),
+        Map.entry(Blocks.WAXED_CHISELED_COPPER, Blocks.CHISELED_COPPER),
+        Map.entry(Blocks.WAXED_EXPOSED_CHISELED_COPPER, Blocks.EXPOSED_CHISELED_COPPER),
+        Map.entry(Blocks.WAXED_WEATHERED_CHISELED_COPPER, Blocks.WEATHERED_CHISELED_COPPER),
+        Map.entry(Blocks.WAXED_OXIDIZED_CHISELED_COPPER, Blocks.OXIDIZED_CHISELED_COPPER),
 
-            Map.entry(Blocks.WAXED_COPPER_GRATE, Blocks.COPPER_GRATE),
-            Map.entry(Blocks.WAXED_EXPOSED_COPPER_GRATE, Blocks.EXPOSED_COPPER_GRATE),
-            Map.entry(Blocks.WAXED_WEATHERED_COPPER_GRATE, Blocks.WEATHERED_COPPER_GRATE),
-            Map.entry(Blocks.WAXED_OXIDIZED_COPPER_GRATE, Blocks.OXIDIZED_COPPER_GRATE),
+        Map.entry(Blocks.WAXED_COPPER_GRATE, Blocks.COPPER_GRATE),
+        Map.entry(Blocks.WAXED_EXPOSED_COPPER_GRATE, Blocks.EXPOSED_COPPER_GRATE),
+        Map.entry(Blocks.WAXED_WEATHERED_COPPER_GRATE, Blocks.WEATHERED_COPPER_GRATE),
+        Map.entry(Blocks.WAXED_OXIDIZED_COPPER_GRATE, Blocks.OXIDIZED_COPPER_GRATE),
 
-            Map.entry(Blocks.WAXED_CUT_COPPER, Blocks.CUT_COPPER),
-            Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER, Blocks.EXPOSED_CUT_COPPER),
-            Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER, Blocks.WEATHERED_CUT_COPPER),
-            Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER, Blocks.OXIDIZED_CUT_COPPER),
+        Map.entry(Blocks.WAXED_CUT_COPPER, Blocks.CUT_COPPER),
+        Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER, Blocks.EXPOSED_CUT_COPPER),
+        Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER, Blocks.WEATHERED_CUT_COPPER),
+        Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER, Blocks.OXIDIZED_CUT_COPPER),
 
-            Map.entry(Blocks.WAXED_CUT_COPPER_STAIRS, Blocks.CUT_COPPER_STAIRS),
-            Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER_STAIRS, Blocks.EXPOSED_CUT_COPPER_STAIRS),
-            Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER_STAIRS, Blocks.WEATHERED_CUT_COPPER_STAIRS),
-            Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER_STAIRS, Blocks.OXIDIZED_CUT_COPPER_STAIRS),
+        Map.entry(Blocks.WAXED_CUT_COPPER_STAIRS, Blocks.CUT_COPPER_STAIRS),
+        Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER_STAIRS, Blocks.EXPOSED_CUT_COPPER_STAIRS),
+        Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER_STAIRS, Blocks.WEATHERED_CUT_COPPER_STAIRS),
+        Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER_STAIRS, Blocks.OXIDIZED_CUT_COPPER_STAIRS),
 
-            Map.entry(Blocks.WAXED_CUT_COPPER_SLAB, Blocks.CUT_COPPER_SLAB),
-            Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB, Blocks.EXPOSED_CUT_COPPER_SLAB),
-            Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB, Blocks.WEATHERED_CUT_COPPER_SLAB),
-            Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB, Blocks.OXIDIZED_CUT_COPPER_SLAB),
+        Map.entry(Blocks.WAXED_CUT_COPPER_SLAB, Blocks.CUT_COPPER_SLAB),
+        Map.entry(Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB, Blocks.EXPOSED_CUT_COPPER_SLAB),
+        Map.entry(Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB, Blocks.WEATHERED_CUT_COPPER_SLAB),
+        Map.entry(Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB, Blocks.OXIDIZED_CUT_COPPER_SLAB),
 
-            Map.entry(Blocks.WAXED_COPPER_BULB, Blocks.COPPER_BULB),
-            Map.entry(Blocks.WAXED_EXPOSED_COPPER_BULB, Blocks.EXPOSED_COPPER_BULB),
-            Map.entry(Blocks.WAXED_WEATHERED_COPPER_BULB, Blocks.WEATHERED_COPPER_BULB),
-            Map.entry(Blocks.WAXED_OXIDIZED_COPPER_BULB, Blocks.OXIDIZED_COPPER_BULB),
+        Map.entry(Blocks.WAXED_COPPER_BULB, Blocks.COPPER_BULB),
+        Map.entry(Blocks.WAXED_EXPOSED_COPPER_BULB, Blocks.EXPOSED_COPPER_BULB),
+        Map.entry(Blocks.WAXED_WEATHERED_COPPER_BULB, Blocks.WEATHERED_COPPER_BULB),
+        Map.entry(Blocks.WAXED_OXIDIZED_COPPER_BULB, Blocks.OXIDIZED_COPPER_BULB),
 
-            Map.entry(Blocks.WAXED_COPPER_DOOR, Blocks.COPPER_DOOR),
-            Map.entry(Blocks.WAXED_EXPOSED_COPPER_DOOR, Blocks.EXPOSED_COPPER_DOOR),
-            Map.entry(Blocks.WAXED_WEATHERED_COPPER_DOOR, Blocks.WEATHERED_COPPER_DOOR),
-            Map.entry(Blocks.WAXED_OXIDIZED_COPPER_DOOR, Blocks.OXIDIZED_COPPER_DOOR),
+        Map.entry(Blocks.WAXED_COPPER_DOOR, Blocks.COPPER_DOOR),
+        Map.entry(Blocks.WAXED_EXPOSED_COPPER_DOOR, Blocks.EXPOSED_COPPER_DOOR),
+        Map.entry(Blocks.WAXED_WEATHERED_COPPER_DOOR, Blocks.WEATHERED_COPPER_DOOR),
+        Map.entry(Blocks.WAXED_OXIDIZED_COPPER_DOOR, Blocks.OXIDIZED_COPPER_DOOR),
 
-            Map.entry(Blocks.WAXED_COPPER_TRAPDOOR, Blocks.COPPER_TRAPDOOR),
-            Map.entry(Blocks.WAXED_EXPOSED_COPPER_TRAPDOOR, Blocks.EXPOSED_COPPER_TRAPDOOR),
-            Map.entry(Blocks.WAXED_WEATHERED_COPPER_TRAPDOOR, Blocks.WEATHERED_COPPER_TRAPDOOR),
-            Map.entry(Blocks.WAXED_OXIDIZED_COPPER_TRAPDOOR, Blocks.OXIDIZED_COPPER_TRAPDOOR),
+        Map.entry(Blocks.WAXED_COPPER_TRAPDOOR, Blocks.COPPER_TRAPDOOR),
+        Map.entry(Blocks.WAXED_EXPOSED_COPPER_TRAPDOOR, Blocks.EXPOSED_COPPER_TRAPDOOR),
+        Map.entry(Blocks.WAXED_WEATHERED_COPPER_TRAPDOOR, Blocks.WEATHERED_COPPER_TRAPDOOR),
+        Map.entry(Blocks.WAXED_OXIDIZED_COPPER_TRAPDOOR, Blocks.OXIDIZED_COPPER_TRAPDOOR),
 
-            // Mod
-            Map.entry(ModBlocks.WAXED_COPPER_BARS, ModBlocks.COPPER_BARS),
-            Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_BARS, ModBlocks.EXPOSED_COPPER_BARS),
-            Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_BARS, ModBlocks.WEATHERED_COPPER_BARS),
-            Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_BARS, ModBlocks.OXIDIZED_COPPER_BARS),
+        // Mod
+        Map.entry(ModBlocks.WAXED_COPPER_BARS, ModBlocks.COPPER_BARS),
+        Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_BARS, ModBlocks.EXPOSED_COPPER_BARS),
+        Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_BARS, ModBlocks.WEATHERED_COPPER_BARS),
+        Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_BARS, ModBlocks.OXIDIZED_COPPER_BARS),
 
-            Map.entry(ModBlocks.WAXED_COPPER_CHAIN, ModBlocks.COPPER_CHAIN),
-            Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN, ModBlocks.EXPOSED_COPPER_CHAIN),
-            Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN, ModBlocks.WEATHERED_COPPER_CHAIN),
-            Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN, ModBlocks.OXIDIZED_COPPER_CHAIN),
+        Map.entry(ModBlocks.WAXED_COPPER_CHAIN, ModBlocks.COPPER_CHAIN),
+        Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN, ModBlocks.EXPOSED_COPPER_CHAIN),
+        Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN, ModBlocks.WEATHERED_COPPER_CHAIN),
+        Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN, ModBlocks.OXIDIZED_COPPER_CHAIN),
 
-            Map.entry(ModBlocks.WAXED_COPPER_LANTERN, ModBlocks.COPPER_LANTERN),
-            Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN, ModBlocks.EXPOSED_COPPER_LANTERN),
-            Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN, ModBlocks.WEATHERED_COPPER_LANTERN),
-            Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN, ModBlocks.OXIDIZED_COPPER_LANTERN)
+        Map.entry(ModBlocks.WAXED_COPPER_LANTERN, ModBlocks.COPPER_LANTERN),
+        Map.entry(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN, ModBlocks.EXPOSED_COPPER_LANTERN),
+        Map.entry(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN, ModBlocks.WEATHERED_COPPER_LANTERN),
+        Map.entry(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN, ModBlocks.OXIDIZED_COPPER_LANTERN)
     );
 
+    /**
+     * Checks if the given crafting input matches the unwaxing recipe.
+     * <ul>
+     *   <li>Requires either one waxed item (if {@link CopperEquipmentsConfigs#axeRequiredForUnwaxing} = false)</li>
+     *   <li>Or one waxed item + one axe (if {@link CopperEquipmentsConfigs#axeRequiredForUnwaxing} = true)</li>
+     *   <li>Two axes are only valid if one is a waxed copper axe and the other is a non-copper axe</li>
+     * </ul>
+     */
     @Override
     public boolean matches(CraftingRecipeInput input, World world) {
-        boolean axeRequired = CopperEquipments.CONFIG.unwaxing.axeRequiredForUnwaxing;
+        boolean axeRequired = CopperEquipmentsConfigs.axeRequiredForUnwaxing;
 
-        // Si l'outil est requis, il faut exactement 2 items (un waxed + une hache)
-        // Sinon, un seul item waxed suffit
+        // validate count based on config
         if (input.getStackCount() != (axeRequired ? 2 : 1)) {
             return false;
         }
 
-        ItemStack waxed = null;
-        ItemStack axe = null;
+        ItemStack waxed = findWaxedItem(input);
+        ItemStack axe = findAxe(input);
 
-        for (ItemStack stack : input.getStacks()) {
-            if (stack.isEmpty()) continue;
-            Item item = stack.getItem();
-
-            if (item instanceof AxeItem) {
-                if (axe == null) axe = stack;
-                continue;
-            }
-
-            if (item instanceof CopperItem && CopperItem.isWaxed(stack)) {
-                waxed = stack;
-                continue;
-            }
-
-            if (item instanceof BlockItem blockItem) {
-                Block block = blockItem.getBlock();
-                if (UNWAXING_MAP.containsKey(block)) {
-                    waxed = stack;
-                }
-            }
-        }
-
-        if (waxed == null) return false;
-        if (axeRequired && axe == null) return false;
-
-        return true;
+        // must have a waxed item, and if axe is required, a valid axe too
+        return waxed != null && (!axeRequired || axe != null);
     }
 
+    /**
+     * Produces the result of the unwaxing recipe.
+     * <ul>
+     *    <li>If the waxed item is tool → return a copy with wax removed</li>
+     *    <li>If the waxed item is a block → return its unwaxed variant</li>
+     * </ul>
+     */
     @Override
     public ItemStack craft(CraftingRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
-        for (ItemStack stack : input.getStacks()) {
-            if (stack.isEmpty()) continue;
-            Item item = stack.getItem();
+        ItemStack waxed = findWaxedItem(input);
+        if (waxed == null) return ItemStack.EMPTY;
 
-            if (item instanceof CopperItem && CopperItem.isWaxed(stack)) {
-                ItemStack result = stack.copy();
-                CopperItem.setWaxed(result, false);
-                return result;
-            }
+        if (waxed.getItem() instanceof CopperItem) {
+            ItemStack result = waxed.copy();
+            CopperItem.setWaxed(result, false);
+            return result;
+        }
 
-            if (item instanceof BlockItem blockItem) {
-                Block block = blockItem.getBlock();
-                Block unwaxed = UNWAXING_MAP.get(block);
-                if (unwaxed != null) {
-                    return new ItemStack(unwaxed.asItem());
-                }
+        if (waxed.getItem() instanceof BlockItem blockItem) {
+            Block unwaxed = UNWAXING_MAP.get(blockItem.getBlock());
+            if (unwaxed != null) {
+                return new ItemStack(unwaxed.asItem());
             }
         }
 
         return ItemStack.EMPTY;
     }
 
+    /**
+     * Returns the remainder items after crafting.
+     * <ul>
+     *   <li>If axe is required, the axe may take durability damage</li>
+     *   <li>The waxed item itself is consumed (not returned)</li>
+     * </ul>
+     */
     @Override
     public DefaultedList<ItemStack> getRemainder(CraftingRecipeInput input) {
         DefaultedList<ItemStack> remainders = DefaultedList.ofSize(input.getSize(), ItemStack.EMPTY);
 
-        boolean axeRequired = CopperEquipments.CONFIG.unwaxing.axeRequiredForUnwaxing;
-        boolean axeDurability = CopperEquipments.CONFIG.unwaxing.axeDurabilityForUnwaxing;
-
-        if (!axeRequired) {
-            return remainders; // pas d'outil requis → pas de remainder
+        if (!CopperEquipmentsConfigs.axeRequiredForUnwaxing) {
+            return remainders; // no axe required -> no remainders
         }
 
-        Random random = Random.create();
+        ItemStack waxed = findWaxedItem(input);
 
         for (int i = 0; i < input.getSize(); i++) {
             ItemStack stack = input.getStackInSlot(i);
             if (stack.isEmpty() || !(stack.getItem() instanceof AxeItem)) continue;
 
-            ItemStack axeCopy = stack.copy();
+            // 'consume' the waxed axe
+            if (stack == waxed) continue;
 
-            if (axeDurability) {
-                int unbreakingLevel = getEnchantmentLevel(axeCopy, Enchantments.UNBREAKING);
-                if (random.nextInt(unbreakingLevel + 1) == 0) {
-                    int newDamage = axeCopy.getDamage() + 1;
-                    if (newDamage < axeCopy.getMaxDamage()) {
-                        axeCopy.setDamage(newDamage);
-                        remainders.set(i, axeCopy);
-                    } else {
-                        remainders.set(i, ItemStack.EMPTY); // l'outil se casse
-                    }
-                } else {
-                    remainders.set(i, axeCopy); // pas de dégât
-                }
-            } else {
-                remainders.set(i, axeCopy); // durabilité désactivée
-            }
+            remainders.set(i, damageOrBreakAxe(stack));
         }
 
         return remainders;
     }
 
+    /**
+     * Finds the waxed item in the input.
+     * <ul>
+     *  <li>Can be a waxed copper item or a waxed copper block</li>
+     *  <li>Special case: if there are two axes, only return the copper axe if it is waxed
+     *   and the other axe is not copper</li>
+     * </ul>
+     */
+    private ItemStack findWaxedItem(CraftingRecipeInput input) {
+        List<ItemStack> axes = new ArrayList<>();
+        ItemStack copperWaxed = null;
+        ItemStack otherWaxed = null;
+
+        for (ItemStack stack : input.getStacks()) {
+            if (stack.isEmpty()) continue;
+            Item item = stack.getItem();
+
+            if (item instanceof AxeItem) {
+                axes.add(stack);
+                // keep track of a waxed copper axe
+                if (item instanceof CopperItem && CopperItem.isWaxed(stack)) {
+                    copperWaxed = stack;
+                }
+                continue;
+            }
+
+            if (item instanceof CopperItem && CopperItem.isWaxed(stack)) {
+                otherWaxed = stack;
+            } else if (item instanceof BlockItem blockItem && UNWAXING_MAP.containsKey(blockItem.getBlock())) {
+                otherWaxed = stack;
+            }
+        }
+
+        // in case of two axes
+        if (axes.size() == 2) {
+            // only valid if one is a waxed copper axe and the other not copper
+            if (copperWaxed != null && axes.stream().anyMatch(s -> !(s.getItem() instanceof CopperItem))) {
+                return copperWaxed;
+            }
+            return null;
+        }
+
+        // in case 1 waxed axe and axeRequiredForUnwaxing = false
+        if (axes.size() == 1 && copperWaxed != null && !CopperEquipmentsConfigs.axeRequiredForUnwaxing) {
+            return copperWaxed;
+        }
+
+        return otherWaxed;
+    }
+
+    /**
+     * Finds the axe used in the recipe.
+     * <ul>
+     *   <li>If two axes are present, return the non-copper one</li>
+     *   <li>Otherwise return the first axe found</li>
+     * </ul>
+     */
+    private ItemStack findAxe(CraftingRecipeInput input) {
+        List<ItemStack> axes = new ArrayList<>();
+        for (ItemStack stack : input.getStacks()) {
+            if (!stack.isEmpty() && stack.getItem() instanceof AxeItem) {
+                axes.add(stack);
+            }
+        }
+
+        if (axes.size() == 2) {
+            for (ItemStack axe : axes) {
+                if (!(axe.getItem() instanceof CopperItem)) {
+                    return axe;
+                }
+            }
+            return null; // both copper -> invalid
+        }
+
+        return axes.isEmpty() ? null : axes.getFirst();
+    }
+
+    /**
+     * Applies durability damage to an axe, or breaks it if max damage is reached.
+     * <ul>
+     *   <li>If durability is disabled, return the axe unchanged</li>
+     *   <li>Uses Unbreaking enchantment to reduce chance of damage</li>
+     * </ul>
+     */
+    private ItemStack damageOrBreakAxe(ItemStack axe) {
+        ItemStack copy = axe.copy();
+        if (!CopperEquipmentsConfigs.axeDurabilityForUnwaxing) return copy;
+
+        Random random = Random.create();
+        int unbreakingLevel = getEnchantmentLevel(copy, Enchantments.UNBREAKING);
+
+        if (random.nextInt(unbreakingLevel + 1) == 0) {
+            int newDamage = copy.getDamage() + 1;
+            if (newDamage < copy.getMaxDamage()) {
+                copy.setDamage(newDamage);
+                return copy; // damaged
+            }
+            return ItemStack.EMPTY; // broken
+        }
+        return copy; // no damaged
+    }
 
     @Override
     public boolean fits(int width, int height) {
@@ -215,11 +298,18 @@ public class UnwaxingRecipe extends SpecialCraftingRecipe implements ModRecipe {
 
     @Override
     public void playSound(World world, PlayerEntity player) {
-        UnwaxFlagHolder accessor = (UnwaxFlagHolder) player;
-        if (!accessor.hasPlayedUnwaxThisTick()) {
-            accessor.setPlayedUnwaxThisTick(true);
+        ActionFlagHolder accessor = (ActionFlagHolder) player;
+        if (!accessor.hasPlayedFlag(ActionType.UNWAX)) {
+            accessor.setPlayedFlag(ActionType.UNWAX, true);
             world.playSound(null, player.getBlockPos(),
-                    SoundEvents.ITEM_AXE_WAX_OFF, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                    SoundEvents.ITEM_AXE_WAX_OFF, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
+    }
+
+    @Override
+    public void grantAdvancement(PlayerEntity player) {
+        ModFunctions.grantAdvancementCrafting(
+                Identifier.of("minecraft","husbandry/wax_off"),
+                player);
     }
 }

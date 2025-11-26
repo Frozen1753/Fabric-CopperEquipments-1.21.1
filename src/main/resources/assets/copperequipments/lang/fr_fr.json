@@ -50,5 +50,64 @@
   "tooltip.copperequipments.weathered": "Altéré",
   "tooltip.copperequipments.oxidized": "Oxydé",
 
-  "itemgroup.copperequipments.copper_equipments": "Équipements en cuivre"
+  "advancements.husbandry.wax_off.title": "Grattage express",
+  "advancements.husbandry.wax_off.description": "Retirez la cire d’un bloc de cuivre avec une hache.",
+  "advancements.husbandry.wax_on.title": "Miel protecteur",
+  "advancements.husbandry.wax_on.description": "Appliquez un rayon de miel sur un bloc de cuivre pour le protéger.",
+  "advancements.husbandry.force_oxidation.title": "Rouille à toute allure",
+  "advancements.husbandry.force_oxidation.description": "Utilisez de la poudre oxydante pour faire oxyder le cuivre d’un stade.",
+  "advancements.husbandry.scrape_oxidation.title": "Brillance retrouvée",
+  "advancements.husbandry.scrape_oxidation.description": "Grattez le cuivre avec une hache pour réduire son oxydation d’un stade.",
+
+  "itemgroup.copperequipments.copper_equipments": "Équipements en cuivre",
+
+  "copperequipments.midnightconfig.title": "Configs de Copper Equipments",
+  "copperequipments.midnightconfig.category.deoxidation": "Déoxydation",
+  "copperequipments.midnightconfig.category.unwaxing": "Décirage",
+  "copperequipments.midnightconfig.category.oxidation": "Oxydation",
+  "copperequipments.midnightconfig.category.textures": "[Bientôt Disponible] Textures",
+  "copperequipments.midnightconfig.category.items": "[Bientôt Disponible] Items",
+
+  "copperequipments.midnightconfig.axeRequiredForDeoxidize": "Hache requise pour la Déoxydation",
+  "copperequipments.midnightconfig.axeRequiredForDeoxidize.tooltip": "Dans le menu de craft, combinez un bloc oxydé avec une hache pour le gratter.",
+  "copperequipments.midnightconfig.axeDurabilityForDeoxidize": "Utiliser la durabilité de la hache pour la Déoxydation",
+  "copperequipments.midnightconfig.axeDurabilityForDeoxidize.tooltip": "Gratter dans l’inventaire réduit la durabilité de la hache.",
+
+  "copperequipments.midnightconfig.axeRequiredForUnwaxing": "Hache requise pour le Décirage",
+  "copperequipments.midnightconfig.axeRequiredForUnwaxing.tooltip": "Dans le menu de craft, combinez un bloc ciré avec une hache pour enlever la cire.",
+  "copperequipments.midnightconfig.axeDurabilityForUnwaxing": "Utiliser la durabilité de la hache pour le Décirage",
+  "copperequipments.midnightconfig.axeDurabilityForUnwaxing.tooltip": "Enlever la cire dans l’inventaire réduit la durabilité de la hache.",
+
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.NONE": "Aucun",
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_ONLY": "Durabilité uniquement",
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.TIME_ONLY": "Temps uniquement",
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_AND_TIME": "Durabilité et Temps",
+
+  "copperequipments.midnightconfig.itemOxidationMethod": "Méthode d’oxydation des items",
+  "copperequipments.midnightconfig.itemOxidationMethod.tooltip": "Choisissez comment les objets en cuivre s’oxydent :\n[Aucun] Les items ne s’oxydent jamais naturellement.\n[Durabilité] Le stade d’oxydation dépend de la durabilité :\n • 100–75% → Intact\n • 75–50% → Exposé\n • 50–25% → Altéré\n • 25–0% → Oxydé\n[Temps] Les items s’oxydent progressivement au fil du temps, selon la durée de vie.\n[Les deux] Les items s’oxydent selon la durabilité et la durée de vie, avec une influence pondérée.",
+  "copperequipments.midnightconfig.maxLifespanTick": "Durée de vie maximale (Ticks)",
+  "copperequipments.midnightconfig.maxLifespanTick.tooltip": "Définit combien de temps un item peut exister avant d’atteindre l’oxydation complète avec la méthode basée sur le temps.\nExemple : 36000 ticks = 30 minutes en temps réel.",
+  "copperequipments.midnightconfig.alphaWeight": "Poids de la Durabilité (α)",
+  "copperequipments.midnightconfig.alphaWeight.tooltip": "Contrôle l’importance de la durabilité dans l’oxydation avec la méthode «Durabilité et Temps».\nUne valeur plus élevée rend les dégâts plus influents dans la progression de l’oxydation.",
+  "copperequipments.midnightconfig.betaWeight": "Poids du Temps (β)",
+  "copperequipments.midnightconfig.betaWeight.tooltip": "Contrôle l’importance de la durée de vie dans l’oxydation avec la méthode «Durabilité et Temps».\nUne valeur plus élevée rend l’âge de l’objet plus influent dans la progression de l’oxydation.",
+  "copperequipments.midnightconfig.oxidationIntervalAttempt": "Intervalle de vérification de l’oxydation (Ticks)",
+  "copperequipments.midnightconfig.oxidationIntervalAttempt.tooltip": "Définit la fréquence à laquelle le jeu tente de faire progresser l’oxydation.\nValeur plus basse = vérifications plus fréquentes.\nExemple : 200 ticks = toutes les 10 secondes en temps réel.\n⚠ Attention : une valeur trop basse peut causer des problèmes de performance à cause de trop de vérifications.",
+
+  "copperequipments.midnightconfig.waxedUniqueTextures": "Textures uniques pour les blocs cirés",
+  "copperequipments.midnightconfig.waxedUniqueTextures.tooltip": "Modifie les textures des blocs pour afficher des détails subtils de miel.",
+  "copperequipments.midnightconfig.waxedIndicatorItem": "Indicateur visuel pour les objets cirés",
+  "copperequipments.midnightconfig.waxedIndicatorItem.tooltip": "Ajoute un petit point jaune aux objets cirés.",
+
+  "copperequipments.midnightconfig.copperHorseArmorCraftable": "Recette d’armure de cheval en cuivre",
+  "copperequipments.midnightconfig.copperHorseArmorCraftable.tooltip": "Ajoute une recette pour fabriquer l’armure de cheval en cuivre.",
+
+  "copperequipments.midnightconfig.category.internal": "Serveur",
+  "copperequipments.midnightconfig.isServerOwner": "Êtes‑vous l’hôte du monde ?",
+  "copperequipments.midnightconfig.isServerOwner.tooltip": "Le mod détecte si votre client Minecraft héberge le monde. Si vous n’êtes pas l’hôte, il vous avertira que certaines options ne sont pas disponibles.",
+
+  "copperequipments.midnightconfig.notHostWarningCommentDeoxidation": "⚠ Vous n’êtes pas l’hôte ⚠\nLes changements n’affecteront pas votre monde actuel!",
+  "copperequipments.midnightconfig.notHostWarningCommentUnwaxing": "⚠ Vous n’êtes pas l’hôte ⚠\nLes changements n’affecteront pas votre monde actuel!",
+  "copperequipments.midnightconfig.notHostWarningCommentOxidation": "⚠ Vous n’êtes pas l’hôte ⚠\nLes changements n’affecteront pas votre monde actuel!",
+  "copperequipments.midnightconfig.notHostWarningCommentItems": "⚠ Vous n’êtes pas l’hôte ⚠\nLes changements n’affecteront pas votre monde actuel!"
 }

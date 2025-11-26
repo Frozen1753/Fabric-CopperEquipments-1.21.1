@@ -1,7 +1,6 @@
 package net.frozen1753.copperequipments.item.custom;
 
-import net.frozen1753.copperequipments.CopperEquipments;
-import net.frozen1753.copperequipments.config.ModConfigs;
+import net.frozen1753.copperequipments.config.CopperEquipmentsConfigs;
 import net.frozen1753.copperequipments.util.ModDataComponents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
@@ -36,8 +35,6 @@ public interface CopperItem {
 
         int stage = Math.min(3, (int) (ratio * 4));
         setOxidationStage(stack, stage);
-
-        System.out.println("[CopperEquipments] DURABILITY_ONLY | damage=" + damage + "/" + max + " | ratio=" + ratio + " | stage=" + stage);
     }
 
     static long getCreationTime(ItemStack stack, World world) {
@@ -46,7 +43,6 @@ public interface CopperItem {
 
     static void setCreationTime(ItemStack stack, World world) {
         stack.set(ModDataComponents.CREATION_TIME, world.getTime());
-        System.out.println("[CopperEquipments] Creation time set at tick " + world.getTime());
     }
 
     static long getAgeTicks(ItemStack stack, World world) {
@@ -57,15 +53,11 @@ public interface CopperItem {
     static void setAgeTicks(ItemStack stack, World world, long ageTicks) {
         long creationTime = world.getTime() - ageTicks;
         stack.set(ModDataComponents.CREATION_TIME, creationTime);
-
-        System.out.println("[CopperEquipments] setAgeTicks called | ageTicks=" + ageTicks
-                + " | worldTime=" + world.getTime()
-                + " | creationTime=" + creationTime);
     }
 
     static void setAgeTicksForStage(ItemStack stack, World world) {
         int stage = getOxidationStage(stack);
-        long maxLifespan = (long) CopperEquipments.CONFIG.oxidation.maxLifespanTick;
+        long maxLifespan = (long) CopperEquipmentsConfigs.maxLifespanTick;
 
         long ageForStage;
         switch (stage) {
@@ -87,35 +79,30 @@ public interface CopperItem {
         else if (pct < 0.75) stage = 2;
         else stage = 3;
 
-        System.out.println("[CopperEquipments] TIME_ONLY | ageTicks=" + ageTicks + "/" + maxLifespanTicks + " | pct=" + pct + " | stage=" + stage);
         return stage;
     }
 
     static void updateOxidationStage(ItemStack stack, World world, Random random) {
         if (isWaxed(stack)) {
-            System.out.println("[CopperEquipments] Item was waxed");
             return;
         }
 
         int currentStage = getOxidationStage(stack);
         if (currentStage > 2) {
-            System.out.println("[CopperEquipments] Item cannot age further");
+            return;
         }
 
-        var method = CopperEquipments.CONFIG.oxidation.itemOxidationMethod;
-        if (method == ModConfigs.OxidationSettings.ItemOxidationMethod.NONE) {
-            System.out.println("[CopperEquipments] NONE | stage kept at " + currentStage);
+        var method = CopperEquipmentsConfigs.itemOxidationMethod;
+        if (method == CopperEquipmentsConfigs.ItemOxidationMethod.NONE) {
             return;
         }
 
         long ageTicks = getAgeTicks(stack, world);
 
         switch (method) {
-            case DURABILITY_ONLY -> {
-                updateStageFromDamage(stack);
-            }
+            case DURABILITY_ONLY -> updateStageFromDamage(stack);
             case TIME_ONLY -> {
-                int stage = stageFromTime(ageTicks, (long) CopperEquipments.CONFIG.oxidation.maxLifespanTick);
+                int stage = stageFromTime(ageTicks, (long) CopperEquipmentsConfigs.maxLifespanTick);
                 setOxidationStage(stack, stage);
             }
             case DURABILITY_AND_TIME -> {
@@ -123,11 +110,11 @@ public interface CopperItem {
                         ? 1.0 - (stack.getDamage() / (double) stack.getMaxDamage())
                         : 1.0;
 
-                double Lmax = CopperEquipments.CONFIG.oxidation.maxLifespanTick;
+                double Lmax = CopperEquipmentsConfigs.maxLifespanTick;
                 double timePct = Math.min(1.0, ageTicks / Lmax);
 
-                double alpha = CopperEquipments.CONFIG.oxidation.alphaWeight;
-                double beta = CopperEquipments.CONFIG.oxidation.betaWeight;
+                double alpha = CopperEquipmentsConfigs.alphaWeight;
+                double beta = CopperEquipmentsConfigs.betaWeight;
 
                 double threshold = (1 + currentStage) / 4.0;
                 double durabilityFactor = 1.0 / (1 + Math.exp(-50 * ((1 - durabilityPct) - threshold)));
@@ -136,15 +123,9 @@ public interface CopperItem {
                 p = Math.max(0.0, Math.min(1.0, p));
 
                 double roll = random.nextDouble();
-                System.out.println("[CopperEquipments] BOTH | ageTicks=" + ageTicks + "/" + Lmax
-                        + " | timePct=" + timePct
-                        + " | durabilityPct=" + durabilityPct);
-                System.out.println("[CopperEquipments] BOTH | probability=" + p + " | roll=" + roll
-                        + " | currentStage=" + currentStage);
 
                 if (roll < p) {
                     setOxidationStage(stack, currentStage + 1);
-                    System.out.println("[CopperEquipments] BOTH | Stage progressed to " + (currentStage + 1));
                 }
             }
         }

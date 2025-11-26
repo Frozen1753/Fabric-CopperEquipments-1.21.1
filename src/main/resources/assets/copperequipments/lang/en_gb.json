@@ -50,5 +50,64 @@
   "tooltip.copperequipments.weathered": "Weathered",
   "tooltip.copperequipments.oxidised": "Oxidised",
 
-  "itemgroup.copperequipments.copper_equipments": "Copper Equipments"
+  "advancements.husbandry.wax_off.title": "Wax Off",
+  "advancements.husbandry.wax_off.description": "Use an axe to scrape wax from copper blocks.",
+  "advancements.husbandry.wax_on.title": "Wax On",
+  "advancements.husbandry.wax_on.description": "Apply honeycomb to copper blocks to protect them from oxidising.",
+  "advancements.husbandry.force_oxidation.title": "Rust Rush",
+  "advancements.husbandry.force_oxidation.description": "Use oxidising powder to advance copper by one stage of weathering.",
+  "advancements.husbandry.scrape_oxidation.title": "Shine Again",
+  "advancements.husbandry.scrape_oxidation.description": "Scrape copper to reduce its oxidation by one stage.",
+
+  "itemgroup.copperequipments.copper_equipments": "Copper Equipments",
+
+  "copperequipments.midnightconfig.title": "Copper Equipments Configs",
+  "copperequipments.midnightconfig.category.deoxidation": "Deoxidation",
+  "copperequipments.midnightconfig.category.unwaxing": "Unwaxing",
+  "copperequipments.midnightconfig.category.oxidation": "Oxidation",
+  "copperequipments.midnightconfig.category.textures": "[Coming Soon] Textures",
+  "copperequipments.midnightconfig.category.items": "[Coming Soon] Items",
+
+  "copperequipments.midnightconfig.axeRequiredForDeoxidize": "Axe Required for Deoxidation",
+  "copperequipments.midnightconfig.axeRequiredForDeoxidize.tooltip": "In the crafting menu, combine an oxidised block with any axe to scrape it.",
+  "copperequipments.midnightconfig.axeDurabilityForDeoxidize": "Use Axe Durability for Deoxidation",
+  "copperequipments.midnightconfig.axeDurabilityForDeoxidize.tooltip": "Scraping in the inventory will reduce the axe’s durability.",
+
+  "copperequipments.midnightconfig.axeRequiredForUnwaxing": "Axe Required for Unwaxing",
+  "copperequipments.midnightconfig.axeRequiredForUnwaxing.tooltip": "In the crafting menu, combine a waxed block with any axe to remove the wax.",
+  "copperequipments.midnightconfig.axeDurabilityForUnwaxing": "Use Axe Durability for Unwaxing",
+  "copperequipments.midnightconfig.axeDurabilityForUnwaxing.tooltip": "Unwaxing in the inventory will reduce the axe’s durability.",
+
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.NONE": "None",
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_ONLY": "Durability Only",
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.TIME_ONLY": "Time Only",
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_AND_TIME": "Durability and Time",
+
+  "copperequipments.midnightconfig.itemOxidationMethod": "Item Oxidation Method",
+  "copperequipments.midnightconfig.itemOxidationMethod.tooltip": "Choose how copper items oxidise:\n[None] Items never oxidise naturally.\n[Durability] Oxidation stage is determined by durability:\n • 100–75% → Unexposed\n • 75–50% → Exposed\n • 50–25% → Weathered\n • 25–0% → Oxidised\n[Time] Items oxidise gradually over time based on their lifespan.\n[Both] Items oxidise based on both durability and lifespan, with weighted influence.",
+  "copperequipments.midnightconfig.maxLifespanTick": "Max Lifespan (Ticks)",
+  "copperequipments.midnightconfig.maxLifespanTick.tooltip": "Defines how long an item can exist before reaching full oxidation when using time-based methods.\nFor example, 36000 ticks = 30 minutes of real time.",
+  "copperequipments.midnightconfig.alphaWeight": "Durability Weight (α)",
+  "copperequipments.midnightconfig.alphaWeight.tooltip": "Controls how strongly durability influences oxidation when using the 'Durability and Time' method.\nHigher values make damage more important in determining oxidation progression.",
+  "copperequipments.midnightconfig.betaWeight": "Time Weight (β)",
+  "copperequipments.midnightconfig.betaWeight.tooltip": "Controls how strongly lifespan influences oxidation when using the 'Durability and Time' method.\nHigher values make item age more important in determining oxidation progression.",
+  "copperequipments.midnightconfig.oxidationIntervalAttempt": "Oxidation Check Interval (Ticks)",
+  "copperequipments.midnightconfig.oxidationIntervalAttempt.tooltip": "Defines how often the game attempts to progress oxidation.\nLower values = more frequent checks.\nFor example, 200 ticks = every 10 seconds of real time.\n⚠ Warning: Setting this too low may cause performance issues due to excessive oxidation checks.",
+
+  "copperequipments.midnightconfig.waxedUniqueTextures": "Waxed Unique Textures",
+  "copperequipments.midnightconfig.waxedUniqueTextures.tooltip": "Changes block textures to show subtle honey details.",
+  "copperequipments.midnightconfig.waxedIndicatorItem": "Waxed Indicator Item",
+  "copperequipments.midnightconfig.waxedIndicatorItem.tooltip": "Adds a small yellow dot to waxed items.",
+
+  "copperequipments.midnightconfig.copperHorseArmorCraftable": "Copper Horse Armour Recipe",
+  "copperequipments.midnightconfig.copperHorseArmorCraftable.tooltip": "Adds a recipe to craft the copper horse armour.",
+
+  "copperequipments.midnightconfig.category.internal": "Server",
+  "copperequipments.midnightconfig.isServerOwner": "Are you hosting the world?",
+  "copperequipments.midnightconfig.isServerOwner.tooltip": "The mod recognises whether your Minecraft client is hosting the world. If you are not the host, it will inform you that some options cannot be used.",
+
+  "copperequipments.midnightconfig.notHostWarningCommentDeoxidation": "⚠ You are not the host ⚠\nChanges will not affect your current world!",
+  "copperequipments.midnightconfig.notHostWarningCommentUnwaxing": "⚠ You are not the host ⚠\nChanges will not affect your current world!",
+  "copperequipments.midnightconfig.notHostWarningCommentOxidation": "⚠ You are not the host ⚠\nChanges will not affect your current world!",
+  "copperequipments.midnightconfig.notHostWarningCommentItems": "⚠ You are not the host ⚠\nChanges will not affect your current world!"
 }

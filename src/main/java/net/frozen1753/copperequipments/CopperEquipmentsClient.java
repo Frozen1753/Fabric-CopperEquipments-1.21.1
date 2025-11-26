@@ -2,10 +2,12 @@ package net.frozen1753.copperequipments;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.config.CopperEquipmentsConfigs;
 import net.frozen1753.copperequipments.item.ModItems;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.material.custom.CopperHorseEntityRenderer;
@@ -171,5 +173,15 @@ public class CopperEquipmentsClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.FORCED_OXIDATION, ForcedOxidationParticle.Factory::new);
 
         ItemDurabilityChangeCallback.EVENT.register((stack, amount, world, player) -> {});
+
+        ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
+            CopperEquipmentsConfigs.updateEnv();
+            CopperEquipments.LOGGER.info("[DEBUG] [ENV] Updated on world join: " + CopperEquipmentsConfigs.isServerOwner);
+        });
+
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            CopperEquipmentsConfigs.updateEnv();
+            CopperEquipments.LOGGER.info("[DEBUG] [ENV] Updated on disconnect: " + CopperEquipmentsConfigs.isServerOwner);
+        });
     }
 }

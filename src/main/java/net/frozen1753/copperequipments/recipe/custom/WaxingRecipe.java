@@ -2,7 +2,9 @@ package net.frozen1753.copperequipments.recipe.custom;
 
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
-import net.frozen1753.copperequipments.util.accessor.WaxFlagHolder;
+import net.frozen1753.copperequipments.util.ModFunctions;
+import net.frozen1753.copperequipments.util.accessor.ActionFlagHolder;
+import net.frozen1753.copperequipments.util.accessor.ActionType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -12,6 +14,7 @@ import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class WaxingRecipe extends SpecialCraftingRecipe implements ModRecipe{
@@ -77,12 +80,19 @@ public class WaxingRecipe extends SpecialCraftingRecipe implements ModRecipe{
 
     @Override
     public void playSound(World world, PlayerEntity player) {
-        WaxFlagHolder accessor = (WaxFlagHolder) player;
-        if (!accessor.hasPlayedWaxThisTick()) {
-            accessor.setPlayedWaxThisTick(true);
+        ActionFlagHolder accessor = (ActionFlagHolder) player;
+        if (!accessor.hasPlayedFlag(ActionType.WAX)) {
+            accessor.setPlayedFlag(ActionType.WAX, true);
             world.playSound(null, player.getBlockPos(),
-                    SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                    SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
+    }
+
+    @Override
+    public void grantAdvancement(PlayerEntity player) {
+        ModFunctions.grantAdvancementCrafting(
+                Identifier.of("minecraft","husbandry/wax_on"),
+                player);
     }
 }
 

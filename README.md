@@ -62,14 +62,14 @@ Here’s what I’ve been working on for the next version:
     - [x] include mod tags instead of list of vanilla blocks for block targets
   - [x] `Rust Rush` advancement for using Oxidizing Powder
   - [x] `Shine Again` advancement for scraping any oxidized block
-- [ ] `in progress` Mod menu config requirements
-- [ ] Configs working without Mod Menu
-- [ ] Tests and cleanup
-- [ ] Translations
-  - [ ] 🇺🇸 English (US)
-  - [ ] 🇬🇧 English (GB)
-  - [ ] 🇫🇷 French (FR)
-  - [ ] 🇨🇳 Mandarin (CN)
+- [x] Mod menu config requirements
+- [x] Configs working without Mod Menu
+- [x] Tests and cleanup
+- [ ] `in progress` Translations
+  - [x] 🇺🇸 English (US)
+  - [x] 🇬🇧 English (GB)
+  - [x] 🇫🇷 French (FR)
+  - [ ] `help wanted` 🇨🇳 Mandarin (CN)
 
 ## 🔮 What’s Next?
 I’ve got big plans for future updates!
@@ -78,7 +78,7 @@ I’ve got big plans for future updates!
 - 📝 **Config file**: Add a config file and compatibility with [Mod Menu](https://modrinth.com/mod/modmenu)
 - ⚙️ **Oxidation rework for items**: With config options, players can customize how oxidation works for items (`Durability only`, `Time only`, `Durability + Time` or `No oxidation`)
 
-**v1.0.7 — Pre-Release**
+**v1.0.7**
 - 🧟 **Armor Spawn for mobs**: Zombies, Husks, Skeletons, Strays, and Bogged can now spawn with armor just like vanilla.
 - 🛡️ **Copper Armor Trims**: Copper armor should properly support trims, fixing the issue present in v1.0.5.
 

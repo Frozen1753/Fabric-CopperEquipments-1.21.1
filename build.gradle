@@ -17,16 +17,14 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 
+    // midnightlib
+    maven { url = "https://maven.midnightdust.eu/releases" }
 
     // Mod Menu
     maven {
         name = "Terraformers"
         url = "https://maven.terraformersmc.com/"
     }
-
-    // Cloth Config
-    maven { url "https://maven.shedaniel.me/" }
-    maven { url "https://maven.terraformersmc.com/releases/" }
 }
 
 fabricApi {
@@ -44,10 +42,12 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // Other dependencies
+
+    // midnightlib
+    modImplementation include ("eu.midnightdust:midnightlib:${project.midnightlib_version}")
+
+    // mod menu
     modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
 }
 
 processResources {

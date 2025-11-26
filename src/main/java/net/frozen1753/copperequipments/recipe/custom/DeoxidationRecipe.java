@@ -1,10 +1,12 @@
 package net.frozen1753.copperequipments.recipe.custom;
 
-import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.block.ModBlocks;
+import net.frozen1753.copperequipments.config.CopperEquipmentsConfigs;
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.ModRecipes;
-import net.frozen1753.copperequipments.util.accessor.ScrapeFlagHolder;
+import net.frozen1753.copperequipments.util.ModFunctions;
+import net.frozen1753.copperequipments.util.accessor.ActionFlagHolder;
+import net.frozen1753.copperequipments.util.accessor.ActionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantments;
@@ -17,6 +19,7 @@ import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.registry.*;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -117,12 +120,19 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe implements ModRecip
 
     @Override
     public void playSound(World world, PlayerEntity player) {
-        ScrapeFlagHolder accessor = (ScrapeFlagHolder) player;
-        if (!accessor.hasPlayedScrapeThisTick()) {
-            accessor.setPlayedScrapeThisTick(true);
+        ActionFlagHolder accessor = (ActionFlagHolder) player;
+        if (!accessor.hasPlayedFlag(ActionType.SCRAPE)) {
+            accessor.setPlayedFlag(ActionType.SCRAPE, true);
             world.playSound(null, player.getBlockPos(),
-                    SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                    SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
+    }
+
+    @Override
+    public void grantAdvancement(PlayerEntity player) {
+        ModFunctions.grantAdvancementCrafting(
+                Identifier.of("minecraft","husbandry/scrape_oxidation"),
+                player);
     }
 
     private record Candidates(ItemStack oxidized, ItemStack axe) {}
@@ -160,15 +170,14 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe implements ModRecip
 
     @Override
     public boolean matches(CraftingRecipeInput input, World world) {
-        boolean axeRequired = CopperEquipments.CONFIG.deoxidation.axeRequiredForDeoxidize;
+        boolean axeRequired = CopperEquipmentsConfigs.axeRequiredForDeoxidize;
 
         if (input.getStackCount() != (axeRequired ? 2 : 1)) return false;
 
         Candidates c = findCandidates(input);
         if (c.oxidized == null) return false;
-        if (axeRequired && c.axe == null) return false;
 
-        return true;
+        return !axeRequired || c.axe != null;
     }
 
     @Override
@@ -198,11 +207,11 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe implements ModRecip
     public DefaultedList<ItemStack> getRemainder(CraftingRecipeInput input) {
         DefaultedList<ItemStack> remainders = DefaultedList.ofSize(input.getSize(), ItemStack.EMPTY);
 
-        if (!CopperEquipments.CONFIG.deoxidation.axeRequiredForDeoxidize) {
+        if (!CopperEquipmentsConfigs.axeRequiredForDeoxidize) {
             return remainders; // nothing to do
         }
 
-        boolean axeDurability = CopperEquipments.CONFIG.deoxidation.axeDurabilityForDeoxidize;
+        boolean axeDurability = CopperEquipmentsConfigs.axeDurabilityForDeoxidize;
         Random random = Random.create();
 
         for (int i = 0; i < input.getSize(); i++) {

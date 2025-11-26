@@ -2,6 +2,8 @@ package net.frozen1753.copperequipments.mixin;
 
 import net.frozen1753.copperequipments.item.custom.CopperItem;
 import net.frozen1753.copperequipments.recipe.custom.DeoxidationRecipe;
+import net.frozen1753.copperequipments.recipe.custom.WaxingRecipe;
+import net.frozen1753.copperequipments.util.ModFunctions;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.RecipeInputInventory;
@@ -55,37 +57,34 @@ public abstract class CraftingScreenHandlerMixin {
     @Shadow private PlayerEntity player;
 
     @Inject(method = "quickMove", at = @At("HEAD"))
-    private void ce$applyCopperAgingOnShiftClick(PlayerEntity p, int slot, CallbackInfoReturnable<ItemStack> cir) {
+    private void applyCopperAgingOnShiftClick(PlayerEntity p, int slot, CallbackInfoReturnable<ItemStack> cir) {
+        World world = this.player.getWorld();
+        if (world.isClient) return; // run only on server side
 
         // Only process the result slot (index 0)
-        if (slot != 0) {
-            return;
-        }
+        if (slot != 0) return;
 
         // Get the current stack in the result slot
         ItemStack out = this.result.getStack(0);
         if (out.isEmpty()) return; // nothing to do if empty
-
-        World world = this.player.getWorld();
-        if (world.isClient) return; // run only on server side
 
         // Build the crafting input for the RecipeManager
         CraftingRecipeInput craftingInput = this.input.createRecipeInput();
         Optional<RecipeEntry<CraftingRecipe>> opt = world.getRecipeManager()
                 .getFirstMatch(RecipeType.CRAFTING, craftingInput, world);
 
-        if (opt.isEmpty()) {
-            return;
-        }
+        if (opt.isEmpty()) return;
 
         CraftingRecipe recipe = opt.get().value();
 
-        if (!(recipe instanceof DeoxidationRecipe)) {
-            return;
+        // copper aging for deoxidation recipes
+        if (recipe instanceof DeoxidationRecipe && out.getItem() instanceof CopperItem) {
+            CopperItem.setAgeTicksForStage(out, world);
         }
 
-        if (out.getItem() instanceof CopperItem) {
-            CopperItem.setAgeTicksForStage(out, world);
+        if (recipe instanceof WaxingRecipe) {
+            ModFunctions.playWaxSoundCrafting(out, world, player);
+            ModFunctions.grantWaxAdvancementCrafting(out, player);
         }
     }
 }
