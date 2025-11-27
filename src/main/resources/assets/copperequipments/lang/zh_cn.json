@@ -65,7 +65,7 @@
   "copperequipments.midnightconfig.category.deoxidation": "除锈设置",
   "copperequipments.midnightconfig.category.unwaxing": "除蜡设置",
   "copperequipments.midnightconfig.category.oxidation": "氧化设置",
-  "copperequipments.midnightconfig.category.ui": "用户界面",
+  "copperequipments.midnightconfig.category.ui": "物品栏提示",
   "copperequipments.midnightconfig.category.textures": "[敬请期待] 材质设置",
   "copperequipments.midnightconfig.category.items": "[敬请期待] 物品设置",
 
@@ -98,8 +98,8 @@
   "copperequipments.midnightconfig.enum.TooltipMode.NO_TOOLTIP": "无提示",
   "copperequipments.midnightconfig.enum.TooltipMode.WAXED_ONLY": "仅显示涂蜡",
   "copperequipments.midnightconfig.enum.TooltipMode.OXIDATION_ONLY": "仅显示氧化",
-  "copperequipments.midnightconfig.enum.TooltipMode.WAXED_AND_OXIDATION": "上蜡与氧化",
-  "copperequipments.midnightconfig.enum.TooltipMode.OXIDATION_AND_WAXED": " 氧化与上蜡",
+  "copperequipments.midnightconfig.enum.TooltipMode.WAXED_AND_OXIDATION": "涂蜡与氧化",
+  "copperequipments.midnightconfig.enum.TooltipMode.OXIDATION_AND_WAXED": " 氧化与涂蜡",
 
   "copperequipments.midnightconfig.tooltipMode": "提示显示模式",
   "copperequipments.midnightconfig.tooltipMode.tooltip": "选择铜质物品的提示显示方式：\n[无提示] 不显示任何提示。\n[仅显示涂蜡] 只显示物品是否涂蜡。\n[仅显示氧化] 只显示氧化阶段。\n[涂蜡 + 氧化] 先显示涂蜡状态，再显示氧化阶段。\n[氧化 + 涂蜡] 先显示氧化阶段，再显示涂蜡状态。",

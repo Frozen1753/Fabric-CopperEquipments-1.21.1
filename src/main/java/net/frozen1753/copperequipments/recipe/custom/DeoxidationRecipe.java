@@ -24,6 +24,8 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static net.frozen1753.copperequipments.util.ModFunctions.getEnchantmentLevel;
@@ -118,54 +120,54 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe implements ModRecip
             Map.entry(ModBlocks.EXPOSED_COPPER_LANTERN, ModBlocks.COPPER_LANTERN)
     );
 
-    @Override
-    public void playSound(World world, PlayerEntity player) {
-        ActionFlagHolder accessor = (ActionFlagHolder) player;
-        if (!accessor.hasPlayedFlag(ActionType.SCRAPE)) {
-            accessor.setPlayedFlag(ActionType.SCRAPE, true);
-            world.playSound(null, player.getBlockPos(),
-                    SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        }
-    }
-
-    @Override
-    public void grantAdvancement(PlayerEntity player) {
-        ModFunctions.grantAdvancementCrafting(
-                Identifier.of("minecraft","husbandry/scrape_oxidation"),
-                player);
-    }
-
     private record Candidates(ItemStack oxidized, ItemStack axe) {}
 
     private Candidates findCandidates(CraftingRecipeInput input) {
-        ItemStack oxidized = null;
-        ItemStack axe = null;
+        List<ItemStack> axes = new ArrayList<>();
+        ItemStack blockOxidized = null;
+        ItemStack copperOxidizedAxe = null;
 
         for (ItemStack stack : input.getStacks()) {
             if (stack.isEmpty()) continue;
             Item item = stack.getItem();
 
-            // Axe tool check first: copper axes should always be considered tools
             if (item instanceof AxeItem) {
-                if (axe == null) axe = stack;
+                axes.add(stack);
+                if (item instanceof CopperItem && !CopperItem.isWaxed(stack)) {
+                    int stage = CopperItem.getOxidationStage(stack);
+                    if (stage > 0) copperOxidizedAxe = stack;
+                }
                 continue;
             }
 
-            // Oxidized block
             if (item instanceof BlockItem blockItem && DEOXIDATION_MAP.containsKey(blockItem.getBlock())) {
-                if (oxidized == null) oxidized = stack;
+                blockOxidized = stack;
                 continue;
             }
 
-            // Oxidized copper item (but not tools!)
             if (item instanceof CopperItem && !CopperItem.isWaxed(stack)) {
                 int stage = CopperItem.getOxidationStage(stack);
-                if (stage > 0 && oxidized == null) {
-                    oxidized = stack;
+                if (stage > 0 && blockOxidized == null) {
+                    blockOxidized = stack;
                 }
             }
         }
-        return new Candidates(oxidized, axe);
+
+        // priority to blocks
+        if (blockOxidized != null) {
+            ItemStack axe = axes.isEmpty() ? null : axes.getFirst();
+            return new Candidates(blockOxidized, axe);
+        }
+
+        // two axe
+        if (axes.size() == 2 && copperOxidizedAxe != null) {
+            ItemStack tool = axes.stream().filter(s -> !(s.getItem() instanceof CopperItem)).findFirst().orElse(null);
+            if (tool != null) {
+                return new Candidates(copperOxidizedAxe, tool);
+            }
+        }
+
+        return new Candidates(null, null);
     }
 
     @Override
@@ -185,59 +187,77 @@ public class DeoxidationRecipe extends SpecialCraftingRecipe implements ModRecip
         Candidates c = findCandidates(input);
         if (c.oxidized == null) return ItemStack.EMPTY;
 
-        ItemStack result;
         Item item = c.oxidized.getItem();
 
         if (item instanceof BlockItem blockItem) {
             Block target = (Block) DEOXIDATION_MAP.get(blockItem.getBlock());
-            if (target == null) return ItemStack.EMPTY;
-            result = new ItemStack(target.asItem());
-        } else if (item instanceof CopperItem) {
-            result = c.oxidized.copy();
-            int stage = CopperItem.getOxidationStage(result);
-            if (stage > 0) CopperItem.setOxidationStage(result, stage - 1);
-        } else {
-            return ItemStack.EMPTY;
+            return target == null ? ItemStack.EMPTY : new ItemStack(target.asItem());
         }
 
-        return result;
+        if (item instanceof CopperItem) {
+            ItemStack result = c.oxidized.copy();
+            int stage = CopperItem.getOxidationStage(result);
+            if (stage > 0) CopperItem.setOxidationStage(result, stage - 1);
+            return result;
+        }
+
+        return ItemStack.EMPTY;
     }
 
     @Override
     public DefaultedList<ItemStack> getRemainder(CraftingRecipeInput input) {
         DefaultedList<ItemStack> remainders = DefaultedList.ofSize(input.getSize(), ItemStack.EMPTY);
+        if (!CopperEquipmentsConfigs.axeRequiredForDeoxidize) return remainders;
 
-        if (!CopperEquipmentsConfigs.axeRequiredForDeoxidize) {
-            return remainders; // nothing to do
-        }
-
-        boolean axeDurability = CopperEquipmentsConfigs.axeDurabilityForDeoxidize;
-        Random random = Random.create();
+        Candidates c = findCandidates(input);
+        ItemStack oxidized = c.oxidized;
 
         for (int i = 0; i < input.getSize(); i++) {
             ItemStack stack = input.getStackInSlot(i);
-            if (stack.isEmpty() || !(stack.getItem() instanceof AxeItem)) continue;
+            if (stack.isEmpty()) continue;
 
-            ItemStack axeCopy = stack.copy();
+            if (stack == oxidized) continue; // consumed
 
-            if (axeDurability) {
-                int unbreakingLevel = getEnchantmentLevel(axeCopy, Enchantments.UNBREAKING);
-                if (random.nextInt(unbreakingLevel + 1) == 0) {
-                    int newDamage = axeCopy.getDamage() + 1;
-                    if (newDamage < axeCopy.getMaxDamage()) {
-                        axeCopy.setDamage(newDamage);
-                        remainders.set(i, axeCopy);
-                    } else {
-                        remainders.set(i, ItemStack.EMPTY); // broke
-                    }
-                } else {
-                    remainders.set(i, axeCopy); // no damage
-                }
-            } else {
-                remainders.set(i, axeCopy); // durability disabled
+            if (stack.getItem() instanceof AxeItem) {
+                remainders.set(i, damageOrBreakAxe(stack));
             }
         }
         return remainders;
+    }
+
+    private ItemStack damageOrBreakAxe(ItemStack axe) {
+        ItemStack copy = axe.copy();
+        if (!CopperEquipmentsConfigs.axeDurabilityForDeoxidize) return copy;
+
+        Random random = Random.create();
+        int unbreakingLevel = getEnchantmentLevel(copy, Enchantments.UNBREAKING);
+
+        if (random.nextInt(unbreakingLevel + 1) == 0) {
+            int newDamage = copy.getDamage() + 1;
+            if (newDamage < copy.getMaxDamage()) {
+                copy.setDamage(newDamage);
+                return copy;
+            }
+            return ItemStack.EMPTY; // broken
+        }
+        return copy; // no damage
+    }
+
+    @Override
+    public void playSound(World world, PlayerEntity player) {
+        ActionFlagHolder accessor = (ActionFlagHolder) player;
+        if (!accessor.hasPlayedFlag(ActionType.SCRAPE)) {
+            accessor.setPlayedFlag(ActionType.SCRAPE, true);
+            world.playSound(null, player.getBlockPos(),
+                    SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        }
+    }
+
+    @Override
+    public void grantAdvancement(PlayerEntity player) {
+        ModFunctions.grantAdvancementCrafting(
+                Identifier.of("minecraft","husbandry/scrape_oxidation"),
+                player);
     }
 
     @Override
