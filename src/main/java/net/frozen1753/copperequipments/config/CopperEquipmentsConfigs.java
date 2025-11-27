@@ -8,6 +8,7 @@ public class CopperEquipmentsConfigs extends MidnightConfig {
     public static final String DEOXIDATION = "deoxidation";
     public static final String UNWAXING = "unwaxing";
     public static final String OXIDATION = "oxidation";
+    public static final String UI = "ui";
     public static final String TEXTURES = "textures";
     public static final String ITEMS = "items";
 
@@ -105,6 +106,24 @@ public class CopperEquipmentsConfigs extends MidnightConfig {
     )
     @Entry(category = OXIDATION, min = 1d)
     public static double oxidationIntervalAttempt = 200; // 10s RL
+
+    // -------------------
+    // UI
+    // -------------------
+
+    public enum TooltipMode {
+        NO_TOOLTIP, WAXED_ONLY, OXIDATION_ONLY, WAXED_AND_OXIDATION, OXIDATION_AND_WAXED
+    }
+
+    @Entry(category = UI)
+    public static TooltipMode tooltipMode = TooltipMode.WAXED_AND_OXIDATION;
+
+    @Condition(
+            requiredOption = "copperequipments:tooltipMode",
+            requiredValue = {"WAXED_AND_OXIDATION", "OXIDATION_AND_WAXED"}
+    )
+    @Entry(category = UI)
+    public static boolean tooltipTwoLines = false;
 
     // -------------------
     // Textures

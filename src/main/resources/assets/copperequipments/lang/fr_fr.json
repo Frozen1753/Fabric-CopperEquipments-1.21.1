@@ -65,6 +65,7 @@
   "copperequipments.midnightconfig.category.deoxidation": "Déoxydation",
   "copperequipments.midnightconfig.category.unwaxing": "Décirage",
   "copperequipments.midnightconfig.category.oxidation": "Oxydation",
+  "copperequipments.midnightconfig.category.ui": "UI",
   "copperequipments.midnightconfig.category.textures": "[Bientôt Disponible] Textures",
   "copperequipments.midnightconfig.category.items": "[Bientôt Disponible] Items",
 
@@ -81,7 +82,7 @@
   "copperequipments.midnightconfig.enum.ItemOxidationMethod.NONE": "Aucun",
   "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_ONLY": "Durabilité uniquement",
   "copperequipments.midnightconfig.enum.ItemOxidationMethod.TIME_ONLY": "Temps uniquement",
-  "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_AND_TIME": "Durabilité et Temps",
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_AND_TIME": "Durabilité + Temps",
 
   "copperequipments.midnightconfig.itemOxidationMethod": "Méthode d’oxydation des items",
   "copperequipments.midnightconfig.itemOxidationMethod.tooltip": "Choisissez comment les objets en cuivre s’oxydent :\n[Aucun] Les items ne s’oxydent jamais naturellement.\n[Durabilité] Le stade d’oxydation dépend de la durabilité :\n • 100–75% → Intact\n • 75–50% → Exposé\n • 50–25% → Altéré\n • 25–0% → Oxydé\n[Temps] Les items s’oxydent progressivement au fil du temps, selon la durée de vie.\n[Les deux] Les items s’oxydent selon la durabilité et la durée de vie, avec une influence pondérée.",
@@ -93,6 +94,17 @@
   "copperequipments.midnightconfig.betaWeight.tooltip": "Contrôle l’importance de la durée de vie dans l’oxydation avec la méthode «Durabilité et Temps».\nUne valeur plus élevée rend l’âge de l’objet plus influent dans la progression de l’oxydation.",
   "copperequipments.midnightconfig.oxidationIntervalAttempt": "Intervalle de vérification de l’oxydation (Ticks)",
   "copperequipments.midnightconfig.oxidationIntervalAttempt.tooltip": "Définit la fréquence à laquelle le jeu tente de faire progresser l’oxydation.\nValeur plus basse = vérifications plus fréquentes.\nExemple : 200 ticks = toutes les 10 secondes en temps réel.\n⚠ Attention : une valeur trop basse peut causer des problèmes de performance à cause de trop de vérifications.",
+
+  "copperequipments.midnightconfig.enum.TooltipMode.NO_TOOLTIP": "Aucun Tooltip",
+  "copperequipments.midnightconfig.enum.TooltipMode.WAXED_ONLY": "Cire uniquement",
+  "copperequipments.midnightconfig.enum.TooltipMode.OXIDATION_ONLY": "Oxydation uniquement",
+  "copperequipments.midnightconfig.enum.TooltipMode.WAXED_AND_OXIDATION": "Cire + Oxydation",
+  "copperequipments.midnightconfig.enum.TooltipMode.OXIDATION_AND_WAXED": "Oxydation + Cire",
+
+  "copperequipments.midnightconfig.tooltipMode": "Affichage des tooltips",
+  "copperequipments.midnightconfig.tooltipMode.tooltip": "Choisissez comment les tooltips des items en cuivre sont affichés :\n[Aucun Tooltip] Aucun tooltip n’est affiché.\n[Cire uniquement] Affiche seulement si l’item est ciré.\n[Oxydation uniquement] Affiche seulement le stade d’oxydation.\n[Cire + Oxydation] Affiche d’abord l’état ciré, puis le stade d’oxydation.\n[Oxydation + Cire] Affiche d’abord le stade d’oxydation, puis l’état ciré.",
+  "copperequipments.midnightconfig.tooltipTwoLines": "Tooltip sur deux lignes",
+  "copperequipments.midnightconfig.tooltipTwoLines.tooltip": "Si activé, l’état ciré et le stade d’oxydation seront affichés sur des lignes séparées.",
 
   "copperequipments.midnightconfig.waxedUniqueTextures": "Textures uniques pour les blocs cirés",
   "copperequipments.midnightconfig.waxedUniqueTextures.tooltip": "Modifie les textures des blocs pour afficher des détails subtils de miel.",

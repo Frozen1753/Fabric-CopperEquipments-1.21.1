@@ -9,6 +9,7 @@ import net.minecraft.text.TextColor;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface CopperItem {
@@ -135,38 +136,64 @@ public interface CopperItem {
         boolean waxed = isWaxed(stack);
         int stage = getOxidationStage(stack);
 
+        CopperEquipmentsConfigs.TooltipMode mode = CopperEquipmentsConfigs.tooltipMode;
+
+        // if mode = NO_TOOLTIP
+        if (mode == CopperEquipmentsConfigs.TooltipMode.NO_TOOLTIP) {
+            return;
+        }
+
+        // colors
         TextColor waxedColor = TextColor.fromRgb(0xFFC30B);
         TextColor unexposedColor = TextColor.fromRgb(0xD66D48);
         TextColor exposedColor = TextColor.fromRgb(0xAA7D57);
         TextColor weatheredColor = TextColor.fromRgb(0x7E8E67);
         TextColor oxidizedColor = TextColor.fromRgb(0x529F77);
 
+        // texts
         Text waxedText = Text.translatable("tooltip.copperequipments.waxed")
                 .styled(style -> style.withColor(waxedColor));
-        Text unexposedText = Text.translatable("tooltip.copperequipments.unexposed")
-                .styled(style -> style.withColor(unexposedColor));
-        Text exposedText = Text.translatable("tooltip.copperequipments.exposed")
-                .styled(style -> style.withColor(exposedColor));
-        Text weatheredText = Text.translatable("tooltip.copperequipments.weathered")
-                .styled(style -> style.withColor(weatheredColor));
-        Text oxidizedText = Text.translatable("tooltip.copperequipments.oxidized")
-                .styled(style -> style.withColor(oxidizedColor));
+        Text oxidationText = switch (stage) {
+            case 0 -> Text.translatable("tooltip.copperequipments.unexposed").styled(s -> s.withColor(unexposedColor));
+            case 1 -> Text.translatable("tooltip.copperequipments.exposed").styled(s -> s.withColor(exposedColor));
+            case 2 -> Text.translatable("tooltip.copperequipments.weathered").styled(s -> s.withColor(weatheredColor));
+            case 3 -> Text.translatable("tooltip.copperequipments.oxidized").styled(s -> s.withColor(oxidizedColor));
+            default -> null;
+        };
 
-        if (waxed || stage >= 0) {
-            MutableText tooltipText = Text.empty();
-
-            if (isWaxed(stack)) {
-                tooltipText.append(waxedText).append(" ");
+        // build list of components to display depending on mode
+        List<Text> components = new ArrayList<>();
+        switch (mode) {
+            case WAXED_ONLY -> {
+                if (waxed) components.add(waxedText);
             }
-
-            switch (getOxidationStage(stack)) {
-                case 1 -> tooltipText.append(exposedText);
-                case 2 -> tooltipText.append(weatheredText);
-                case 3 -> tooltipText.append(oxidizedText);
-                case 0 -> tooltipText.append(unexposedText);
+            case OXIDATION_ONLY -> {
+                if (oxidationText != null) components.add(oxidationText);
             }
+            case WAXED_AND_OXIDATION -> {
+                if (waxed) components.add(waxedText);
+                if (oxidationText != null) components.add(oxidationText);
+            }
+            case OXIDATION_AND_WAXED -> {
+                if (oxidationText != null) components.add(oxidationText);
+                if (waxed) components.add(waxedText);
+            }
+        }
 
-            tooltip.add(tooltipText);
+        boolean lines = CopperEquipmentsConfigs.tooltipTwoLines;
+
+        // display depending on lines setting
+        if (!lines && components.size() > 1) {
+            // merge into one line
+            MutableText merged = Text.empty();
+            for (int i = 0; i < components.size(); i++) {
+                merged.append(components.get(i));
+                if (i < components.size() - 1) merged.append(" ");
+            }
+            tooltip.add(merged);
+        } else {
+            // each component on its own line
+            tooltip.addAll(components);
         }
     }
 }

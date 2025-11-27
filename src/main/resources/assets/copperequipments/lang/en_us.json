@@ -65,6 +65,7 @@
   "copperequipments.midnightconfig.category.deoxidation": "Deoxidation",
   "copperequipments.midnightconfig.category.unwaxing": "Unwaxing",
   "copperequipments.midnightconfig.category.oxidation": "Oxidation",
+  "copperequipments.midnightconfig.category.ui": "UI",
   "copperequipments.midnightconfig.category.textures": "[Coming Soon] Textures",
   "copperequipments.midnightconfig.category.items": "[Coming Soon] Items",
 
@@ -81,7 +82,7 @@
   "copperequipments.midnightconfig.enum.ItemOxidationMethod.NONE": "None",
   "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_ONLY": "Durability Only",
   "copperequipments.midnightconfig.enum.ItemOxidationMethod.TIME_ONLY": "Time Only",
-  "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_AND_TIME": "Durability and Time",
+  "copperequipments.midnightconfig.enum.ItemOxidationMethod.DURABILITY_AND_TIME": "Durability + Time",
 
   "copperequipments.midnightconfig.itemOxidationMethod": "Item Oxidation Method",
   "copperequipments.midnightconfig.itemOxidationMethod.tooltip": "Choose how copper items oxidize:\n[None] Items never oxidize naturally.\n[Durability] Oxidation stage is determined by durability:\n • 100–75% → Unexposed\n • 75–50% → Exposed\n • 50–25% → Weathered\n • 25–0% → Oxidized\n[Time] Items oxidize gradually over time based on their lifespan.\n[Both] Items oxidize based on both durability and lifespan, with weighted influence.",
@@ -93,6 +94,17 @@
   "copperequipments.midnightconfig.betaWeight.tooltip": "Controls how strongly lifespan influences oxidation when using the 'Durability and Time' method.\nHigher values make item age more important in determining oxidation progression.",
   "copperequipments.midnightconfig.oxidationIntervalAttempt": "Oxidation Check Interval (Ticks)",
   "copperequipments.midnightconfig.oxidationIntervalAttempt.tooltip": "Defines how often the game attempts to progress oxidation.\nLower values = more frequent checks.\nFor example, 200 ticks = every 10 seconds of real time.\n⚠ Warning: Setting this too low may cause performance issues due to excessive oxidation checks.",
+
+  "copperequipments.midnightconfig.enum.TooltipMode.NO_TOOLTIP": "No Tooltip",
+  "copperequipments.midnightconfig.enum.TooltipMode.WAXED_ONLY": "Waxed Only",
+  "copperequipments.midnightconfig.enum.TooltipMode.OXIDATION_ONLY": "Oxidation Only",
+  "copperequipments.midnightconfig.enum.TooltipMode.WAXED_AND_OXIDATION": "Waxed + Oxidation",
+  "copperequipments.midnightconfig.enum.TooltipMode.OXIDATION_AND_WAXED": "Oxidation + Waxed",
+
+  "copperequipments.midnightconfig.tooltipMode": "Tooltip Display Mode",
+  "copperequipments.midnightconfig.tooltipMode.tooltip": "Choose how tooltips for copper items are displayed:\n[No Tooltip] No tooltip is shown.\n[Waxed Only] Only shows whether the item is waxed.\n[Oxidation Only] Only shows the oxidation stage.\n[Waxed + Oxidation] Shows waxed status first, then oxidation stage.\n[Oxidation + Waxed] Shows oxidation stage first, then waxed status.",
+  "copperequipments.midnightconfig.tooltipTwoLines": "Tooltip on Two Lines",
+  "copperequipments.midnightconfig.tooltipTwoLines.tooltip": "If enabled, waxed status and oxidation stage are displayed on separate lines.",
 
   "copperequipments.midnightconfig.waxedUniqueTextures": "Waxed Unique Textures",
   "copperequipments.midnightconfig.waxedUniqueTextures.tooltip": "Changes block textures to show subtle honey details.",
