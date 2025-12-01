@@ -82,10 +82,8 @@ public abstract class CraftingScreenHandlerMixin {
             CopperItem.setAgeTicksForStage(out, world);
         }
 
-        if (recipe instanceof WaxingRecipe) {
-            ModFunctions.playWaxSoundCrafting(out, world, player);
-            ModFunctions.grantWaxAdvancementCrafting(out, player);
-        }
+        ModFunctions.playWaxSoundCrafting(out, world, player);
+        ModFunctions.grantWaxAdvancementCrafting(out, player);
     }
 }
 

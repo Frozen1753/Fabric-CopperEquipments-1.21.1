@@ -13,11 +13,16 @@ Copper Equipments is a lightweight mod that gives copper a real purpose in the g
 - 🎨 **Vanilla Textures**: Faithful to Minecraft 1.21.9’s style.
 - 🔁 **Repairable**: All items can be repaired using copper ingots.
 - ✨ **Enchantable**: Copper gear supports enchantments like any vanilla equipment.
-- 🧪 **Natural Oxidation** : The blocks oxidise over time and the gears oxidise depending on their durability.
+- 🧪 **Oxidation** : Blocks gradually oxidize over time, just like in vanilla. Gears also oxidize based on their age and durability. Gear behavior can be customized through the configuration settings.
 - 🕯️ **Waxing** : Blocks and gear can be waxed to prevent further oxidation.
 - 🪓 **Fast Unwax & Scraping**: In vanilla Minecraft you can wax a full stack of blocks directly in your inventory with honeycomb. But unwaxing or scraping requires placing them down and axing each one individually. Now simply drop them into a crafting table and they’ll be scraped in bulk!
 - 💨️ **Oxidizing powder**: Tired of waiting for your blocks and items to age? Sprinkle some `Oxidizing powder` to accelerate oxidation instantly!
-- 📦 **Crafting Recipes**: Fully integrated with the vanilla crafting system.
+- 📦 **Crafting Recipes**: Fully integrated with the vanilla crafting system and added sound effects !
+- 🏆 Advancements:
+  - New custom advancements: `Rust Rush` and `Shine Again`.
+  - Enhanced vanilla advancements: `Wax On` and `Wax Off` now adapted to copper mechanics.
+  - Advancements mentioned above can also be triggered through crafting recipes.
+- 📝 **Configuration**: Fully configurable and compatible with [Mod Menu](https://modrinth.com/mod/modmenu) for easy adjustments.
 
 ## Translations
 - 🇺🇸 EN (US)
@@ -29,6 +34,10 @@ If you want to add or correct a language, please create a new issue on [Github](
 
 ## 🛠️ Current Progress (v1.0.7)
 Here’s what I’ve been working on for the next version:
+
+Status : `On hold`
+
+The development of this mod is officially on pause until December 19, 2025, due to exam preparation and school projects. Thank you for your understanding.
 
 - [ ] Add Armor Trims
 - [ ] Modify loot tables
