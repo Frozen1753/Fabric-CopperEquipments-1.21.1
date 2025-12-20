@@ -4,13 +4,19 @@ import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.frozen1753.copperequipments.CopperEquipments;
 import net.frozen1753.copperequipments.util.ModDataComponents;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.trim.ArmorTrim;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 
 public class OxidizableArmorRenderer implements ArmorRenderer {
@@ -68,5 +74,32 @@ public class OxidizableArmorRenderer implements ArmorRenderer {
         }
 
         ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, armorModel, texture);
+        /*
+        ArmorTrim trim = stack.get(DataComponentTypes.TRIM);
+
+        if (trim != null) {
+            // 1. Pattern texture (NOT material-specific)
+            String pattern = trim.getPattern().value().assetId().getPath();
+            String patternPath = "trims/models/armor/" + pattern;
+            if (secondLayer) patternPath += "_leggings";
+
+            Identifier patternTex = Identifier.of("minecraft", patternPath + ".png");
+
+            // 2. Palette texture (material)
+            String material = trim.getMaterial().value().assetName();
+            Identifier paletteTex = Identifier.of("minecraft", "trims/color_palettes/" + material + ".png");
+
+            // 3. Use the vanilla 2-texture trim layer
+            RenderLayer trimLayer = RenderLayer.getArmorCutoutNoCull(patternTex, paletteTex);
+
+            VertexConsumer vc = ItemRenderer.getArmorGlintConsumer(
+                    vertexConsumers,
+                    trimLayer,
+                    stack.hasGlint()
+            );
+
+            armorModel.render(matrices, vc, light, OverlayTexture.DEFAULT_UV, 0xFFFFFFFF);
+        }
+        */
     }
 }

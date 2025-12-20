@@ -65,17 +65,17 @@ public class ModItems {
 
     public static final Item COPPER_CHESTPLATE = registerItem("copper_chestplate",
             new CopperArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
-                    new Item.Settings().maxDamage(BASE_DURABILITY[3] * DURABILITY_MULTIPLIER))
+                    new Item.Settings().maxDamage(BASE_DURABILITY[2] * DURABILITY_MULTIPLIER))
     );
 
     public static final Item COPPER_LEGGINGS = registerItem("copper_leggings",
             new CopperArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
-                    new Item.Settings().maxDamage(BASE_DURABILITY[3] * DURABILITY_MULTIPLIER))
+                    new Item.Settings().maxDamage(BASE_DURABILITY[1] * DURABILITY_MULTIPLIER))
     );
 
     public static final Item COPPER_BOOTS = registerItem("copper_boots",
             new CopperArmorItem(ModArmorMaterials.COPPER_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
-                    new Item.Settings().maxDamage(BASE_DURABILITY[3] * DURABILITY_MULTIPLIER))
+                    new Item.Settings().maxDamage(BASE_DURABILITY[0] * DURABILITY_MULTIPLIER))
     );
 
     public static final Item COPPER_HORSE_ARMOR = registerItem("copper_horse_armor",

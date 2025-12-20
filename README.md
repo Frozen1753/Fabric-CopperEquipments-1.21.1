@@ -35,11 +35,13 @@ If you want to add or correct a language, please create a new issue on [Github](
 ## 🛠️ Current Progress (v1.0.7)
 Here’s what I’ve been working on for the next version:
 
-Status : `On hold`
+Status : `On going` ( *I'm baaaack !* )
 
-The development of this mod is officially on pause until December 19, 2025, due to exam preparation and school projects. Thank you for your understanding.
-
-- [ ] Add Armor Trims
+- [x] Fixed durability error for armors
+- [ ] `in progress` Add Armor Trims
+  - [x] add Armor Trims to armor renderer
+  - [ ] render trim textures for armor models
+  - [ ] render trim textures for items
 - [ ] Modify loot tables
 - [ ] Add new trades to toolsmith, weaponsmith and armorer
 - [ ] Add Monster spawn

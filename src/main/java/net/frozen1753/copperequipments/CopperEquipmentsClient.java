@@ -20,121 +20,25 @@ import net.frozen1753.copperequipments.util.events.ItemDurabilityChangeCallback;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
 public class CopperEquipmentsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_SWORD, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_PICKAXE, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_AXE, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_SHOVEL, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_HOE, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_HELMET, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_CHESTPLATE, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_LEGGINGS, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_BOOTS, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
-
-        ModelPredicateProviderRegistry.register(ModItems.COPPER_HORSE_ARMOR, Identifier.of("oxidation"), (stack, world, entity, seed) -> {
-            if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
-            return switch (CopperItem.getOxidationStage(stack)) {
-                case 0 -> 0.0F;
-                case 1 -> 0.25F;
-                case 2 -> 0.50F;
-                case 3 -> 0.75F;
-                default -> -1.0F;
-            };
-        });
+        registerCopperOxidationPredicate(
+                ModItems.COPPER_SWORD,
+                ModItems.COPPER_PICKAXE,
+                ModItems.COPPER_AXE,
+                ModItems.COPPER_SHOVEL,
+                ModItems.COPPER_HOE,
+                ModItems.COPPER_HELMET,
+                ModItems.COPPER_CHESTPLATE,
+                ModItems.COPPER_LEGGINGS,
+                ModItems.COPPER_BOOTS,
+                ModItems.COPPER_HORSE_ARMOR
+        );
 
         ArmorRenderer.register(new OxidizableArmorRenderer(), ModItems.COPPER_HELMET, ModItems.COPPER_CHESTPLATE, ModItems.COPPER_LEGGINGS, ModItems.COPPER_BOOTS);
         EntityRendererRegistry.register(EntityType.HORSE, CopperHorseEntityRenderer::new);
@@ -183,5 +87,25 @@ public class CopperEquipmentsClient implements ClientModInitializer {
             CopperEquipmentsConfigs.updateEnv();
             CopperEquipments.LOGGER.info("[DEBUG] [ENV] Updated on disconnect: " + CopperEquipmentsConfigs.isServerOwner);
         });
+    }
+
+    private static void registerCopperOxidationPredicate(Item... items) {
+        for (Item item : items) {
+            ModelPredicateProviderRegistry.register(
+                    item,
+                    Identifier.of("oxidation"),
+                    (stack, world, entity, seed) -> {
+                        if (!stack.contains(ModDataComponents.OXIDATION_STAGE)) return -1.0F;
+
+                        return switch (CopperItem.getOxidationStage(stack)) {
+                            case 0 -> 0.0F;
+                            case 1 -> 0.25F;
+                            case 2 -> 0.50F;
+                            case 3 -> 0.75F;
+                            default -> -1.0F;
+                        };
+                    }
+            );
+        }
     }
 }
